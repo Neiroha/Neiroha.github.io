@@ -5,52 +5,74 @@ sidebar_label: 快速开始
 
 ## 环境要求
 
-- Flutter SDK 3.11 或更新版本
-- Windows 10/11，当前主要支持平台
-- 至少一个可访问的 TTS 后端，可以是云端、本机或局域网服务
+- Windows 10/11、Linux x64 或 Android 设备。
+- 至少一个可访问的 TTS 后端，可以是本机、局域网或云端服务。
+- 普通用户不需要安装 Flutter；直接下载 Release 包即可。
 
-## 从源码运行
+## 1. 下载 Release 包
 
-在 Neiroha 源码仓库中执行：
+打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，下载最新版本。当前最新版本是 `v0.2.1`，发布时间为 2026-05-17。
 
-```bash
-flutter pub get
-dart run build_runner build --delete-conflicting-outputs
-flutter run -d windows
-```
+| 平台 | 下载文件 | 用法 |
+|---|---|---|
+| Windows | `neiroha-v0.2.1-windows-x64-release.zip` | 解压后运行 `neiroha.exe` |
+| Android | `neiroha-v0.2.1-android-release.apk` | 复制到设备后安装 APK |
+| Linux x64 | `neiroha-v0.2.1-linux-x64-release.tar.gz` | 解压后运行 bundle 内的可执行文件 |
 
-## CI 构建产物
+Release 页面同时提供 `SHA256SUMS.txt` 和各平台校验和。下载完成后可以用系统自带工具校验文件是否完整。
 
-主程序仓库已经支持 GitHub Actions 原生构建。Pull request 和手动触发会生成 Android、Linux、Windows debug 产物；打 `v*.*` tag 或手动输入 tag 时会生成 release 产物并发布到 GitHub Release。
+详细安装步骤见 [安装 Release 包](/guide/install-release)。
 
-详细说明见 [GitHub Actions 构建](/operations/github-actions-builds)。
+## 2. 准备一个 TTS 后端
 
-## 第一次配置路径
+Neiroha 本身是 TTS 工作站和中间件，不内置大模型推理。第一次使用前需要准备一个后端：
 
-1. 打开 **提供商（Providers）**，新增一个 TTS 后端。
-2. 填写 Base URL、API Key 和默认模型名。
-3. 点击 **Fetch** 或 **Fetch All** 拉取模型和音色。
-4. 保存并启用提供商，然后执行健康检查。
-5. 打开 **语音库（Voice Bank）**，创建语音库和语音角色。
-6. 在角色检查器顶部使用快速 TTS 面板进行第一次合成。
+| 选择 | 适合谁 | 下一步 |
+|---|---|---|
+| 本地推理引擎 | 有本机 GPU、局域网推理服务器，或不想把文本发到云端 | 看 [连接本地推理引擎](/workflow/providers/local-engines) |
+| 云端 / 免费额度 | 想先快速试用，不想本地部署模型 | 看 [连接云端推理引擎](/workflow/providers/cloud-engines) |
+| Windows 系统 TTS | 只想测试 Neiroha 工作流，不要求 AI 音色 | 在 Provider 中使用 Windows System TTS |
 
-## 默认本地服务
+## 3. 配置 Provider
 
-Neiroha 的本地 API Server 默认监听：
+打开 **Providers** 页面。左侧是 Provider 列表，右侧是当前 Provider 的配置表单。
 
-```text
-127.0.0.1:8976
-```
+<img className="screenshot" src="/img/screenshot_providers.png" alt="提供商配置页" />
 
-默认绑定回环地址，只允许本机访问。只有在明确需要局域网调用时，才把绑定地址改为 `0.0.0.0`，并配置 API Key。
+基本流程：
 
-## 常用源码目录
+1. 点击左侧列表右上角的 **+**。
+2. 选择适配器类型。
+3. 填写 `Base URL`、`API Key` 和必要的模型名。
+4. 点击 **Fetch All** 拉取模型和音色。
+5. 打开该 Provider 的启用开关。
+6. 点击 **Health Check** 确认服务可用。
 
-| 路径 | 用途 |
-|---|---|
-| `lib/server/api_server.dart` | 本地 OpenAI 兼容 API 服务器 |
-| `lib/data/adapters/` | 上游 TTS Provider 适配器 |
-| `lib/data/services/tts_queue_service.dart` | 共享 TTS 任务队列、Provider 并发和限流 |
-| `lib/presentation/screens/` | 主屏幕 |
-| `lib/presentation/widgets/` | 各工作流组件 |
-| `docs/` | 活跃项目文档、计划、缺陷、API 参考和研究资料 |
+Provider 详细说明见 [配置提供商](/workflow/providers)。
+
+## 4. 创建语音库和角色
+
+切到 **Voice Bank** 页面。这里把“角色”组织成“语音库”，后续 Dialog TTS、Phase TTS、API Server 都会从语音库中选择声音。
+
+<img className="screenshot" src="/img/screenshot_overview.png" alt="语音库页面" />
+
+第一次使用可以直接点默认的 **Default Bank**，再点 **Default Voice**，在右侧检查角色绑定的 Provider、模型和音色。
+
+## 5. 做第一次快速合成
+
+在 **Voice Bank** 页面选中一个角色后，右侧会出现 **Quick Test** 面板。
+
+<img className="screenshot" src="/img/screenshot_quick_tts.png" alt="快速 TTS 页面" />
+
+1. 在输入框里写一句测试文本。
+2. 点击紫色生成按钮。
+3. 如果 Provider 配置正确，音频会进入共享 TTS 队列并自动播放。
+4. 生成的音频会保存在语音资产目录，后续可在存储扫描中管理。
+
+## 6. 下一步
+
+- 多角色台词：看 [对话 TTS](/workflow/dialog-tts)。
+- 长文本 / 有声书：看 [段落 TTS](/workflow/phase-tts)。
+- TXT 小说朗读：看 [小说阅读器](/workflow/novel-reader)。
+- 字幕配音：看 [视频配音](/workflow/video-dub)。
+- 给外部工具提供 OpenAI 兼容接口：看 [API 服务器](/operations/api-server)。

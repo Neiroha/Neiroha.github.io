@@ -27,7 +27,7 @@ description: Neiroha 的产品说明、使用手册、API 参考和开发文档�
 <div className="wiki-grid">
   <a className="wiki-card" href="/guide/getting-started">
     <strong>快速开始</strong>
-    <p>环境要求、源码运行命令和第一个 TTS 后端的配置路径。</p>
+    <p>先下载 GitHub Release 包，再配置第一个本地或云端 TTS 后端。</p>
   </a>
   <a className="wiki-card" href="/workflow/providers">
     <strong>核心工作流</strong>

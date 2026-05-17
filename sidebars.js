@@ -10,14 +10,30 @@ const sidebars = {
       type: 'category',
       label: '快速入门',
       collapsed: false,
-      items: ['guide/getting-started'],
+      items: [
+        'guide/getting-started',
+        'guide/install-release',
+        'guide/source-build',
+      ],
     },
     {
       type: 'category',
       label: '核心工作流',
       collapsed: false,
       items: [
-        'workflow/providers',
+        {
+          type: 'category',
+          label: '提供商配置',
+          collapsed: false,
+          items: [
+            'workflow/providers',
+            'workflow/providers/local-engines',
+            'workflow/providers/cloud-engines',
+            'workflow/providers/mimo',
+            'workflow/providers/gemini',
+            'workflow/providers/azure',
+          ],
+        },
         'workflow/voice-bank',
         'workflow/quick-tts',
         'workflow/dialog-tts',
