@@ -1,0 +1,9 @@
+{
+  "label": "历史归档",
+  "position": 11,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/category/archive"
+  }
+}
