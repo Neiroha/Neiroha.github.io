@@ -34,6 +34,7 @@ const sidebars = {
         'operations/settings-tasks-storage',
         'operations/api-server',
         'operations/storage-troubleshooting',
+        'operations/github-actions-builds',
       ],
     },
     {

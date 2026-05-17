@@ -19,6 +19,12 @@ dart run build_runner build --delete-conflicting-outputs
 flutter run -d windows
 ```
 
+## CI 构建产物
+
+主程序仓库已经支持 GitHub Actions 原生构建。Pull request 和手动触发会生成 Android、Linux、Windows debug 产物；打 `v*.*` tag 或手动输入 tag 时会生成 release 产物并发布到 GitHub Release。
+
+详细说明见 [GitHub Actions 构建](/operations/github-actions-builds)。
+
 ## 第一次配置路径
 
 1. 打开 **提供商（Providers）**，新增一个 TTS 后端。
