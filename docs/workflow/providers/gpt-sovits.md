@@ -13,6 +13,8 @@ D:\Python_Project\Neiroha-GPT-SoVITS
 
 <img className="screenshot" src="/img/admin_gpt_sovits.png" alt="Neiroha GPT-SoVITS Admin" />
 
+截图使用 `admin` 模式采集，所以首页可能显示 API 离线；实际使用 `start_api_admin.bat` 或 `pixi run api-admin-preload` 会同时启动 API 和 Admin。
+
 ## 默认地址
 
 | 服务 | 默认地址 | 说明 |

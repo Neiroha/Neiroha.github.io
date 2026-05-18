@@ -13,6 +13,8 @@ D:\Python_Project\Neiroha-Cosyvoice
 
 <img className="screenshot" src="/img/admin_cosyvoice.png" alt="Neiroha CosyVoice3 Admin" />
 
+截图使用 `admin` 模式采集，所以首页可能显示 API 离线；实际使用 `start_api_admin.bat` 或 `pixi run api-admin` 会同时启动 API 和 Admin。
+
 ## 默认地址
 
 | 服务 | 默认地址 | 说明 |
