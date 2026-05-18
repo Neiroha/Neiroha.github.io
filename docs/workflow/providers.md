@@ -90,6 +90,9 @@ Provider 的并发、RPM、TPM、RPD 限流会作用到所有工作流：Quick T
 ## 下一步
 
 - 本地服务、局域网服务、Android 模拟器连接电脑：看 [连接本地推理引擎](/workflow/providers/local-engines)。
+- 本地 GPT-SoVITS：看 [Neiroha GPT-SoVITS](/workflow/providers/gpt-sovits)。
+- 本地 VoxCPM2：看 [Neiroha VoxCPM2](/workflow/providers/voxcpm)。
+- 本地 CosyVoice3：看 [Neiroha CosyVoice3](/workflow/providers/cosyvoice)。
 - 云端服务和免费额度：看 [连接云端推理引擎](/workflow/providers/cloud-engines)。
 - MiMo：看 [MiMo TTS](/workflow/providers/mimo)。
 - Gemini：看 [Gemini TTS](/workflow/providers/gemini)。

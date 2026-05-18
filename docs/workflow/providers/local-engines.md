@@ -20,10 +20,16 @@ sidebar_label: 本地推理引擎
 | 后端类型 | Neiroha 适配器 | Base URL 示例 | 角色配置重点 |
 |---|---|---|---|
 | OpenAI 兼容 TTS | OpenAI TTS API Compatible | `http://127.0.0.1:8880/v1` | 选模型和 preset voice |
-| GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:9880` | trained profile 或参考音频 clone |
-| CosyVoice | CosyVoice Native | `http://127.0.0.1:9880` | server profile、参考音频、prompt text |
+| GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:19880` | trained profile 或参考音频 clone |
+| CosyVoice3 | CosyVoice Native | `http://127.0.0.1:19890` | prompt clone、cross-lingual、instruct |
 | VoxCPM2 | VoxCPM2 Native | `http://127.0.0.1:8000` | registered voice、voice design、clone |
 | Windows 系统声音 | Windows System TTS | 留空 | Windows 桌面端直接枚举 SAPI voice |
+
+本地后端的完整教程：
+
+- [Neiroha GPT-SoVITS](/workflow/providers/gpt-sovits)
+- [Neiroha VoxCPM2](/workflow/providers/voxcpm)
+- [Neiroha CosyVoice3](/workflow/providers/cosyvoice)
 
 ## OpenAI 兼容服务
 
@@ -41,7 +47,7 @@ OpenAI 兼容是最容易接的本地协议，适合 Kokoro、XTTS、Orpheus、K
 GPT-SoVITS 适合已经有训练好的说话人 profile，或需要参考音频克隆的工作流。
 
 1. Provider 适配器选 **GPT-SoVITS**。
-2. `Base URL` 填服务根地址，例如 `http://127.0.0.1:9880`。
+2. `Base URL` 填服务根地址。Neiroha GPT-SoVITS 本地启动器默认是 `http://127.0.0.1:19880`。
 3. 默认模型可保留 `gpt-sovits`。
 4. 点 **Fetch All** 拉取 `/gpt-sovits/models` 和 `/gpt-sovits/voices`。
 5. 创建角色时选择：
@@ -54,7 +60,7 @@ GPT-SoVITS 适合已经有训练好的说话人 profile，或需要参考音频�
 CosyVoice Native 使用 Neiroha 的原生 JSON / multipart 适配，不要求后端伪装成 OpenAI。
 
 1. Provider 适配器选 **CosyVoice Native**。
-2. `Base URL` 填服务根地址，例如 `http://127.0.0.1:9880`。
+2. `Base URL` 填服务根地址。Neiroha CosyVoice3 本地启动器默认是 `http://127.0.0.1:19890`。
 3. Health Check 会访问 `/health`。
 4. 创建角色时可以使用服务端 profiles，也可以用参考音频走 upload 路径。
 5. 如果要跨语言或 instruct 风格，优先在角色里补齐 prompt text / voice instruction。

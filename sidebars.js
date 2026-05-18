@@ -28,6 +28,9 @@ const sidebars = {
           items: [
             'workflow/providers',
             'workflow/providers/local-engines',
+            'workflow/providers/gpt-sovits',
+            'workflow/providers/voxcpm',
+            'workflow/providers/cosyvoice',
             'workflow/providers/cloud-engines',
             'workflow/providers/mimo',
             'workflow/providers/gemini',
