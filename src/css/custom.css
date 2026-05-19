@@ -93,6 +93,31 @@
   margin: 1rem 0;
 }
 
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.screenshot-grid figure {
+  margin: 0;
+}
+
+.screenshot-grid img {
+  border: 1px solid var(--neiroha-border);
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+}
+
+.screenshot-grid figcaption {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin-top: 0.35rem;
+}
+
 .menu__list-item-collapsible {
   border-radius: 6px;
 }

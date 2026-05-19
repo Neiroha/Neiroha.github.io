@@ -7,9 +7,34 @@ sidebar_label: CosyVoice3
 
 它提供 FastAPI、Gradio Admin、TOML voice profile、OpenAI 兼容接口和 CosyVoice 原生接口。
 
-<img className="screenshot" src="/img/admin_cosyvoice.png" alt="Neiroha CosyVoice3 Admin" />
+<div className="screenshot-grid">
+  <figure>
+    <img src="/img/admin_cosyvoice.png" alt="Neiroha CosyVoice3 Admin 首页" />
+    <figcaption>后端 Admin 用来查看 API、voice set、模型 preset、克隆配置和日志。</figcaption>
+  </figure>
+  <figure>
+    <img src="/img/screenshot_providers.png" alt="Neiroha Providers 配置页" />
+    <figcaption>Neiroha 的 Providers 页面负责连接 `http://127.0.0.1:19890` 并拉取 voice。</figcaption>
+  </figure>
+</div>
 
 截图使用 `admin` 模式采集，所以首页可能显示 API 离线；实际使用 `start_api_admin.bat` 或 `pixi run api-admin` 会同时启动 API 和 Admin。
+
+## 官方能力速查
+
+这部分按 FunAudioLLM 官方模型卡、CosyVoice3 论文、官方示例和本地启动器 voice profile 整理；Neiroha 只负责调用，不会扩大底层模型能力。
+
+| 维度 | 当前结论 |
+|---|---|
+| 推荐版本 | 本地默认使用 `Fun-CosyVoice3-0.5B`，输出采样率为 24 kHz。 |
+| 支持语言 | 官方模型卡列出 9 种通用语言：中文、英语、日语、韩语、德语、西班牙语、法语、意大利语、俄语。 |
+| 方言/口音 | 官方模型卡写明 18+ 中文方言/口音，并列举广东、闽南、四川、东北、山西/陕西、上海、天津、山东、宁夏、甘肃等。论文数据图还出现湖北、吴中、苏杭、湖南、河南、江西、云南、贵州等。实际质量会随文本写法和参考音频波动。 |
+| 跨语言输出 | 支持 multilingual / cross-lingual zero-shot voice cloning。目标语言仍建议落在官方 9 种语言内；日语按官方示例最好先转成片假名读法。 |
+| prompt clone | `prompt-clone` / `zero_shot` 需要参考音频和 prompt text；prompt text 应是参考音频对应文本。 |
+| cross-lingual clone | `cross-lingual-clone` 需要参考音频，不需要 prompt text；目标文本决定输出语言。 |
+| instruct clone | `instruct-clone` 需要参考音频和 instruction；适合语速、情绪、方言、音量等指令控制，但不是严格可验证的规则系统。 |
+| 官方速度口径 | 官方模型卡强调 bi-streaming，可低至约 150 ms 延迟；没有给出像 GPT-SoVITS/VoxCPM2 那样的官方 PyTorch RTF 表。Neiroha 会在响应头记录本机实测 `X-Neiroha-RTF`。 |
+| 边界 | 论文指出罕见词、绕口令、专业术语仍是难点；情绪控制更依赖文本语义，和目标文本无关的情绪要求稳定性较差。 |
 
 ## 默认地址
 
@@ -111,6 +136,8 @@ curl.exe http://127.0.0.1:19890/v1/audio/speech `
 7. 确认能看到 `prompt-clone`、`cross-lingual-clone`、`instruct-clone`。
 8. 打开启用开关，点击 **Health Check**。
 
+<img className="screenshot" src="/img/screenshot_quick_tts.png" alt="Neiroha Quick TTS 试听页面" />
+
 Android 模拟器连接宿主机时：
 
 ```text
@@ -145,3 +172,9 @@ http://10.0.2.2:19890
 - 合成输出会写入 `runtime/outputs/`。
 - 响应头包含 `X-Neiroha-Output-Path`、`X-Neiroha-Audio-Seconds`、`X-Neiroha-Elapsed-Seconds`、`X-Neiroha-RTF`。
 - `X-Neiroha-CosyVoice-Mode` 会标出实际使用的 CosyVoice 模式。
+
+## 资料来源
+
+- [Fun-CosyVoice3-0.5B-2512 模型卡](https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512)
+- [FunAudioLLM/CosyVoice 官方示例](https://github.com/FunAudioLLM/CosyVoice/blob/main/example.py)
+- [CosyVoice3 论文](https://arxiv.org/abs/2505.17589)
