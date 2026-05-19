@@ -14,7 +14,7 @@ Release 包由主程序仓库的 GitHub Actions 构建并发布。普通用户�
 ## Windows
 
 1. 下载 `neiroha-v0.2.1-windows-x64-release.zip`。
-2. 解压到一个固定目录，例如 `D:\Apps\Neiroha`。
+2. 解压到一个固定目录，例如你专门存放便携应用的 `Neiroha` 文件夹。
 3. 运行解压目录里的 `neiroha.exe`。
 4. 如果 Windows SmartScreen 提示未知发布者，确认文件来自官方 Release 页面后再继续。
 5. 第一次启动后进入 [快速开始](/guide/getting-started) 的 Provider 配置步骤。

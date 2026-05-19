@@ -245,7 +245,7 @@ Provider 与媒体能力会按当前运行平台过滤：
   "response_format": "wav",
   "mode": "zero_shot",
   "profile": "speaker_name",
-  "prompt_audio_path": "D:/voices/demo.wav",
+  "prompt_audio_path": "/path/to/voices/demo.wav",
   "prompt_text": "参考文本",
   "instruct_text": "用温柔平静的语气朗读"
 }

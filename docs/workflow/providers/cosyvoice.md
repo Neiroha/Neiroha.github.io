@@ -3,13 +3,9 @@ title: Neiroha CosyVoice3
 sidebar_label: CosyVoice3
 ---
 
-这一页对应本机项目：
+这一页对应 Neiroha CosyVoice3 本地启动器。将启动器克隆或解压到任意目录；下面用 `<backend-root>` 表示这个目录。
 
-```text
-D:\Python_Project\Neiroha-Cosyvoice
-```
-
-它是面向 Neiroha 的 CosyVoice3 本地服务，提供 FastAPI、Gradio Admin、TOML voice profile、OpenAI 兼容接口和 CosyVoice 原生接口。
+它提供 FastAPI、Gradio Admin、TOML voice profile、OpenAI 兼容接口和 CosyVoice 原生接口。
 
 <img className="screenshot" src="/img/admin_cosyvoice.png" alt="Neiroha CosyVoice3 Admin" />
 
@@ -27,7 +23,7 @@ D:\Python_Project\Neiroha-Cosyvoice
 ## 安装
 
 ```powershell
-cd D:\Python_Project\Neiroha-Cosyvoice
+cd <backend-root>
 pixi install
 pixi run submodule-init
 pixi run install
@@ -53,7 +49,7 @@ pixi run install-ttsfrd
 最简单：
 
 ```powershell
-cd D:\Python_Project\Neiroha-Cosyvoice
+cd <backend-root>
 .\start_api_admin.bat
 ```
 

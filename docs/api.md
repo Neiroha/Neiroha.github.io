@@ -248,7 +248,7 @@ Full CosyVoice feature support with multiple synthesis modes via the native JSON
   "response_format": "wav",
   "mode": "zero_shot",
   "profile": "speaker_name",
-  "prompt_audio_path": "D:/voices/demo.wav",
+  "prompt_audio_path": "/path/to/voices/demo.wav",
   "prompt_text": "reference text",
   "instruct_text": "Read in a gentle and calm tone"
 }

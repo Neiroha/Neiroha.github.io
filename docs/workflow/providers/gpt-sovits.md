@@ -3,13 +3,9 @@ title: Neiroha GPT-SoVITS
 sidebar_label: GPT-SoVITS
 ---
 
-这一页对应本机项目：
+这一页对应 Neiroha GPT-SoVITS 本地启动器。将启动器克隆或解压到任意目录；下面用 `<backend-root>` 表示这个目录。
 
-```text
-D:\Python_Project\Neiroha-GPT-SoVITS
-```
-
-它是给 Neiroha 使用的 GPT-SoVITS 独立后端，包含 FastAPI、Gradio Admin、TOML 配置、默认 voice set 和一个示例 voice。
+它包含 FastAPI、Gradio Admin、TOML 配置、默认 voice set 和一个示例 voice。
 
 <img className="screenshot" src="/img/admin_gpt_sovits.png" alt="Neiroha GPT-SoVITS Admin" />
 
@@ -29,7 +25,7 @@ D:\Python_Project\Neiroha-GPT-SoVITS
 第一次使用在项目目录执行：
 
 ```powershell
-cd D:\Python_Project\Neiroha-GPT-SoVITS
+cd <backend-root>
 pixi install
 pixi run submodule-init
 pixi run install-deps
@@ -44,7 +40,7 @@ pixi run install-sample-voice
 最简单：
 
 ```powershell
-cd D:\Python_Project\Neiroha-GPT-SoVITS
+cd <backend-root>
 .\start_api_admin.bat
 ```
 

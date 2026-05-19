@@ -3,13 +3,9 @@ title: Neiroha VoxCPM2
 sidebar_label: VoxCPM2
 ---
 
-这一页对应本机项目：
+这一页对应 Neiroha VoxCPM2 本地启动器。将启动器克隆或解压到任意目录；下面用 `<backend-root>` 表示这个目录。
 
-```text
-D:\Python_Project\VoxCPM
-```
-
-它是给 Neiroha 使用的 VoxCPM2 后端，提供 OpenAI 兼容接口、VoxCPM 原生接口、voice registry 和 Gradio Admin。
+它提供 OpenAI 兼容接口、VoxCPM 原生接口、voice registry 和 Gradio Admin。
 
 <img className="screenshot" src="/img/admin_voxcpm.png" alt="Neiroha VoxCPM Admin" />
 
@@ -25,7 +21,7 @@ D:\Python_Project\VoxCPM
 ## 安装
 
 ```powershell
-cd D:\Python_Project\VoxCPM
+cd <backend-root>
 pixi install
 pixi run install
 ```
@@ -41,7 +37,7 @@ pixi run install-asr
 最简单：
 
 ```powershell
-cd D:\Python_Project\VoxCPM
+cd <backend-root>
 .\start_api_admin.bat
 ```
 
@@ -135,7 +131,7 @@ VoxCPM2 当前推荐使用自然语言风格提示，例如：
 ```powershell
 curl.exe -X POST http://127.0.0.1:8000/voxcpm/voices `
   -H "Content-Type: application/json" `
-  -d "{\"id\":\"taichi_cn_01\",\"display_name\":\"Taichi CN\",\"mode_hint\":\"reference_with_text\",\"audio_path\":\"file:///D:/voices/taichi/ref.wav\",\"prompt_text\":\"参考文本\",\"copy_audio_to_registry\":true}"
+  -d "{\"id\":\"taichi_cn_01\",\"display_name\":\"Taichi CN\",\"mode_hint\":\"reference_with_text\",\"audio_path\":\"file:///path/to/voices/taichi/ref.wav\",\"prompt_text\":\"参考文本\",\"copy_audio_to_registry\":true}"
 ```
 
 注册后，Neiroha Fetch All 会把它作为 voice 候选。

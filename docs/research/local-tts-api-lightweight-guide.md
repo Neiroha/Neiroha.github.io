@@ -235,7 +235,7 @@ Keep profiles simple and portable:
     "id": "alice",
     "name": "alice",
     "mode": "zero_shot",
-    "prompt_audio": "D:/voices/alice.wav",
+    "prompt_audio": "/path/to/voices/alice.wav",
     "prompt_text": "这是一段与参考音频一致的文本。",
     "prompt_lang": "zh",
     "instruct_text": ""
@@ -326,7 +326,7 @@ curl.exe -X POST http://127.0.0.1:9880/cosyvoice/speech/upload `
   -F "text=你好，这是一次上传参考音频的测试。" `
   -F "mode=zero_shot" `
   -F "prompt_text=参考音频对应的文本。" `
-  -F "prompt_audio=@D:/voices/alice.wav" `
+  -F "prompt_audio=@/path/to/voices/alice.wav" `
   -F "response_format=wav" `
   --output out_upload.wav
 ```
@@ -374,7 +374,7 @@ Expected request fields:
 {
   "text": "要合成的文本",
   "text_lang": "zh",
-  "ref_audio_path": "D:/voices/ref.wav",
+  "ref_audio_path": "/path/to/voices/ref.wav",
   "prompt_text": "参考文本",
   "prompt_lang": "zh",
   "speed_factor": 1.0,

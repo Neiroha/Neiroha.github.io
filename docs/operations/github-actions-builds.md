@@ -62,8 +62,8 @@ Android release APK 还会执行 provenance attestation。最终资产由 releas
 
 默认假设：
 
-- Android SDK 在 `D:\Programs\Android_SDK`
+- Android SDK 在你的 Android SDK 目录
 - 模拟器 serial 为 `emulator-5554`
-- APK 为 `D:\Web_Project\Neiroha\build\app\outputs\flutter-apk\app-debug.apk`
+- APK 为主程序仓库的 `build\app\outputs\flutter-apk\app-debug.apk`
 
 推荐使用 `neiroha_tablet_16x10` AVD，设备输出为 `2560x1600`。脚本会安装 debug APK、清理 app 数据、打开应用并覆盖 `static/img/screenshot_*.png`。
