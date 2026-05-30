@@ -12,13 +12,7 @@ sidebar_label: VoxCPM2
     <img src="/img/admin_voxcpm.png" alt="Neiroha VoxCPM Admin 首页" />
     <figcaption>后端 Admin 用来加载模型、管理 voice registry、试听和查看日志。</figcaption>
   </figure>
-  <figure>
-    <img src="/img/screenshot_providers.png" alt="Neiroha Providers 配置页" />
-    <figcaption>Neiroha 的 Providers 页面负责连接 `http://127.0.0.1:8000` 并拉取 voice。</figcaption>
-  </figure>
 </div>
-
-<img className="screenshot" src="/img/screenshot_quick_tts.png" alt="Neiroha Quick TTS 试听页面" />
 
 ## 能力速查
 
@@ -45,7 +39,14 @@ sidebar_label: VoxCPM2
 
 ## 安装
 
-第一次使用在 `<backend-root>` 执行：
+推荐先用 Windows 便携包：
+
+1. 打开 [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases)。
+2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-VoxCPM-portable.7z.001`、`.002`、`.003`、`.004`。
+3. 把四个文件放在同一目录，用 7-Zip 从 `.001` 解压。
+4. 解压后运行 `start_portable.bat`。
+
+源码或开发环境第一次使用，在 `<backend-root>` 执行：
 
 ```powershell
 pixi install

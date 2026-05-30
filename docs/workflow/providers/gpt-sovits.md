@@ -12,13 +12,7 @@ sidebar_label: GPT-SoVITS
     <img src="/img/admin_gpt_sovits.png" alt="Neiroha GPT-SoVITS Admin 首页" />
     <figcaption>后端 Admin 用来查看 API 状态、加载 preset、管理 voice、下载资产和查看日志。</figcaption>
   </figure>
-  <figure>
-    <img src="/img/screenshot_providers.png" alt="Neiroha Providers 配置页" />
-    <figcaption>Neiroha 的 Providers 页面负责填写 Base URL、拉取模型和 voice。</figcaption>
-  </figure>
 </div>
-
-<img className="screenshot" src="/img/screenshot_quick_tts.png" alt="Neiroha Quick TTS 试听页面" />
 
 ## 能力速查
 
@@ -46,7 +40,14 @@ sidebar_label: GPT-SoVITS
 
 ## 安装
 
-第一次使用在 `<backend-root>` 执行：
+推荐先用 Windows 便携包：
+
+1. 打开 [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases)。
+2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-GPT-SoVITS-Portable.7z.001`、`.002`、`.003`。
+3. 把三个文件放在同一目录，用 7-Zip 从 `.001` 解压。
+4. 解压后运行 `start_portable.bat serve`。
+
+源码或开发环境第一次使用，在 `<backend-root>` 执行：
 
 ```powershell
 pixi install

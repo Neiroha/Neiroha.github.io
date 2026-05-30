@@ -5,8 +5,6 @@ sidebar_label: 云端 / 免费额度
 
 云端 TTS 适合先试用、跨设备使用，或不想本地部署模型的场景。这里的“免费”通常指免费层、试用额度、赠送 credit 或限时活动，额度和模型可用性会变，最终以官方控制台显示为准。
 
-<img className="screenshot" src="/img/screenshot_providers.png" alt="云端提供商配置入口" />
-
 ## 通用步骤
 
 1. 到云服务官网创建账号和 API Key。

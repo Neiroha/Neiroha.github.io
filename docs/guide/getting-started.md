@@ -11,15 +11,15 @@ sidebar_label: 快速开始
 
 ## 1. 下载 Release 包
 
-打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，下载最新版本。当前最新版本是 `v0.2.1`，发布时间为 2026-05-17。
+打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，下载最新版本。当前最新版本是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，发布时间为 2026-05-30。
 
 | 平台 | 下载文件 | 用法 |
 |---|---|---|
-| Windows | `neiroha-v0.2.1-windows-x64-release.zip` | 解压后运行 `neiroha.exe` |
-| Android | `neiroha-v0.2.1-android-release.apk` | 复制到设备后安装 APK |
-| Linux x64 | `neiroha-v0.2.1-linux-x64-release.tar.gz` | 解压后运行 bundle 内的可执行文件 |
+| Windows | `neiroha-v0.3.0-windows-x64-release.zip` | 解压后运行 `neiroha.exe` |
+| Android | `neiroha-v0.3.0-android-release.apk` | 复制到设备后安装 APK |
+| Linux x64 | `neiroha-v0.3.0-linux-x64-release.tar.gz` | 解压后运行 bundle 内的可执行文件 |
 
-Release 页面同时提供 `SHA256SUMS.txt` 和各平台校验和。下载完成后可以用系统自带工具校验文件是否完整。
+SHA256 现在直接写在 Release 正文的 **Checksums** 表里，不再单独提供 `SHA256SUMS*.txt`。
 
 详细安装步骤见 [安装 Release 包](/guide/install-release)。
 
@@ -32,6 +32,8 @@ Neiroha 本身是 TTS 工作站和中间件，不内置大模型推理。第一�
 | 本地推理引擎 | 有本机 GPU、局域网推理服务器，或不想把文本发到云端 | 看 [连接本地推理引擎](/workflow/providers/local-engines) |
 | 云端 / 免费额度 | 想先快速试用，不想本地部署模型 | 看 [连接云端推理引擎](/workflow/providers/cloud-engines) |
 | Windows 系统 TTS | 只想测试 Neiroha 工作流，不要求 AI 音色 | 在 Provider 中使用 Windows System TTS |
+
+本地后端已经开始提供 Windows 便携包。GPT-SoVITS 和 VoxCPM2 可直接从各自 Release 页面下载分卷包，CosyVoice3 上传完成后也按同样规则使用；具体见 [Windows 便携后端包](/workflow/providers/local-engines#windows-便携后端包)。
 
 ## 3. 配置 Provider
 

@@ -5,7 +5,7 @@ sidebar_label: GitHub Actions 构建
 
 Neiroha 主程序仓库已经配置了原生平台 CI，不再只依赖本地机器产物。
 
-普通用户应该直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 `v0.2.1`，包含 Android、Linux x64、Windows x64 三个平台资产。
+普通用户应该直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，包含 Android、Linux x64、Windows x64 三个平台资产。
 
 ## 工作流
 
@@ -13,7 +13,7 @@ Neiroha 主程序仓库已经配置了原生平台 CI，不再只依赖本地机
 |---|---|---|
 | `native-tests.yml` | Pull request、手动触发 | Flutter / Dart 测试与基础校验 |
 | `native-debug-builds.yml` | Pull request、手动触发 | Android debug APK、Linux debug bundle、Windows debug bundle |
-| `native-release-builds.yml` | `v*.*` tag、手动输入 tag | Android release APK、Linux release tar.gz、Windows release zip、校验和与 release assets |
+| `native-release-builds.yml` | `v*.*` tag、手动输入 tag | Android release APK、Linux release tar.gz、Windows release zip、Release 正文校验表与 release assets |
 
 ## Android Debug APK
 
@@ -46,9 +46,8 @@ Release workflow 会在 tag 发布或手动输入 tag 时构建：
 - `neiroha-<tag>-android-release.apk`
 - `neiroha-<tag>-linux-x64-release.tar.gz`
 - `neiroha-<tag>-windows-x64-release.zip`
-- `SHA256SUMS-*.txt`
 
-Android release APK 还会执行 provenance attestation。最终资产由 release workflow 发布到 GitHub Release。
+SHA256 不再作为单独 txt 资产上传，而是写入 GitHub Release 正文的 **Checksums** 表。Android release APK 还会执行 provenance attestation。最终资产由 release workflow 发布到 GitHub Release。
 
 这意味着 wiki 的快速开始不再要求用户从源码构建；源码运行只保留给开发者、调试者和想改代码的人。
 

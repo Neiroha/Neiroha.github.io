@@ -12,13 +12,7 @@ sidebar_label: CosyVoice3
     <img src="/img/admin_cosyvoice.png" alt="Neiroha CosyVoice3 Admin 首页" />
     <figcaption>后端 Admin 用来查看 API、voice set、模型 preset、克隆配置和日志。</figcaption>
   </figure>
-  <figure>
-    <img src="/img/screenshot_providers.png" alt="Neiroha Providers 配置页" />
-    <figcaption>Neiroha 的 Providers 页面负责填写 Base URL、拉取模型和 voice。</figcaption>
-  </figure>
 </div>
-
-<img className="screenshot" src="/img/screenshot_quick_tts.png" alt="Neiroha Quick TTS 试听页面" />
 
 ## 能力速查
 
@@ -47,7 +41,9 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 API 端口 `9880`。如果你要
 
 ## 安装
 
-第一次使用在 `<backend-root>` 执行：
+Windows 便携包上传完成后，优先从 [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) 下载分卷包。命名按同一规则使用 `Neiroha-Cosyvoice-portable.7z.001`、`.002`、`.003` 这类分卷文件；下载时以 Release 页面实际资产为准，把所有分卷放在同一目录后从 `.001` 解压。
+
+源码或开发环境第一次使用，在 `<backend-root>` 执行：
 
 ```powershell
 pixi install
