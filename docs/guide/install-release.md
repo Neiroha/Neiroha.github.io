@@ -3,18 +3,18 @@ title: 安装 Release 包
 sidebar_label: 安装 Release 包
 ---
 
-普通用户建议从 Release 包开始，不需要本地编译。
+日常安装请从 Release 包开始，不需要本地编译。
 
 ## 下载入口
 
 打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，选择最新版本。当前最新版本是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，发布时间为 2026-05-30。
 
-Release 包由主程序仓库的 GitHub Actions 构建并发布。普通用户不需要安装 Flutter，也不需要本地执行 build 命令。
+Release 包由主程序仓库的 GitHub Actions 构建并发布。使用 Release 包不需要安装 Flutter，也不需要本地执行 build 命令。
 
 ## Windows
 
 1. 下载 `neiroha-v0.3.0-windows-x64-release.zip`。
-2. 解压到一个固定目录，例如你专门存放便携应用的 `Neiroha` 文件夹。
+2. 解压到固定目录，例如专门存放便携应用的 `Neiroha` 文件夹。
 3. 运行解压目录里的 `neiroha.exe`。
 4. 如果 Windows SmartScreen 提示未知发布者，确认文件来自官方 Release 页面后再继续。
 5. 第一次启动后进入 [快速开始](/guide/getting-started) 的 Provider 配置步骤。
@@ -64,10 +64,10 @@ Android 和 Linux 包也可以用同样方式在 Windows 上校验，或用系�
 | VoxCPM2 | [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases) | 下载 `Neiroha-VoxCPM-portable.7z.001` 到 `.004`，从 `.001` 解压 |
 | CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | 下载 `neiroha-cosyvoice3-portable.7z.001` 到 `.006`，从 `.001` 解压；以 Release 页面实际资产为准 |
 
-分卷包必须放在同一目录。只下载 `.001` 或单独移动某个分卷都无法完整解压。
+分卷包必须放在同一目录。仅下载 `.001` 或单独移动某个分卷都无法完整解压。
 
 ## 更新版本
 
 下载新版本 Release 包后，覆盖旧程序目录即可。Neiroha 的数据和生成音频默认存放在系统应用数据目录，不和程序目录绑定。
 
-如果你使用 Windows portable release，程序目录内也可能包含 portable 数据目录。覆盖前可以先保留旧目录备份。
+使用 Windows portable release 时，程序目录内也可能包含 portable 数据目录。覆盖前可保留旧目录备份。

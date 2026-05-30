@@ -5,7 +5,7 @@ sidebar_label: GitHub Actions 构建
 
 Neiroha 主程序仓库已经配置了原生平台 CI，不再只依赖本地机器产物。
 
-普通用户应该直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，包含 Android、Linux x64、Windows x64 三个平台资产。
+日常安装应直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，包含 Android、Linux x64、Windows x64 三个平台资产。
 
 ## 工作流
 
@@ -49,7 +49,7 @@ Release workflow 会在 tag 发布或手动输入 tag 时构建：
 
 SHA256 不再作为单独 txt 资产上传，而是写入 GitHub Release 正文的 **Checksums** 表。Android release APK 还会执行 provenance attestation。最终资产由 release workflow 发布到 GitHub Release。
 
-这意味着 wiki 的快速开始不再要求用户从源码构建；源码运行只保留给开发者、调试者和想改代码的人。
+因此，wiki 的快速开始不再要求用户从源码构建；源码运行仅保留给开发者、调试者和需要修改代码的贡献者。
 
 ## Wiki 截图更新
 
@@ -61,7 +61,7 @@ SHA256 不再作为单独 txt 资产上传，而是写入 GitHub Release 正文�
 
 默认假设：
 
-- Android SDK 在你的 Android SDK 目录
+- Android SDK 位于本机 Android SDK 目录
 - 模拟器 serial 为 `emulator-5554`
 - APK 为主程序仓库的 `build\app\outputs\flutter-apk\app-debug.apk`
 

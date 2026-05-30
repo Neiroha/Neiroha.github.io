@@ -23,7 +23,7 @@ sidebar_label: CosyVoice3
 | 推荐版本 | 默认使用 `Fun-CosyVoice3-0.5B`，输出采样率为 24 kHz。 |
 | 支持语言 | 官方模型卡列出 9 种通用语言：中文、英语、日语、韩语、德语、西班牙语、法语、意大利语、俄语。 |
 | 方言 / 口音 | 官方模型卡写明 18+ 中文方言 / 口音，并列举广东、闽南、四川、东北、山西 / 陕西、上海、天津、山东、宁夏、甘肃等。实际质量会随文本写法和参考音频波动。 |
-| 跨语言输出 | 支持 multilingual / cross-lingual zero-shot voice cloning。目标语言仍建议落在官方 9 种语言内；日语按官方示例最好先转成片假名读法。 |
+| 跨语言输出 | 支持 multilingual / cross-lingual zero-shot voice cloning。目标语言仍建议落在官方 9 种语言内；日语可按官方示例先转成片假名读法。 |
 | prompt clone | `prompt-clone` / `zero_shot` 需要参考音频和 prompt text；prompt text 应是参考音频对应文本。 |
 | cross-lingual clone | `cross-lingual-clone` 需要参考音频，不需要 prompt text；目标文本决定输出语言。 |
 | instruct clone | `instruct-clone` 需要参考音频和 instruction；适合语速、情绪、方言、音量等指令控制，但不是严格可验证的规则系统。 |
@@ -37,11 +37,11 @@ sidebar_label: CosyVoice3
 | FastAPI | `http://127.0.0.1:9880` | Neiroha Provider 连接这里 |
 | Admin | `http://127.0.0.1:7880` | 管理 voice set、克隆配置、模型 preset、下载和日志 |
 
-CosyVoice3 和 GPT-SoVITS 当前都默认使用 API 端口 `9880`。如果你要同时运行多个本地后端，请在其中一个后端的 `configs/server.toml` 修改端口，或使用 launcher 自动选择的随机端口，并把日志里的实际地址填到 Neiroha。
+CosyVoice3 和 GPT-SoVITS 当前都默认使用 API 端口 `9880`。同时运行多个本地后端时，请在其中一个后端的 `configs/server.toml` 修改端口，或使用 launcher 自动选择的随机端口，并把日志里的实际地址填到 Neiroha。
 
 ## 安装
 
-Windows 便携包上传完成后，优先从 [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) 下载分卷包。当前分卷命名为 `neiroha-cosyvoice3-portable.7z.001` 到 `.006`；下载时以 Release 页面实际资产为准，把六个分卷放在同一目录后从 `.001` 解压。
+Windows 便携包从 [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) 下载。当前分卷命名为 `neiroha-cosyvoice3-portable.7z.001` 到 `.006`；下载时以 Release 页面实际资产为准，把六个分卷放在同一目录后从 `.001` 解压。
 
 源码或开发环境第一次使用，在 `<backend-root>` 执行：
 
@@ -149,7 +149,7 @@ Android 模拟器连接宿主机时：
 http://10.0.2.2:9880
 ```
 
-如果你同时运行 GPT-SoVITS 和 CosyVoice3，模拟器地址也要跟随实际端口变化。
+同时运行 GPT-SoVITS 和 CosyVoice3 时，模拟器地址也要跟随实际端口变化。
 
 ## 创建角色
 
@@ -158,7 +158,7 @@ http://10.0.2.2:9880
 | 零样本提示克隆 | 选择 `prompt-clone`，提供参考音频和 prompt text |
 | 跨语言克隆 | 选择 `cross-lingual-clone`，提供参考音频和目标语言文本 |
 | 指令控制 | 选择 `instruct-clone`，在 instruction 写声音要求 |
-| 自己的声音 | 在 Admin 的克隆配置页上传参考音频并保存新的 voice |
+| 自定义声音 | 在 Admin 的克隆配置页上传参考音频并保存新的 voice |
 
 参考音频建议保持干净、短句、无背景音乐。`prompt_clone` 模式必须有参考文本；`instruct` 模式必须有 instruction。
 

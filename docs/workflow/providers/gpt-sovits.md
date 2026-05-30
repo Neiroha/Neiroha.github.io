@@ -36,11 +36,11 @@ sidebar_label: GPT-SoVITS
 | FastAPI | `http://127.0.0.1:9880` | Neiroha Provider 连接这里 |
 | Admin | `http://127.0.0.1:7860` | 管理模型 preset、voice、下载和日志 |
 
-如果端口被占用，launcher 会自动选择可用随机端口，并写入终端和 `runtime/logs/backend.log`。教程里的端口打不开时，先看日志里的实际地址。
+如果端口被占用，launcher 会自动选择可用随机端口，并写入终端和 `runtime/logs/backend.log`。默认端口无法访问时，先查看日志里的实际地址。
 
 ## 安装
 
-推荐先用 Windows 便携包：
+推荐使用 Windows 便携包：
 
 1. 打开 [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases)。
 2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-GPT-SoVITS-Portable.7z.001`、`.002`、`.003`。
@@ -55,7 +55,7 @@ pixi run install
 pixi run install-sample-voice
 ```
 
-这些命令会初始化 GPT-SoVITS 子模块、安装上游依赖、下载基础预训练资产，并安装一个默认示例 voice。新版本不再默认下载大批角色权重；如果你有自己的 `.ckpt` / `.pth`，在 Admin 的 Model Presets 和克隆配置里登记。
+这些命令会初始化 GPT-SoVITS 子模块、安装上游依赖、下载基础预训练资产，并安装一个默认示例 voice。新版本不再默认下载大批角色权重；已有 `.ckpt` / `.pth` 可在 Admin 的 Model Presets 和克隆配置里登记。
 
 ## 启动
 
@@ -139,11 +139,11 @@ Android 真机连接电脑时，后端需要监听局域网可访问地址，并
 | 场景 | 角色设置 |
 |---|---|
 | 用默认示例声音 | 任务模式选预设 / 已训练 voice，voice 选 `genshin-keqing` |
-| 用自己的训练权重 | 在 Admin 的 Model Presets 新增 `.ckpt` / `.pth`，再创建 voice |
+| 使用自有训练权重 | 在 Admin 的 Model Presets 新增 `.ckpt` / `.pth`，再创建 voice |
 | 参考音频 clone | 选择 clone 流程，提供参考音频、参考文本、参考语言和目标文本语言 |
 | 多套声音 | 新建 voice set，把需要暴露给 Neiroha 的 voice 放进去 |
 
-GPT-SoVITS v2ProPlus clone 对参考音频长度较敏感。本地后端会对 clone 请求做临时音频规范化，但最好仍准备 3 到 10 秒、干净、无背景音乐的参考音频。
+GPT-SoVITS v2ProPlus clone 对参考音频长度较敏感。本地后端会对 clone 请求做临时音频规范化，仍建议准备 3 到 10 秒、干净、无背景音乐的参考音频。
 
 ## Admin 页面
 

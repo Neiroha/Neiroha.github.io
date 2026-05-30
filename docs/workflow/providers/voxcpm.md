@@ -22,13 +22,13 @@ sidebar_label: VoxCPM2
 |---|---|
 | 推荐版本 | VoxCPM2 是当前官方推荐的新部署版本，2B 参数，48 kHz 输出。 |
 | 支持语言 | 官方列出 30 种：Arabic, Burmese, Chinese, Danish, Dutch, English, Finnish, French, German, Greek, Hebrew, Hindi, Indonesian, Italian, Japanese, Khmer, Korean, Lao, Malay, Norwegian, Polish, Portuguese, Russian, Spanish, Swahili, Swedish, Tagalog, Thai, Turkish, Vietnamese。 |
-| 方言 | 官方列出 9 种中文方言：四川话、粤语、吴语、东北话、河南话、陕西话、山东话、天津话、闽南话。方言文本最好写成本方言自己的词汇和表达。 |
+| 方言 | 官方列出 9 种中文方言：四川话、粤语、吴语、东北话、河南话、陕西话、山东话、天津话、闽南话。方言文本宜使用对应方言的词汇和表达。 |
 | 跨语言输出 | 支持多语言合成，也支持用参考音频做跨语言克隆；目标文本仍建议使用官方 30 种语言内的自然书写。 |
 | 文本声音设计 | `voxcpm2-design` 不需要参考音频。把年龄、性别、音色、情绪、语速等自然语言描述放在文本开头括号里。 |
 | 可控克隆 | `voxcpm2-clone` 使用 `reference_audio` 克隆音色，不需要 prompt 文本；括号里的自然语言提示用于调节情绪、语速、风格。 |
-| 高保真克隆 | `voxcpm2-ultimate-clone` 需要 `prompt_audio` + 精确 `prompt_text`，用于延续式 / 对齐式高相似度克隆；这个模式下不要再依赖括号控制风格。 |
+| 高保真克隆 | `voxcpm2-ultimate-clone` 需要 `prompt_audio` + 精确 `prompt_text`，用于延续式 / 对齐式高相似度克隆；这个模式下不应依赖括号控制风格。 |
 | 官方速度口径 | 官方 PyTorch 在 RTX 4090 上 RTF 约 `0.30`；Nano-vLLM / vLLM-Omni 加速口径约 `0.13`。官方表格还标注 VoxCPM2 约 8 GB VRAM。 |
-| 边界 | 太短文本可能声音发虚；长文本容易加速、噪声、停不下来或 OOM，生产使用要按句切段。`cfg_value` 过高更贴文本但更容易出 artifacts。 |
+| 边界 | 过短文本可能声音发虚；长文本容易出现加速、噪声、无法正常停止或 OOM，生产使用要按句切段。`cfg_value` 过高更贴文本但更容易出现 artifacts。 |
 
 ## 默认地址
 
@@ -39,7 +39,7 @@ sidebar_label: VoxCPM2
 
 ## 安装
 
-推荐先用 Windows 便携包：
+推荐使用 Windows 便携包：
 
 1. 打开 [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases)。
 2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-VoxCPM-portable.7z.001`、`.002`、`.003`、`.004`。
@@ -162,7 +162,7 @@ VoxCPM2 当前推荐使用自然语言风格提示，例如：
 (A young woman, gentle and sweet voice)Hello, welcome to VoxCPM2.
 ```
 
-不要依赖未文档化的方括号 token；本地 API 也建议用自然语言提示和显式字段。
+不应依赖未文档化的方括号 token；本地 API 也建议使用自然语言提示和显式字段。
 
 ## 注册可复用 voice
 

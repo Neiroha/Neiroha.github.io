@@ -7,7 +7,7 @@ Azure Speech 在 Neiroha 中使用 **Azure Speech Service** 适配器，调用 M
 
 ## 免费层和官方入口
 
-Azure Speech 定价页显示 Free F0 的 Neural Text to Speech 有每月免费字符额度；页面当前列出 Neural TTS `0.5 million characters free per month`。价格和区域会变，最终以 Azure 定价页和你的订阅为准。
+Azure Speech 定价页显示 Free F0 的 Neural Text to Speech 有每月免费字符额度；页面当前列出 Neural TTS `0.5 million characters free per month`。价格和区域会变化，最终以 Azure 定价页和订阅控制台为准。
 
 官方页面：
 

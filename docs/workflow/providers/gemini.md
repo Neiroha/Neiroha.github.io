@@ -3,9 +3,9 @@ title: Gemini TTS
 sidebar_label: Gemini
 ---
 
-Gemini TTS 在 Neiroha 中使用 **Google Gemini TTS** 适配器。它调用 Gemini API 的 native text-to-speech 能力，适合先用 Google AI Studio API key 做小规模试听和风格测试。
+Gemini TTS 在 Neiroha 中使用 **Google Gemini TTS** 适配器。它调用 Gemini API 的 native text-to-speech 能力，适合使用 Google AI Studio API key 做小规模试听和风格测试。
 
-## 官方限制先看这里
+## 官方限制
 
 Google 官方文档把 Gemini TTS 标为 Preview，并说明 TTS 接收文本、输出音频。官方 Rate Limits 页面列出 `gemini-2.5-flash-preview-tts` 免费层限制为 `3 RPM / 10,000 TPM / 15 RPD`。额度、模型和命名可能调整，实际以 AI Studio 控制台为准。
 
@@ -31,7 +31,7 @@ Google 官方文档把 Gemini TTS 标为 Preview，并说明 TTS 接收文本、
 2. Neiroha 会显示内置 Gemini TTS 模型和官方预设 voice 列表。
 3. 打开启用开关。
 4. 点 **Health Check**。
-5. 去 Voice Bank 创建一个 preset voice 角色。
+5. 到 Voice Bank 创建一个 preset voice 角色。
 
 ## 可选 voice
 
@@ -45,7 +45,7 @@ Alnilam, Schedar, Gacrux, Pulcherrima, Achird, Zubenelgenubi,
 Vindemiatrix, Sadachbia, Sadaltager, Sulafat
 ```
 
-第一次测试建议选 `Kore` 或 `Puck`，文本不要太长。
+首次测试可选 `Kore` 或 `Puck`，文本不宜过长。
 
 ## 角色设置
 
@@ -59,7 +59,7 @@ Gemini TTS 没有独立的速度字段，Neiroha 会把非 `1.0` 的速度选择
 
 ## 免费额度用法
 
-Gemini 免费层请求数很适合 Quick TTS 和短 Dialog 测试，不适合直接跑完整小说。
+Gemini 免费层请求数适合 Quick TTS 和短 Dialog 测试，不适合直接处理完整小说。
 
 建议 Provider 限流：
 
@@ -70,4 +70,4 @@ Gemini 免费层请求数很适合 Quick TTS 和短 Dialog 测试，不适合直
 | TPM | `10000` 或更低 |
 | RPD | `15` 或按控制台实际额度设置 |
 
-如果遇到 `429 RESOURCE_EXHAUSTED`，先停一会儿，再降低并发和批量规模。
+如果遇到 `429 RESOURCE_EXHAUSTED`，暂停请求后再降低并发和批量规模。

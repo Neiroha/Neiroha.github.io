@@ -22,7 +22,7 @@ Tasks 展示全进程共享 TTS 调度器状态。Quick TTS、Dialog TTS、Phase
 - 最近完成或失败的任务。
 - Provider 限流和并发影响。
 
-开发计划中的 Task System V2 会把当前内存队列升级为持久任务系统，并增加 cancel、retry、history 和 job API。
+Tasks 当前主要用于运行时观测。关闭应用后，内存队列中的临时任务不会作为完整作业历史保留。
 
 ## API Server
 

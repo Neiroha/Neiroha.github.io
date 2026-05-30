@@ -7,7 +7,7 @@ sidebar_label: 快速开始
 
 - Windows 10/11、Linux x64 或 Android 设备。
 - 至少一个可访问的 TTS 后端，可以是本机、局域网或云端服务。
-- 普通用户不需要安装 Flutter；直接下载 Release 包即可。
+- 日常使用不需要安装 Flutter；下载 Release 包即可。
 
 ## 1. 下载 Release 包
 
@@ -29,11 +29,11 @@ Neiroha 本身是 TTS 工作站和中间件，不内置大模型推理。第一�
 
 | 选择 | 适合谁 | 下一步 |
 |---|---|---|
-| 本地推理引擎 | 有本机 GPU、局域网推理服务器，或不想把文本发到云端 | 看 [连接本地推理引擎](/workflow/providers/local-engines) |
-| 云端 / 免费额度 | 想先快速试用，不想本地部署模型 | 看 [连接云端推理引擎](/workflow/providers/cloud-engines) |
-| Windows 系统 TTS | 只想测试 Neiroha 工作流，不要求 AI 音色 | 在 Provider 中使用 Windows System TTS |
+| 本地推理引擎 | 有本机 GPU、局域网推理服务器，或需要文本留在本地 | 看 [连接本地推理引擎](/workflow/providers/local-engines) |
+| 云端 / 免费额度 | 需要快速试用，且暂不部署本地模型 | 看 [连接云端推理引擎](/workflow/providers/cloud-engines) |
+| Windows 系统 TTS | 仅验证 Neiroha 工作流，不要求 AI 音色 | 在 Provider 中使用 Windows System TTS |
 
-本地后端已经开始提供 Windows 便携包。GPT-SoVITS 和 VoxCPM2 可直接从各自 Release 页面下载分卷包，CosyVoice3 上传完成后也按同样规则使用；具体见 [Windows 便携后端包](/workflow/providers/local-engines#windows-便携后端包)。
+本地后端提供 Windows 便携包。GPT-SoVITS、VoxCPM2 和 CosyVoice3 可从各自 Release 页面下载分卷包；具体见 [Windows 便携后端包](/workflow/providers/local-engines#windows-便携后端包)。
 
 ## 3. 配置 Provider
 
@@ -58,7 +58,7 @@ Provider 详细说明见 [配置提供商](/workflow/providers)。
 
 <img className="screenshot" src="/img/screenshot_overview.png" alt="语音库页面" />
 
-第一次使用可以直接点默认的 **Default Bank**，再点 **Default Voice**，在右侧检查角色绑定的 Provider、模型和音色。
+首次使用可选择默认的 **Default Bank**，再选择 **Default Voice**，在右侧检查角色绑定的 Provider、模型和音色。
 
 ## 5. 做第一次快速合成
 

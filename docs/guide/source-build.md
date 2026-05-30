@@ -3,7 +3,7 @@ title: 从源码运行
 sidebar_label: 开发者源码运行
 ---
 
-这一页面面向想改代码、调试问题或提交 PR 的开发者。普通用户请优先使用 [安装 Release 包](/guide/install-release)，主程序仓库已经用 GitHub Actions 自动构建 Windows、Android 和 Linux Release 产物。
+这一页面面向需要修改代码、调试问题或提交 PR 的开发者。日常使用请优先选择 [安装 Release 包](/guide/install-release)，主程序仓库已经用 GitHub Actions 自动构建 Windows、Android 和 Linux Release 产物。
 
 ## 准备环境
 
@@ -23,15 +23,15 @@ sidebar_label: 开发者源码运行
 flutter doctor
 ```
 
-如果只开发 Windows 桌面版，至少要看到 Windows desktop toolchain 可用；如果要构建 Android，还要看到 Android toolchain 和 Java 17 可用。
+仅开发 Windows 桌面版时，至少需要 Windows desktop toolchain 可用；如需构建 Android，还需要 Android toolchain 和 Java 17 可用。
 
 ## Fork 和 Clone
 
-外部贡献者建议先 fork 主仓库，再从自己的 fork clone。不要直接在上游 `main` 或 `dev` 上提交。
+外部贡献者应先 fork 主仓库，再从个人 fork clone。避免直接在上游 `main` 或 `dev` 上提交。
 
 1. 在 GitHub 打开 [Neiroha/Neiroha](https://github.com/Neiroha/Neiroha)。
-2. 点击 **Fork**，创建到自己的账号下。
-3. clone 你的 fork：
+2. 点击 **Fork**，创建到个人账号下。
+3. clone 个人 fork：
 
 ```bash
 git clone https://github.com/<your-name>/Neiroha.git
@@ -67,7 +67,7 @@ flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-如果生成文件冲突，先确认冲突不是你手工改了生成文件；正常情况下重新运行上面的命令即可。
+生成文件冲突时，先确认生成文件未被手工修改；正常情况下重新运行上面的命令即可。
 
 ## 本地运行 Windows 桌面版
 
@@ -113,7 +113,7 @@ flutter build apk --debug
 build/app/outputs/flutter-apk/app-debug.apk
 ```
 
-如果要安装到已连接设备或模拟器：
+如需安装到已连接设备或模拟器：
 
 ```bash
 flutter install -d <device-id>
@@ -134,13 +134,13 @@ flutter analyze
 flutter test
 ```
 
-如果改动涉及代码生成，再跑：
+改动涉及代码生成时，再运行：
 
 ```bash
 dart run build_runner build --delete-conflicting-outputs
 ```
 
-如果改动涉及平台构建，按影响范围补跑：
+改动涉及平台构建时，按影响范围补充运行：
 
 ```bash
 flutter build windows --debug
@@ -152,7 +152,7 @@ Linux 构建依赖系统包，Windows 上不需要强行本地跑；PR 后会由
 
 ## 提交代码
 
-在你的 `feature/<short-name>` 分支提交：
+在当前 `feature/<short-name>` 分支提交：
 
 ```bash
 git status
@@ -176,18 +176,18 @@ git push origin feature/<short-name>
 
 PR 流程：
 
-1. 在 GitHub 从你的 fork 打开 Pull Request。
+1. 在 GitHub 从个人 fork 打开 Pull Request。
 2. `base repository` 选 `Neiroha/Neiroha`。
-3. `base` 选 `dev`，不要直接提到 `main`。
-4. `compare` 选你的 `feature/<short-name>` 分支。
+3. `base` 选 `dev`，避免直接提交到 `main`。
+4. `compare` 选个人 `feature/<short-name>` 分支。
 5. PR 标题说明用户可见变化或修复点。
 6. PR 描述里写清楚：
    - 改了什么。
    - 为什么要改。
-   - 你本地跑过哪些命令。
+   - 本地已运行哪些检查命令。
    - 是否影响 Windows、Android、Linux、数据迁移或旧项目。
 7. 等 GitHub Actions 自动检查通过。
-8. 根据人工 review 修改，继续 push 到同一个 `feature/<short-name>` 分支。
+8. 根据人工 review 反馈修改，继续 push 到同一个 `feature/<short-name>` 分支。
 9. 自动 workflow 通过且人工 review 通过后，维护者才会合并到 `dev`。
 
 当前 PR 会触发：
@@ -201,7 +201,7 @@ PR 流程：
 
 ## 同步上游 dev
 
-如果你的分支开发时间较长，合并前先同步上游 `dev`：
+分支开发时间较长时，合并前先同步上游 `dev`：
 
 ```bash
 git fetch upstream
