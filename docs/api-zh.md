@@ -272,7 +272,7 @@ Gemini TTS 使用 Google AI Studio 接口密钥。提供商中填写 `https://ge
 
 ### Windows 系统语音
 
-Windows 桌面端通过系统 SAPI 合成，无需基础地址或接口密钥。Android、Apple 和 Linux 的系统 TTS 在原生适配器实现前不会作为可用提供商暴露。
+Windows 桌面端通过系统 SAPI 合成，无需基础地址或接口密钥。Android 和 Linux 的系统 TTS 在原生适配器实现前不会作为可用提供商暴露。
 
 ## 3. 响应头和排错
 

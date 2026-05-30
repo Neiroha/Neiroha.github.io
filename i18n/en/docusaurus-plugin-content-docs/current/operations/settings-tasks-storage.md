@@ -42,4 +42,4 @@ Storage manages the voice asset root, missing-file scans, and audio archive clea
 
 ## Media Tools
 
-Media Tools manages FFmpeg detection and audio/video export defaults. Windows, Linux, and macOS can use external FFmpeg CLI. Android disables local FFmpeg media processing.
+Media Tools manages FFmpeg detection and audio/video export defaults. Windows and Linux can use external FFmpeg CLI. Android disables local FFmpeg media processing.

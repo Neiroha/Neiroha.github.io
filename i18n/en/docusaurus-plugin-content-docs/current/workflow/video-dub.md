@@ -40,7 +40,7 @@ Video Dubbing covers the single-video workflow of subtitles to TTS to dubbed out
 | Check | Reason |
 |---|---|
 | Project voice bank | Cue voice dropdowns come from this bank. |
-| FFmpeg path | Windows, Linux, and macOS export require external FFmpeg. |
+| FFmpeg path | Windows and Linux export require external FFmpeg. |
 | Provider limits | Subtitle projects can create many TTS requests. |
 | A1 mute switch | Controls whether original video audio is kept during export. |
 
@@ -48,10 +48,10 @@ Video Dubbing covers the single-video workflow of subtitles to TTS to dubbed out
 
 Video Dubbing depends on local FFmpeg:
 
-| Capability | Windows | Linux / macOS | Android |
+| Capability | Windows | Linux | Android |
 |---|---|---|---|
-| External FFmpeg path or PATH detection | Supported | Supported | Disabled |
-| Local waveform extraction, trimming, mixing, and export | Supported | Supported | Disabled |
+| External FFmpeg path or PATH detection | ✓ | ✓ | - |
+| Local waveform extraction, trimming, mixing, and export | ✓ | ✓ | - |
 
 Android keeps the UI and TTS-client workflow, but local FFmpeg muxing, trimming, waveform extraction, and video export are unavailable.
 

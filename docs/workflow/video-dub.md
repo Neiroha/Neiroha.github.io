@@ -40,7 +40,7 @@ sidebar_label: 视频配音
 | 检查项 | 原因 |
 |---|---|
 | 项目绑定的语音库 | cue 的音色下拉框来自这个库 |
-| FFmpeg 路径 | Windows / Linux / macOS 导出需要外部 FFmpeg |
+| FFmpeg 路径 | Windows / Linux 导出需要外部 FFmpeg |
 | 提供商限流 | 字幕多时会产生大量 TTS 请求 |
 | A1 静音开关 | 决定导出时是否保留原视频音频 |
 
@@ -48,10 +48,10 @@ sidebar_label: 视频配音
 
 视频配音依赖本地 FFmpeg 能力：
 
-| 能力 | Windows | Linux / macOS | Android |
+| 能力 | Windows | Linux | Android |
 |---|---|---|---|
-| 外部 FFmpeg 命令行路径 / PATH 检测 | 支持 | 支持 | 禁用 |
-| 本地波形提取、裁剪、混音导出 | 支持 | 支持 | 禁用 |
+| 外部 FFmpeg 命令行路径 / PATH 检测 | ✓ | ✓ | - |
+| 本地波形提取、裁剪、混音导出 | ✓ | ✓ | - |
 
 Android 端保留 UI 与 TTS 客户端工作流，但本地 FFmpeg 混流、裁剪、波形提取和视频导出不可用。
 

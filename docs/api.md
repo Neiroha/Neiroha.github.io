@@ -270,7 +270,7 @@ Gemini TTS uses a Google AI Studio API key. Set the provider URL to `https://gen
 
 ### Windows System TTS
 
-Windows desktop uses system SAPI voices and needs no Base URL or API key. Android, Apple, and Linux system TTS providers remain hidden until native platform adapters exist.
+Windows desktop uses system SAPI voices and needs no base URL or API key. Android and Linux system TTS providers remain hidden until native platform adapters exist.
 
 ## 3. Response Headers And Troubleshooting
 

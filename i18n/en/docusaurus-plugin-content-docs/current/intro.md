@@ -63,10 +63,17 @@ description: Product guide, workflows, operations notes, and API reference for N
 
 Neiroha treats platform support as concrete capability boundaries, not as a promise that every platform exposes identical native features.
 
-| Platform | Current Scope |
-|---|---|
-| Windows | Primary desktop target. Windows SAPI and external FFmpeg CLI are supported. |
-| Linux / macOS | Desktop targets. External FFmpeg CLI can be used after installation or configuration; native system TTS is not implemented yet. |
-| Android phones / tablets | UI and TTS client workflows are supported. Local FFmpeg muxing, trimming, waveform extraction, and video export are disabled. |
+| Capability | Windows | Linux | Android phones / tablets |
+|---|---:|---:|---:|
+| Release build | ✓ | ✓ | ✓ |
+| Main UI and project management | ✓ | ✓ | ✓ |
+| Cloud TTS backend connection | ✓ | ✓ | ✓ |
+| Same-device local inference backend connection | ✓ | ✓ | - |
+| LAN-hosted local inference backend connection | ✓ | ✓ | ✓ |
+| Windows SAPI system voice | ✓ | - | - |
+| External FFmpeg CLI detection and invocation | ✓ | ✓ | - |
+| Video dubbing export, muxing, trimming, and waveform extraction | ✓ | ✓ | - |
 
-System TTS currently uses Windows SAPI only. Android, Apple, and Linux system TTS should only appear in the UI after native adapters exist.
+`✓` means the capability is covered by current documentation and release builds. `-` means it is not currently promised or exposed in the UI.
+
+System TTS currently uses Windows SAPI only. Android and Linux system TTS should only appear in the UI after native adapters exist.

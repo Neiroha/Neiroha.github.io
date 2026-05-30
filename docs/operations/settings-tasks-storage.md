@@ -42,4 +42,4 @@ sidebar_label: 设置 / 任务 / 存储
 
 ## 媒体工具（Media Tools）
 
-媒体工具管理 FFmpeg 检测和音频 / 视频导出默认设置。Windows、Linux 和 macOS 可以使用外部 FFmpeg 命令行；Android 禁用本地 FFmpeg 媒体处理。
+媒体工具管理 FFmpeg 检测和音频 / 视频导出默认设置。Windows 和 Linux 可以使用外部 FFmpeg 命令行；Android 禁用本地 FFmpeg 媒体处理。
