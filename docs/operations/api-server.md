@@ -26,6 +26,20 @@ Neiroha 暴露一个本地 HTTP 服务器，供外部工具通过 OpenAI 兼容�
 
 默认只允许本机访问。需要局域网访问时，再将绑定地址改为 `0.0.0.0`，并配置 API Key。
 
+配置 API Key 后，客户端需要发送任一鉴权头：
+
+```bash
+Authorization: Bearer <key>
+```
+
+或：
+
+```bash
+X-API-Key: <key>
+```
+
+如果 API Key 为空，请求示例中的鉴权头可以省略。
+
 ## 接口列表
 
 | 方法 | 路径 | 说明 |
@@ -43,6 +57,7 @@ Neiroha 暴露一个本地 HTTP 服务器，供外部工具通过 OpenAI 兼容�
 ```bash
 curl http://localhost:8976/v1/audio/speech \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <key>" \
   -d '{
     "model": "Default Bank",
     "voice": "Default Voice",

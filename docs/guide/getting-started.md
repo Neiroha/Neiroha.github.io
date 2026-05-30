@@ -35,6 +35,17 @@ Neiroha 本身是 TTS 工作站和中间件，不内置大模型推理。第一�
 
 本地后端提供 Windows 便携包。GPT-SoVITS、VoxCPM2 和 CosyVoice3 可从各自 Release 页面下载分卷包；具体见 [Windows 便携后端包](/workflow/providers/local-engines#windows-便携后端包)。
 
+### 路线选择
+
+| 目标 | 推荐路线 |
+|---|---|
+| 尽快听到第一段声音 | 使用 Windows 系统 TTS 或云端免费额度，先完成 Quick Test |
+| 文本不离开本机 | 使用 GPT-SoVITS、CosyVoice3 或 VoxCPM2 本地后端 |
+| 需要中英混合或多语种试听 | 先试 Gemini、MiMo、CosyVoice3 或 VoxCPM2，再按效果固定 Provider |
+| 需要参考音频克隆 | 使用 GPT-SoVITS、CosyVoice3 或 VoxCPM2，并准备干净短音频 |
+| 批量小说、有声书或字幕配音 | 优先配置本地后端；云端 Provider 需设置 RPM、TPM、RPD 和较低并发 |
+| 给脚本、游戏或其他工具调用 | 先创建语音库并通过 Quick Test，再打开 [API 服务器](/operations/api-server) |
+
 ## 3. 配置 Provider
 
 打开 **Providers** 页面。左侧是 Provider 列表，右侧是当前 Provider 的配置表单。

@@ -26,6 +26,17 @@ sidebar_label: 存储 / 故障排除
 
 语音资产根目录可以在 **设置 → Storage** 中修改。
 
+## 排错顺序
+
+遇到无法合成、无音色、持续排队或 API 调用失败时，按下面顺序定位：
+
+1. 在浏览器或 curl 中直接访问后端 `/health`、`/v1/models` 或 voice 列表，确认后端服务可达。
+2. 回到 **Providers**，检查 `Base URL`、`API Key`、适配器类型和端口，再执行 **Fetch All**。
+3. **Health Check** 通过后，到 **Voice Bank** 创建或检查角色，确认 Provider、model、voice 和任务模式完整。
+4. 用 **Quick Test** 生成一句短文本。Quick Test 未通过前，不建议进入 Dialog、Phase、Novel 或 Video 批量生成。
+5. 如果任务持续排队，查看 **Settings → Tasks**，确认 Provider 最大并发不是 `0`，并检查 RPM、TPM、RPD 是否过低。
+6. 如果外部 API 调用失败，先用本机 `127.0.0.1:8976` 测试；局域网访问再检查绑定地址、API Key、CORS 和防火墙。
+
 ## 常见问题
 
 | 现象 | 解决方案 |
