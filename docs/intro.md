@@ -4,7 +4,7 @@ slug: /
 title: Neiroha Wiki
 sidebar_label: 项目总览
 sidebar_position: 1
-description: Neiroha 的产品说明、使用手册、API 参考和开发文档入口。
+description: Neiroha 的产品说明、使用手册、配置运维和 API 参考入口。
 ---
 
 <div className="wiki-hero">
@@ -37,9 +37,9 @@ description: Neiroha 的产品说明、使用手册、API 参考和开发文档�
     <strong>API 服务器</strong>
     <p>本地 OpenAI 兼容 HTTP 服务、鉴权、CORS、限流和请求示例。</p>
   </a>
-  <a className="wiki-card" href="/plan">
-    <strong>开发状态</strong>
-    <p>当前计划、已确认风险、研究资料与历史归档。</p>
+  <a className="wiki-card" href="/operations/github-actions-builds">
+    <strong>自动构建</strong>
+    <p>了解 GitHub Actions 构建产物、Release 包和调试包下载位置。</p>
   </a>
 </div>
 

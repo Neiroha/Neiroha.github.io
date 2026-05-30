@@ -3,14 +3,14 @@ title: 连接本地推理引擎
 sidebar_label: 本地推理引擎
 ---
 
-本地推理引擎适合有本机 GPU、局域网推理服务器，或不希望把文本发到云端的场景。Neiroha 不负责启动模型服务；它负责把 UI、队列、项目和本地 API 请求转发给你已经启动好的 TTS 服务。
+本地推理引擎适合有本机 GPU、局域网推理服务器，或不希望把文本发到云端的场景。Neiroha 不负责替你训练模型；它负责把 UI、队列、项目和本地 API 请求转发给已经启动好的 TTS 服务。
 
 <img className="screenshot" src="/img/screenshot_providers.png" alt="本地提供商配置入口" />
 
 ## 连接前检查
 
-1. 先启动你的 TTS 后端，确认它监听在固定端口。
-2. 在运行 Neiroha 的机器上打开后端的健康检查或模型列表地址。
+1. 先启动你的 TTS 后端，确认终端或日志里显示了真实监听地址。
+2. 在运行 Neiroha 的机器上打开后端的 `/health`、`/v1/models` 或 voice 列表地址。
 3. 如果 Neiroha 跑在 Android 模拟器里，宿主机地址用 `10.0.2.2`，不要用 `127.0.0.1`。
 4. 如果 Neiroha 跑在 Android 真机里，使用电脑的局域网 IP，并放行 Windows 防火墙。
 5. 回到 Neiroha 的 **Providers**，新增或编辑 Provider。
@@ -20,12 +20,14 @@ sidebar_label: 本地推理引擎
 | 后端类型 | Neiroha 适配器 | Base URL 示例 | 角色配置重点 |
 |---|---|---|---|
 | OpenAI 兼容 TTS | OpenAI TTS API Compatible | `http://127.0.0.1:8880/v1` | 选模型和 preset voice |
-| GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:19880` | trained profile 或参考音频 clone |
-| CosyVoice3 | CosyVoice Native | `http://127.0.0.1:19890` | prompt clone、cross-lingual、instruct |
+| GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:9880` | 已训练 voice 或参考音频 clone |
+| CosyVoice3 | CosyVoice Native | `http://127.0.0.1:9880` | prompt clone、cross-lingual、instruct |
 | VoxCPM2 | VoxCPM2 Native | `http://127.0.0.1:8000` | registered voice、voice design、clone |
 | Windows 系统声音 | Windows System TTS | 留空 | Windows 桌面端直接枚举 SAPI voice |
 
-本地后端的完整教程：
+CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两个后端，请改其中一个 `configs/server.toml` 的 `[api].port`，或使用 launcher 自动选择的随机端口，并把日志里的实际地址填到 Neiroha。
+
+本地后端完整教程：
 
 - [Neiroha GPT-SoVITS](/workflow/providers/gpt-sovits)
 - [Neiroha VoxCPM2](/workflow/providers/voxcpm)
@@ -44,36 +46,38 @@ OpenAI 兼容是最容易接的本地协议，适合 Kokoro、XTTS、Orpheus、K
 
 ## GPT-SoVITS
 
-GPT-SoVITS 适合已经有训练好的说话人 profile，或需要参考音频克隆的工作流。
+GPT-SoVITS 适合已经有训练好的说话人 voice，或需要参考音频克隆的工作流。
 
-1. Provider 适配器选 **GPT-SoVITS**。
-2. `Base URL` 填服务根地址。Neiroha GPT-SoVITS 本地启动器默认是 `http://127.0.0.1:19880`。
-3. 默认模型可保留 `gpt-sovits`。
-4. 点 **Fetch All** 拉取 `/gpt-sovits/models` 和 `/gpt-sovits/voices`。
+1. 启动后端：便携包运行 `start_portable.bat serve`，源码环境运行 `pixi run serve`。
+2. Provider 适配器选 **GPT-SoVITS**。
+3. `Base URL` 填服务根地址，默认是 `http://127.0.0.1:9880`。
+4. 点 **Fetch All**。新后端会提供 `/v1/models`、`/v1/audio/voices` 和 `/api/gpt-sovits/voices`。
 5. 创建角色时选择：
-   - trained/profile：选服务端已有 voice。
-   - clone：上传参考音频，并填写参考文本和语言。
+   - 已注册 voice：选服务端已有 voice，例如 `genshin-keqing`。
+   - clone：上传参考音频，并填写参考文本、参考语言和目标文本语言。
 6. Quick Test 成功后再用于 Dialog / Phase 批量生成。
 
 ## CosyVoice Native
 
-CosyVoice Native 使用 Neiroha 的原生 JSON / multipart 适配，不要求后端伪装成 OpenAI。
+CosyVoice Native 使用 Neiroha 的原生 JSON / multipart 适配，不要求后端伪装成纯 OpenAI 服务。
 
-1. Provider 适配器选 **CosyVoice Native**。
-2. `Base URL` 填服务根地址。Neiroha CosyVoice3 本地启动器默认是 `http://127.0.0.1:19890`。
-3. Health Check 会访问 `/health`。
-4. 创建角色时可以使用服务端 profiles，也可以用参考音频走 upload 路径。
-5. `prompt_clone` 补齐参考音频对应文本；`cross_lingual` 只需要参考音频；`instruct` 补齐 voice instruction。
+1. 启动后端：便携包运行 `start_portable.bat`，源码环境运行 `pixi run serve`。
+2. Provider 适配器选 **CosyVoice Native**。
+3. `Base URL` 填服务根地址，默认是 `http://127.0.0.1:9880`。
+4. Health Check 会访问 `/health`。
+5. **Fetch All** 会读取 `/v1/models`、`/v1/audio/voices` 和 `/api/cosyvoice/voices`。
+6. 创建角色时按模式补齐字段：`prompt_clone` 需要参考音频和 prompt text；`cross_lingual` 只需要参考音频；`instruct` 需要参考音频和 instruction。
 
 ## VoxCPM2 Native
 
 VoxCPM2 Native 支持 registered voice、自然语言声音设计和参考音频克隆。
 
-1. Provider 适配器选 **VoxCPM2 Native**。
-2. `Base URL` 填 `http://127.0.0.1:8000` 或你的实际服务地址。
-3. **Fetch All** 会尝试 `/v1/models` 和 `/voxcpm/voices`。
-4. 创建角色时按需求选择 registered voice、design、clone 或 ultimate clone。
-5. `clone` 需要参考音频但不需要参考文本；`ultimate clone` 需要参考音频和对应文本。
+1. 启动后端：便携包运行 `start_portable.bat`，源码环境运行 `pixi run serve`。
+2. Provider 适配器选 **VoxCPM2 Native**。
+3. `Base URL` 填 `http://127.0.0.1:8000` 或你的实际服务地址。
+4. **Fetch All** 会读取 `/v1/models`、`/v1/audio/voices` 和 `/api/voxcpm/voices`。
+5. 创建角色时按需求选择 registered voice、design、clone 或 ultimate clone。
+6. `clone` 需要参考音频但不需要参考文本；`ultimate_clone` 需要参考音频和对应文本。
 
 ## Android 连接本机后端
 
@@ -93,5 +97,5 @@ VoxCPM2 Native 支持 registered voice、自然语言声音设计和参考音频
 | Health Check 失败 | URL 层级错了，或端口没开 | OpenAI 兼容通常带 `/v1`，原生适配器通常填服务根地址 |
 | 模拟器连不上本机 | 写了 `127.0.0.1` | 改成 `10.0.2.2` |
 | 真机连不上电脑 | 防火墙拦截或后端只监听 localhost | 后端改监听 `0.0.0.0`，并放行端口 |
-| Fetch All 为空 | 后端没有列表接口 | 手动填模型和 voice，再做 Quick Test |
+| Fetch All 为空 | 后端没有列表接口，或端口填到了错误服务 | 打开 `/v1/models` 和 voice 列表检查，再手动填模型和 voice |
 | 批量生成卡住 | 本地显存或并发过高 | Provider 最大并发先设为 `1` |

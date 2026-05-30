@@ -1,60 +1,48 @@
 # Neiroha — Audio API Reference
 
-## Overview
+Neiroha exposes audio APIs in two places:
 
-Neiroha exposes audio APIs at two levels:
+1. **Neiroha built-in API Server**: exposes the active voice banks in the app as an OpenAI-compatible TTS service.
+2. **Provider upstream adapters**: the app calls local or cloud TTS backends through adapter-specific routes.
 
-1. **Local API Server** (`lib/server/api_server.dart`) — an OpenAI-compatible HTTP server that proxies TTS requests through configured voice characters, scoped by active voice banks
-2. **Upstream Adapter Layer** (`lib/data/adapters/`) — client-side adapters that talk to external TTS backends
+## 1. Built-In API Server
 
----
+The built-in server defaults to `127.0.0.1:8976` and can be toggled from **Settings → API Server**. Bind to `0.0.0.0` only when LAN access is intentional.
 
-## 1. Local API Server (Shelf)
-
-The built-in server defaults to `127.0.0.1:8976` and can be toggled from
-**Settings → API Server**. Set the bind host to `0.0.0.0` only when you
-intentionally want LAN access.
-
-### Security and operational controls
-
-The Settings screen persists the local API configuration in `AppSettings`:
+### Security And Runtime Controls
 
 | Setting | Default | Notes |
 |---|---|---|
-| Bind host | `127.0.0.1` | Loopback-only by default |
+| Bind host | `127.0.0.1` | Loopback only by default |
 | Port | `8976` | Restart the server after changing |
 | API key | empty | When set, requests must send `Authorization: Bearer <key>` or `X-API-Key: <key>` |
 | CORS origins | empty | Empty denies browser cross-origin access; `*` allows any origin |
 | Rate limit | `60` req/min/IP | `0` disables |
-| Max body size | `1048576` bytes | `0` disables declared Content-Length check |
-| API log output | off | Logs metadata only; request bodies and auth headers are never captured |
+| Max body size | `1048576` bytes | `0` disables declared Content-Length checks |
+| API logging | off | Logs metadata only; request bodies and auth headers are not logged |
 
-Every synthesis request goes through the shared `TtsQueueService`, so provider
-concurrency and rate limits apply equally to desktop screens and external API
-clients.
+Every synthesis request goes through the shared `TtsQueueService`, so provider concurrency and rate limits apply to both the desktop UI and external API clients.
 
-### Voice Bank as Model
+### Voice Bank As Model
 
-The API uses **voice banks** as the `model` abstraction:
-- Active voice bank rows appear as models in `/v1/models`
-- The bank name is used as the `model` value in API requests
-- Voices listed in `/v1/audio/voices` and `/speakers` are scoped to active banks
+The built-in API uses **voice banks** as the `model` abstraction:
 
-### Implemented Endpoints
+- Active voice banks appear in `/v1/models`.
+- The bank name is used as the `model` value in API requests.
+- `/v1/audio/voices` and `/speakers` list voices from active banks only.
 
-| Method | Path | Description | Status |
-|---|---|---|---|
-| `POST` | `/v1/audio/speech` | Synthesize speech from text | **Implemented** |
-| `GET` | `/v1/audio/voices` | List voices from active banks (OpenAI format) | **Implemented** |
-| `GET` | `/v1/models` | List active voice banks as models | **Implemented** |
-| `GET` | `/speakers` | List voices from active banks (SillyTavern format) | **Implemented** |
-| `GET` | `/health` | Server health check | **Implemented** |
+### Endpoints
+
+| Method | Path | Description |
+|---|---|---|
+| `POST` | `/v1/audio/speech` | Synthesize speech from text |
+| `GET` | `/v1/audio/voices` | List voices from active voice banks |
+| `GET` | `/v1/models` | List active voice banks as OpenAI-style models |
+| `GET` | `/speakers` | SillyTavern-style speaker list |
+| `GET` | `/health` | Health check |
 
 ### `POST /v1/audio/speech`
 
-OpenAI-compatible TTS endpoint. Resolves voice by name (optionally scoped to a bank via `model`), finds the provider + adapter, and returns raw audio bytes.
-
-**Request body (JSON):**
 ```json
 {
   "input": "Text to synthesize",
@@ -68,126 +56,40 @@ OpenAI-compatible TTS endpoint. Resolves voice by name (optionally scoped to a b
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `input` | string | yes | Text to synthesize |
-| `voice` | string | yes | Voice character name (matched against `VoiceAssets.name`) |
-| `model` | string | no | Voice bank name — scopes voice lookup to that bank's members |
-| `speed` | number | no | Playback speed multiplier (default: 1.0) |
-| `response_format` | string | no | Output format hint passed to upstream adapter |
+| `voice` | string | yes | Voice character name |
+| `model` | string | no | Voice bank name; scopes voice lookup when provided |
+| `speed` | number | no | Playback speed multiplier, default `1.0` |
+| `response_format` | string | no | Output format hint passed to the upstream adapter |
 
-**Voice resolution order:**
-1. If `model` is provided, find the active bank with that name and look up the voice within its members
-2. Fallback: look up the voice by name globally across all voice assets
+The response is raw audio bytes with a format-specific `Content-Type`.
 
-**Response:** Raw audio bytes with appropriate `Content-Type` header (`audio/mpeg`, `audio/wav`, etc.)
+Common errors:
 
-**Error responses:**
-- `400` — Missing `input` or `voice` field
-- `401` — Missing or invalid API key when auth is configured
-- `413` — Request body exceeds configured limit
-- `429` — Per-IP request budget exceeded
-- `404` — Voice character not found
-- `500` — Provider not found or upstream synthesis failed
+| Status | Meaning |
+|---|---|
+| `400` | Missing `input` or `voice` |
+| `401` | Missing or invalid API key when auth is configured |
+| `413` | Request body exceeds the configured limit |
+| `429` | Per-IP request budget exceeded |
+| `404` | Voice character not found |
+| `500` | Provider not found or upstream synthesis failed |
 
-### `GET /v1/audio/voices`
+## 2. Upstream Provider Adapters
 
-Lists voices from all active banks. Each voice includes its bank name as the `model` field.
+Provider `Base URL` rules depend on the adapter. OpenAI-compatible services usually point to `/v1`; Neiroha native local backends usually use the service root.
 
-**Response:**
-```json
-{
-  "voices": [
-    {
-      "voice_id": "character_name",
-      "name": "character_name",
-      "description": "...",
-      "provider": "OpenAI TTS",
-      "model": "My Bank",
-      "task_mode": "presetVoice"
-    }
-  ]
-}
-```
+### OpenAI TTS API Compatible
 
-### `GET /v1/models`
+For any service exposing the standard OpenAI TTS API.
 
-Lists all active voice banks as OpenAI-style model objects.
+| Operation | Method | Relative Path |
+|---|---|---|
+| Synthesize | `POST` | `/audio/speech` |
+| Health check / models | `GET` | `/models` |
+| Voices | `GET` | `/audio/voices`, then `/speakers` as fallback |
 
-**Response:**
-```json
-{
-  "object": "list",
-  "data": [
-    { "id": "Default Bank", "object": "model", "owned_by": "neiroha" },
-    { "id": "Japanese Voices", "object": "model", "owned_by": "neiroha" }
-  ]
-}
-```
+Example payload:
 
-### `GET /speakers`
-
-SillyTavern-compatible speaker list, scoped to active banks.
-
-**Response:**
-```json
-[
-  { "name": "character_name", "voice_id": "asset-uuid", "model": "My Bank" }
-]
-```
-
-### `GET /health`
-
-Simple health check.
-
-**Response:**
-```json
-{
-  "status": "ok",
-  "host": "127.0.0.1",
-  "port": 8976,
-  "authRequired": false
-}
-```
-
----
-
-## 2. Upstream Adapter Layer
-
-Each adapter implements the `TtsAdapter` interface:
-
-```dart
-abstract class TtsAdapter {
-  Future<TtsResult> synthesize(TtsRequest request);
-  Future<bool> healthCheck();
-  Future<List<String>> getSpeakers();
-  Future<List<ModelInfo>> getModels();
-}
-```
-
-### Platform availability
-
-Provider and media capabilities are filtered by the running platform:
-
-| Capability | Windows | Linux / macOS | Android |
-|---|---|---|---|
-| External FFmpeg CLI path / PATH detection | yes | yes | no |
-| Local waveform extraction, trimming and muxed export | yes | yes | disabled |
-| Windows SAPI system TTS | yes | no | no |
-
-Unsupported providers are not offered in the Add Provider dialog. Existing
-database rows from another platform remain visible as unavailable and cannot be
-enabled or health-checked.
-
-### 2.1 OpenAI Compatible (`openaiCompatible`)
-
-For any server exposing the standard OpenAI TTS API.
-
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize | `POST` | `/audio/speech` | **Implemented** |
-| Health check | `GET` | `/models` | **Implemented** |
-| List speakers | `GET` | `/audio/voices` then `/speakers` | **Implemented** |
-| List models | `GET` | `/models` | **Implemented** |
-
-**Synthesis payload:**
 ```json
 {
   "model": "tts-1",
@@ -198,227 +100,192 @@ For any server exposing the standard OpenAI TTS API.
 }
 ```
 
-### 2.2 Chat Completions TTS (`chatCompletionsTts`)
+### Chat Completions TTS
 
-For TTS providers using the Chat Completions format (e.g. MiMo V2 TTS, Qwen-style audio models).
+For TTS providers that return audio through Chat Completions, such as MiMo-style audio models.
 
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize | `POST` | `/chat/completions` | **Implemented** |
-| Health check | `GET` | `/models` | **Implemented** |
-| List speakers | `GET` | `/speakers` | **Implemented** |
-| List models | `GET` | `/models` | **Implemented** |
+| Operation | Method | Relative Path |
+|---|---|---|
+| Synthesize | `POST` | `/chat/completions` |
+| Health check / models | `GET` | `/models` |
+| Voices | `GET` | `/speakers` |
 
-**Synthesis payload:**
+Neiroha reads base64 audio from `choices[0].message.audio.data`. MiMo-style providers use the `api-key` header by default.
+
+### CosyVoice Native
+
+For the Neiroha CosyVoice3 local backend. The default service root is `http://127.0.0.1:9880`; if the launcher falls back to a random port, use the address printed in the backend log.
+
+Stable OpenAI routes:
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/health` | Health check |
+| `GET` | `/v1/models` | List voice sets |
+| `GET` | `/v1/audio/voices` | List voice profiles |
+| `POST` | `/v1/audio/speech` | Synthesize with a registered voice |
+
+Standard native routes:
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/cosyvoice/voices` | List registered voices |
+| `GET` | `/api/cosyvoice/meta` | Backend metadata |
+| `GET` | `/api/cosyvoice/capabilities` | Modes, fields, and upload support |
+| `GET` | `/api/cosyvoice/logs` | Runtime logs |
+| `POST` | `/api/cosyvoice/tts` | JSON synthesis |
+| `POST` | `/api/cosyvoice/tts/upload` | Upload reference audio and synthesize |
+
+Legacy `/cosyvoice/*` and `/cosyvoice3/*` routes remain for compatibility. New integrations should prefer `/api/cosyvoice/*`.
+
+JSON synthesis example:
+
 ```json
 {
-  "model": "mimo-v2-tts",
-  "messages": [
-    { "role": "user", "content": "voice instruction (optional)" },
-    { "role": "assistant", "content": "text to synthesize" }
-  ],
-  "audio": {
-    "format": "wav",
-    "voice": "mimo_default"
-  }
-}
-```
-
-**Response parsing:** Extracts base64 audio from `choices[0].message.audio.data`.
-
-**Auth:** Uses `api-key` header (MiMo-style) by default instead of `Authorization: Bearer`.
-
-### 2.3 CosyVoice Native (`cosyvoice`)
-
-Full CosyVoice feature support with multiple synthesis modes via the native JSON API.
-
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize (JSON) | `POST` | `/cosyvoice/speech` | **Implemented** |
-| Synthesize (upload) | `POST` | `/cosyvoice/speech/upload` | **Implemented** |
-| Health check | `GET` | `/health` | **Implemented** |
-| List speakers | `GET` | `/speakers` | **Implemented** |
-| List profiles | `GET` | `/cosyvoice/profiles` | **Implemented** |
-
-**JSON synthesis (`/cosyvoice/speech`):**
-```json
-{
-  "text": "text to synthesize",
+  "text": "Text to synthesize",
+  "model": "default",
+  "voice": "prompt-clone",
+  "mode": "zero_shot",
   "speed": 1.0,
   "response_format": "wav",
-  "mode": "zero_shot",
-  "profile": "speaker_name",
   "prompt_audio_path": "/path/to/voices/demo.wav",
   "prompt_text": "reference text",
   "instruct_text": "Read in a gentle and calm tone"
 }
 ```
 
-**Mode descriptions:**
-| Mode | Description | Required fields |
+| Mode | Description | Required Fields |
 |---|---|---|
-| `zero_shot` | Voice cloning | `prompt_audio_path`/`prompt_audio` + `prompt_text` |
-| `cross_lingual` | Cross-language clone | `prompt_audio_path`/`prompt_audio` |
-| `instruct` | Instruction-controlled style | `prompt_audio_path`/`prompt_audio` + `instruct_text` |
+| `zero_shot` / `prompt_clone` | Prompt clone | reference audio + `prompt_text` |
+| `cross_lingual` | Cross-lingual clone | reference audio |
+| `instruct` | Instruction control | reference audio + `instruct_text` |
 
-**Multipart upload (`/cosyvoice/speech/upload`):**
-Used when the user uploads a local reference audio. Fields sent as `multipart/form-data`:
-- `text`, `mode`, `speed`, `response_format`
-- `prompt_audio` — the reference audio file
-- `prompt_text` (zero_shot required), `prompt_lang`, `instruct_text` (instruct required)
+### GPT-SoVITS
 
-> **Important:** `profile` is **NOT sent** in the multipart path. The server's
-> `build_runtime_char_config` does a strict lookup and raises 400 "未找到角色"
-> if the name isn't registered. When uploading audio the upload fully defines
-> the voice; no profile lookup is needed. Profile is only used in the JSON path
-> when no audio is uploaded and the server must retrieve stored reference audio.
+For the Neiroha GPT-SoVITS local backend. The default service root is `http://127.0.0.1:9880`; if it conflicts with another backend, use the actual port printed in the log.
 
-**Profile list (`GET /cosyvoice/profiles`):**
-Returns server-registered profiles. Only names from this list are safe to send as `profile`.
+Stable OpenAI routes:
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/health` | Health check |
+| `GET` | `/v1/models` | List voice sets |
+| `GET` | `/v1/audio/voices` | List voice profiles |
+| `POST` | `/v1/audio/speech` | Synthesize with a registered voice |
+
+Standard native routes:
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/api/gpt-sovits/models` | List model presets / low-level weights |
+| `GET` | `/api/gpt-sovits/voices` | List voice profiles |
+| `GET` | `/api/gpt-sovits/capabilities` | Clone and audio normalization support |
+| `GET` | `/api/gpt-sovits/logs` | Runtime logs |
+| `POST` | `/api/gpt-sovits/tts` | Native JSON synthesis |
+| `POST` | `/api/gpt-sovits/clone` | JSON clone request |
+| `POST` | `/api/gpt-sovits/clone/upload` | Upload reference audio and clone |
+| `POST` | `/api/gpt-sovits/load` | Load a preset |
+| `POST` | `/api/gpt-sovits/unload` | Unload the current model |
+| `POST` | `/api/gpt-sovits/reload` | Reload the current model |
+
+Legacy `/gpt-sovits/*` and `/tts` routes remain for compatibility. New integrations should prefer `/api/gpt-sovits/*`.
+
+Clone example:
+
 ```json
 {
-  "object": "list",
-  "data": [
-    { "id": "Neko",  "name": "Neko",  "mode": "zero_shot",    "mode_label": "语音克隆" },
-    { "id": "Kuro",  "name": "Kuro",  "mode": "instruct",     "mode_label": "指令模式" }
-  ]
-}
-```
-The character creation dialog fetches this list and shows it as a dropdown so users cannot type arbitrary (non-existent) profile names.
-
-**Synthesis mode stored in `VoiceAsset.modelName`:**
-For CosyVoice native characters the `modelName` column stores the synthesis mode string
-(`zero_shot` / `cross_lingual` / `instruct`). `createAdapter(provider, modelName: asset.modelName)`
-passes it to `CosyVoiceAdapter(modelName: mode)` which uses it to route synthesis.
-
-**`CosyVoiceProfile` data class** (returned by `getProfiles()`):
-```dart
-class CosyVoiceProfile {
-  final String id;
-  final String name;
-  final String mode;       // zero_shot | cross_lingual | instruct
-  final String modeLabel;  // Chinese label, e.g. 语音克隆
-}
-```
-
-### 2.4 GPT-SoVITS (`gptSovits`)
-
-Adapter for the Neiroha GPT-SoVITS launcher. It supports saved trained
-speaker profiles and reference-audio clone mode.
-
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize trained speaker | `POST` | `/v1/audio/speech` | **Implemented** |
-| Synthesize clone | `POST` | `/gpt-sovits/clone` | **Implemented** |
-| Health check | `GET` | `/health` | **Implemented** |
-| List native models | `GET` | `/gpt-sovits/models` | **Implemented** |
-| List speakers | `GET` | `/gpt-sovits/voices`, `/v1/audio/voices`, `/speakers` | **Implemented** |
-
-**Clone payload:**
-```json
-{
-  "input": "text to synthesize",
+  "input": "Text to synthesize",
   "speaker": "clone",
   "text_lang": "zh",
   "ref_audio_path": "/path/to/ref.wav",
   "prompt_text": "reference text",
   "prompt_lang": "zh",
   "speed": 1.0,
-  "response_format": "wav",
-  "text_split_method": "cut5",
-  "batch_size": 1
+  "response_format": "wav"
 }
 ```
 
-### 2.5 Azure Speech Service (`azureTts`)
+### VoxCPM2 Native
 
-Microsoft Azure Cognitive Services Text-to-Speech REST API. Free tier provides 500k characters/month.
+For the Neiroha VoxCPM2 local backend. The default service root is `http://127.0.0.1:8000`.
 
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize | `POST` | `/cognitiveservices/v1` | **Implemented** |
-| Health check | `GET` | `/cognitiveservices/voices/list` | **Implemented** |
-| List speakers | `GET` | `/cognitiveservices/voices/list` | **Implemented** |
-| List models | `GET` | `/cognitiveservices/voices/list` | **Implemented** (returns locales) |
+Stable OpenAI routes:
 
-**Configuration:**
-- Base URL: `https://{region}.tts.speech.microsoft.com` (e.g. `eastus`, `westus2`, `southeastasia`)
-- API Key: Azure subscription key (set as `Ocp-Apim-Subscription-Key` header)
-
-**Synthesis:** Uses SSML format with voice name, prosody rate, and text. Supports output formats: wav (default), mp3, opus/ogg, pcm.
-
-### 2.6 Windows System TTS (`systemTts`)
-
-Built-in Windows SAPI (System.Speech.Synthesis) via PowerShell. Zero setup — works on any Windows 10/11 installation.
-This provider is seeded and shown only on Windows. Android, Apple and Linux
-system TTS backends are intentionally hidden until native platform adapters are
-implemented.
-
-| Operation | Method | Path | Status |
-|---|---|---|---|
-| Synthesize | PowerShell `SpeechSynthesizer` | — | **Implemented** |
-| Health check | PowerShell assembly load | — | **Implemented** |
-| List speakers | PowerShell `GetInstalledVoices()` | — | **Implemented** |
-
-**Configuration:** No base URL or API key needed. Voice selection via `presetVoiceName` (matched to installed SAPI voice name). Speed is mapped from 0.5–2.0 range to SAPI's -10..10 rate scale. Output is always WAV.
-
----
-
-## 3. Model Management
-
-Providers that support it can auto-query available models from their API. The provider editor UI allows:
-
-- **Auto Fetch** — queries `GET /models` (OpenAI/Chat) or voice list (Azure) to discover available models
-- **Manual Add** — user types in model name/ID
-- Models are stored in the `ModelBindings` table and persist across sessions
-- Voice assets can reference specific models within a provider
-
-Supported adapters:
-
-| Adapter type | Model query | Voice query |
+| Method | Path | Description |
 |---|---|---|
-| `openaiCompatible` | yes | yes |
-| `chatCompletionsTts` | yes | yes |
-| `azureTts` | locales via voice list | yes |
-| `systemTts` | no | yes, Windows only |
-| `cosyvoice` | profiles | profiles |
-| `gptSovits` | native model list | yes |
-| `geminiTts` | yes, built-in TTS model list | yes, built-in voice list |
-| `voxcpm2Native` | yes | yes |
+| `GET` | `/health` | Health check |
+| `GET` | `/v1/models` | List voice sets |
+| `GET` | `/v1/audio/voices` | List voice profiles |
+| `GET` | `/v1/audio/speakers` | Speaker-list compatibility |
+| `POST` | `/v1/audio/speech` | OpenAI-compatible synthesis |
 
----
+Standard native routes:
 
-## 4. Not Yet Implemented
-
-### Adapter stubs (planned)
-
-| Adapter Type | Target Backend | Notes |
+| Method | Path | Description |
 |---|---|---|
-| `qwen3Native` | Qwen3 audio models | Native Qwen3 TTS API (not chat completions wrapper) |
-| `fishSpeech` | Fish Speech | Voice clone / instruct / preset modes |
-| `kokoro` | Kokoro-TTS | Preset + voice design modes |
-| `f5Tts` | F5-TTS / E2-TTS | Zero-shot voice clone mode |
+| `GET` | `/api/voxcpm/models` | List model presets / low-level models |
+| `GET` | `/api/voxcpm/capabilities` | Modes, aliases, fields, and upload support |
+| `GET` | `/api/voxcpm/meta` | Backend metadata |
+| `GET` | `/api/voxcpm/logs` | Runtime logs |
+| `POST` | `/api/voxcpm/load` | Load a preset |
+| `POST` | `/api/voxcpm/unload` | Unload the current model |
+| `POST` | `/api/voxcpm/reload` | Reload the current model |
+| `POST` | `/api/voxcpm/tts` | Native JSON synthesis |
+| `POST` | `/api/voxcpm/tts/upload` | Upload reference / prompt audio and synthesize |
+| `GET` | `/api/voxcpm/voices` | List registered voices |
+| `POST` | `/api/voxcpm/voices` | Create or update a voice |
+| `GET` | `/api/voxcpm/voices/{voice_id}` | Fetch one voice |
+| `DELETE` | `/api/voxcpm/voices/{voice_id}` | Delete one voice |
 
-See [`research/llm-tts-adapter-guide.md`](research/llm-tts-adapter-guide.md)
-for guidance on wiring a new LLM TTS backend.
+Legacy `/voxcpm/*` routes remain for compatibility. New integrations should prefer `/api/voxcpm/*`.
 
-### Missing local server endpoints
+OpenAI extension fields:
 
-| Method | Path | Description | Priority |
-|---|---|---|---|
-| `POST` | `/v1/jobs` | Create a durable async TTS job | High |
-| `GET` | `/v1/jobs/:id` | Inspect job status/progress/result metadata | High |
-| `DELETE` | `/v1/jobs/:id` | Cancel a queued/running job | High |
-| `POST` | `/v1/jobs/:id/retry` | Retry a failed or completed job as a new attempt | Medium |
-| `GET` | `/v1/jobs/:id/events` | Optional SSE progress stream | Medium |
-| `GET` | `/v1/audio/speech/:id` | Retrieve previously generated audio by ID | Medium |
+| Field | Description |
+|---|---|
+| `reference_audio` / `ref_audio` | Reference audio: local path, `file://`, `http(s)://`, or `data:audio/...;base64,...` |
+| `prompt_audio` | Prompt audio for ultimate clone |
+| `prompt_text` / `ref_text` | Transcript for prompt audio |
+| `mode` | `design`, `clone`, `ultimate_clone`, or compatible aliases |
+| `instruction` | Natural-language voice description |
+| `auto_asr` | Use optional ASR to transcribe prompt text |
+| `cfg_value`, `inference_timesteps`, `normalize`, `denoise` | VoxCPM2 inference controls |
 
-### Missing adapter capabilities
+### Azure Speech Service
 
-| Feature | Description | Priority |
+| Operation | Method | Path |
 |---|---|---|
-| Streaming synthesis | Return audio as chunked stream instead of buffered response | High |
-| Voice cloning upload | Upload reference audio through the local API (not just UI) | Medium |
-| Batch synthesis | Accept multiple inputs in one request | Medium |
-| SSML support | Pass SSML markup to adapters that support it | Low |
-| Pronunciation dictionary | Custom word pronunciations | Low |
+| Synthesize | `POST` | `/cognitiveservices/v1` |
+| Health check / voices | `GET` | `/cognitiveservices/voices/list` |
+
+Base URL can be a region like `eastus` or an endpoint such as `https://eastus.tts.speech.microsoft.com`. Neiroha sends the API key as `Ocp-Apim-Subscription-Key`.
+
+### Google Gemini TTS
+
+Gemini TTS uses a Google AI Studio API key. Set the provider URL to `https://generativelanguage.googleapis.com`, then choose a Gemini TTS model and voice.
+
+### Windows System TTS
+
+Windows desktop uses system SAPI voices and needs no Base URL or API key. Android, Apple, and Linux system TTS providers remain hidden until native platform adapters exist.
+
+## 3. Response Headers And Troubleshooting
+
+Neiroha local backends usually include these audio response headers. Exact fields vary by backend:
+
+| Header | Meaning |
+|---|---|
+| `X-Neiroha-Backend` | Backend name |
+| `X-Neiroha-Model-Preset` | Low-level model preset |
+| `X-Neiroha-Voice` | Actual voice used |
+| `X-Neiroha-Sample-Rate` | Output sample rate |
+| `X-Neiroha-Inference-Ms` | Inference time |
+| `X-Neiroha-Audio-Seconds` | Output duration |
+| `X-Neiroha-Output-Path` | Server-side output file path |
+| `X-Neiroha-RTF` | Measured local RTF |
+
+Troubleshooting order:
+
+1. Open `/health` in a browser or with `curl`.
+2. Check `/v1/models` and `/v1/audio/voices`.
+3. In Providers, click **Fetch All** and confirm models and voices are cached.
+4. Test one sentence in Quick TTS before running Dialog / Phase / Video batches.

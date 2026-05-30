@@ -49,4 +49,4 @@ build/app/outputs/flutter-apk/app-debug.apk
 | `lib/data/services/tts_queue_service.dart` | 共享 TTS 任务队列、Provider 并发和限流 |
 | `lib/presentation/screens/` | 主屏幕 |
 | `lib/presentation/widgets/` | 各工作流组件 |
-| `docs/` | 活跃项目文档、计划、缺陷、API 参考和研究资料 |
+| `docs/` | 公开 wiki 文档、使用教程和 API 参考 |

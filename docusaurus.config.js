@@ -52,7 +52,7 @@ const config = {
         {
           name: 'description',
           content:
-            'Neiroha 的使用手册、API 参考、开发计划与项目文档索引。',
+            'Neiroha 的使用手册、核心工作流、配置运维和 API 参考。',
         },
       ],
       navbar: {
@@ -69,7 +69,6 @@ const config = {
             label: '文档',
           },
           {to: '/api-zh', label: 'API', position: 'left'},
-          {to: '/plan', label: '计划', position: 'left'},
           {
             href: 'https://github.com/Neiroha/Neiroha',
             label: 'GitHub',
@@ -91,11 +90,13 @@ const config = {
           {
             title: '项目',
             items: [
-              {label: '开发计划', to: '/plan'},
-              {label: '缺陷与风险', to: '/bugs'},
               {
                 label: '源代码仓库',
                 href: 'https://github.com/Neiroha/Neiroha',
+              },
+              {
+                label: 'Release 下载',
+                href: 'https://github.com/Neiroha/Neiroha/releases',
               },
             ],
           },
