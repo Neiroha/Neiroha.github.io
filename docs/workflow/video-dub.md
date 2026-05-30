@@ -5,6 +5,8 @@ sidebar_label: 视频配音
 
 视频配音模块面向“字幕 → TTS → 导出配音”的单视频工作流。它不是完整剪辑软件，但覆盖常见配音制作路径。
 
+<img className="screenshot" src="/img/screenshot_video_tts.png" alt="视频配音页面" />
+
 ## 适合什么任务
 
 | 任务 | 适合度 |

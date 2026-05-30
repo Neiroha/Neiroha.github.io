@@ -39,7 +39,7 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两�
 |---|---|---|
 | GPT-SoVITS | [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases) | `Neiroha-GPT-SoVITS-Portable.7z.001` 到 `.003` |
 | VoxCPM2 | [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases) | `Neiroha-VoxCPM-portable.7z.001` 到 `.004` |
-| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | 上传完成后按 `Neiroha-Cosyvoice-portable.7z.00N` 分卷命名，以 Release 页面实际资产为准 |
+| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | `neiroha-cosyvoice3-portable.7z.001` 到 `.006`，以 Release 页面实际资产为准 |
 
 便携包启动后仍然在解压目录下使用 `runtime/` 存放日志、输出、临时文件和 voice registry。不要只移动其中一个分卷，也不要把分卷解压到系统临时目录后直接长期使用。
 

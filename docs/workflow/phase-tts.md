@@ -5,6 +5,8 @@ sidebar_label: 段落 TTS
 
 段落 TTS 面向长篇叙事、有声书和需要逐段处理的脚本。
 
+<img className="screenshot" src="/img/screenshot_phase_tts.png" alt="段落 TTS 页面" />
+
 ## 适合什么文本
 
 | 文本 | 适合度 |

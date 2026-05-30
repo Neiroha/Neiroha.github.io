@@ -41,7 +41,7 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 API 端口 `9880`。如果你要
 
 ## 安装
 
-Windows 便携包上传完成后，优先从 [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) 下载分卷包。命名按同一规则使用 `Neiroha-Cosyvoice-portable.7z.001`、`.002`、`.003` 这类分卷文件；下载时以 Release 页面实际资产为准，把所有分卷放在同一目录后从 `.001` 解压。
+Windows 便携包上传完成后，优先从 [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) 下载分卷包。当前分卷命名为 `neiroha-cosyvoice3-portable.7z.001` 到 `.006`；下载时以 Release 页面实际资产为准，把六个分卷放在同一目录后从 `.001` 解压。
 
 源码或开发环境第一次使用，在 `<backend-root>` 执行：
 

@@ -62,7 +62,7 @@ Android 和 Linux 包也可以用同样方式在 Windows 上校验，或用系�
 |---|---|---|
 | GPT-SoVITS | [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases) | 下载 `Neiroha-GPT-SoVITS-Portable.7z.001` 到 `.003`，从 `.001` 解压 |
 | VoxCPM2 | [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases) | 下载 `Neiroha-VoxCPM-portable.7z.001` 到 `.004`，从 `.001` 解压 |
-| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | 上传完成后按 `Neiroha-Cosyvoice-portable.7z.00N` 分卷下载，以 Release 页面实际资产为准 |
+| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | 下载 `neiroha-cosyvoice3-portable.7z.001` 到 `.006`，从 `.001` 解压；以 Release 页面实际资产为准 |
 
 分卷包必须放在同一目录。只下载 `.001` 或单独移动某个分卷都无法完整解压。
 
