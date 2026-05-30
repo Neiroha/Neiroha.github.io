@@ -2,12 +2,12 @@
 
 Neiroha 有两类 API：
 
-1. **Neiroha 内置 API Server**：把当前应用里的语音库暴露成 OpenAI 兼容 TTS 服务，适合脚本、游戏、DAW 或其他工具调用 Neiroha。
-2. **Provider 上游适配器**：Neiroha 作为客户端，去调用本地或云端 TTS 后端。
+1. **Neiroha 内置 API 服务器**：把当前应用里的语音库暴露成 OpenAI 兼容 TTS 服务，适合脚本、游戏、DAW 或其他工具调用 Neiroha。
+2. **提供商上游适配器**：Neiroha 作为客户端，去调用本地或云端 TTS 后端。
 
-## 1. 内置 API Server
+## 1. 内置 API 服务器
 
-内置服务器默认运行在 `127.0.0.1:8976`，可从 **设置 → API Server** 开关。只有在明确需要局域网访问时，才把绑定地址改成 `0.0.0.0`。
+内置服务器默认运行在 `127.0.0.1:8976`，可从 **设置 → API 服务器（API Server）** 开关。只有在明确需要局域网访问时，才把绑定地址改成 `0.0.0.0`。
 
 ### 安全与运行配置
 
@@ -15,17 +15,17 @@ Neiroha 有两类 API：
 |---|---|---|
 | 绑定地址 | `127.0.0.1` | 默认仅本机回环访问 |
 | 端口 | `8976` | 修改后需要重启服务器 |
-| API Key | 空 | 设置后请求需发送 `Authorization: Bearer <key>` 或 `X-API-Key: <key>` |
+| 接口密钥（API Key） | 空 | 设置后请求需发送 `Authorization: Bearer <key>` 或 `X-API-Key: <key>` |
 | CORS origins | 空 | 空值拒绝浏览器跨域访问；`*` 允许任意 origin |
 | 限流 | `60` req/min/IP | `0` 表示禁用 |
 | 最大请求体 | `1048576` 字节 | `0` 表示不检查声明的 Content-Length |
 | API 日志输出 | 关闭 | 仅记录元数据；不会记录请求体和认证头 |
 
-所有合成请求都会进入共享的 `TtsQueueService`，因此 Provider 并发数和限流规则同时作用于桌面界面和外部 API 客户端。
+所有合成请求都会进入共享的 `TtsQueueService`，因此提供商并发数和限流规则同时作用于桌面界面和外部 API 客户端。
 
 ### 音色库作为模型
 
-内置 API 用**音色库（Voice Bank）**作为 `model`：
+内置 API 用**语音库（Voice Bank）**作为 `model`：
 
 - 激活的音色库会在 `/v1/models` 中作为模型出现。
 - API 请求中的 `model` 值是音色库名称。
@@ -68,15 +68,15 @@ Neiroha 有两类 API：
 | 状态码 | 含义 |
 |---|---|
 | `400` | 缺少 `input` 或 `voice` |
-| `401` | 配置鉴权后缺少或传入错误 API Key |
+| `401` | 配置鉴权后缺少或传入错误接口密钥 |
 | `413` | 请求体超过配置大小 |
 | `429` | 超过按 IP 统计的请求预算 |
 | `404` | 未找到声音角色 |
-| `500` | 未找到 Provider 或上游合成失败 |
+| `500` | 未找到提供商或上游合成失败 |
 
-## 2. Provider 上游适配器
+## 2. 提供商上游适配器
 
-Provider 的 `Base URL` 规则取决于适配器：OpenAI 兼容服务通常填到 `/v1`，Neiroha 原生本地后端通常填服务根地址。
+提供商的基础地址（`Base URL`）规则取决于适配器：OpenAI 兼容服务通常填到 `/v1`，Neiroha 原生本地后端通常填服务根地址。
 
 ### OpenAI TTS API Compatible
 
@@ -102,7 +102,7 @@ Provider 的 `Base URL` 规则取决于适配器：OpenAI 兼容服务通常填�
 
 ### Chat Completions TTS
 
-适用于通过 Chat Completions 返回音频的 TTS Provider，例如 MiMo 风格音频模型。
+适用于通过 Chat Completions 返回音频的 TTS 提供商，例如 MiMo 风格音频模型。
 
 | 操作 | 方法 | 相对路径 |
 |---|---|---|
@@ -110,7 +110,7 @@ Provider 的 `Base URL` 规则取决于适配器：OpenAI 兼容服务通常填�
 | 健康检查 / 模型列表 | `GET` | `/models` |
 | 语音列表 | `GET` | `/speakers` |
 
-Neiroha 会从 `choices[0].message.audio.data` 读取 base64 音频。MiMo 风格 Provider 默认使用 `api-key` 请求头。
+Neiroha 会从 `choices[0].message.audio.data` 读取 base64 音频。MiMo 风格提供商默认使用 `api-key` 请求头。
 
 ### CosyVoice Native
 
@@ -260,15 +260,15 @@ OpenAI 扩展字段：
 | 合成 | `POST` | `/cognitiveservices/v1` |
 | 健康检查 / 语音列表 | `GET` | `/cognitiveservices/voices/list` |
 
-Base URL 可以填区域名，例如 `eastus`，也可以填 `https://eastus.tts.speech.microsoft.com`。API Key 使用 Azure 订阅密钥，Neiroha 会放到 `Ocp-Apim-Subscription-Key` 头。
+基础地址（Base URL）可以填区域名，例如 `eastus`，也可以填 `https://eastus.tts.speech.microsoft.com`。接口密钥使用 Azure 订阅密钥，Neiroha 会放到 `Ocp-Apim-Subscription-Key` 头。
 
 ### Google Gemini TTS
 
-Gemini TTS 使用 Google AI Studio API Key。Provider 中填写 `https://generativelanguage.googleapis.com`，然后选择 Gemini TTS 模型和 voice。
+Gemini TTS 使用 Google AI Studio 接口密钥。提供商中填写 `https://generativelanguage.googleapis.com`，然后选择 Gemini TTS 模型和音色。
 
-### Windows System TTS
+### Windows 系统语音
 
-Windows 桌面端通过系统 SAPI 合成，无需 Base URL 或 API Key。Android、Apple 和 Linux 的系统 TTS 在原生适配器实现前不会作为可用 Provider 暴露。
+Windows 桌面端通过系统 SAPI 合成，无需基础地址或接口密钥。Android、Apple 和 Linux 的系统 TTS 在原生适配器实现前不会作为可用提供商暴露。
 
 ## 3. 响应头和排错
 
@@ -289,5 +289,5 @@ Neiroha 本地后端的音频响应通常会带这些头，具体字段按后端
 
 1. 浏览器或 `curl` 先打开 `/health`。
 2. 再检查 `/v1/models` 和 `/v1/audio/voices`。
-3. Provider 里点 **Fetch All**，确认模型和 voice 已缓存。
+3. 提供商里点 **拉取全部（Fetch All）**，确认模型和 voice 已缓存。
 4. 先用 Quick TTS 单句测试，再上 Dialog / Phase / Video 批量生成。

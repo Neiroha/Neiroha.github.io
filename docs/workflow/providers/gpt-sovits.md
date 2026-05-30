@@ -33,7 +33,7 @@ sidebar_label: GPT-SoVITS
 
 | 服务 | 默认地址 | 说明 |
 |---|---|---|
-| FastAPI | `http://127.0.0.1:9880` | Neiroha Provider 连接这里 |
+| FastAPI | `http://127.0.0.1:9880` | Neiroha 提供商连接这里 |
 | Admin | `http://127.0.0.1:7860` | 管理模型 preset、voice、下载和日志 |
 
 如果端口被占用，launcher 会自动选择可用随机端口，并写入终端和 `runtime/logs/backend.log`。默认端口无法访问时，先查看日志里的实际地址。
@@ -118,15 +118,15 @@ curl.exe http://127.0.0.1:9880/v1/audio/speech `
 
 ## 接入 Neiroha
 
-1. 打开 Neiroha 的 **Providers**。
-2. 新建 Provider，Adapter Type 选 **GPT-SoVITS**。
-3. `Base URL` 填 `http://127.0.0.1:9880`，如果日志显示随机端口就填日志里的实际地址。
-4. 本地无鉴权时 `API Key` 留空。
-5. 点击 **Fetch All**。
+1. 打开 Neiroha 的 **提供商（Providers）**。
+2. 新建提供商，适配器类型选 **GPT-SoVITS**。
+3. 基础地址（`Base URL`）填 `http://127.0.0.1:9880`，如果日志显示随机端口就填日志里的实际地址。
+4. 本地无鉴权时接口密钥（`API Key`）留空。
+5. 点击 **拉取全部（Fetch All）**。
 6. 确认能看到 `default` voice set 和 `genshin-keqing` voice。
-7. 打开启用开关，点击 **Health Check**。
+7. 打开启用开关，点击 **健康检查（Health Check）**。
 
-Android 模拟器连接宿主机时，把 Base URL 改成：
+Android 模拟器连接宿主机时，把基础地址改成：
 
 ```text
 http://10.0.2.2:9880

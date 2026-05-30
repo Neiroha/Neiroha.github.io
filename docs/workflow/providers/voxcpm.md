@@ -34,7 +34,7 @@ sidebar_label: VoxCPM2
 
 | 服务 | 默认地址 | 说明 |
 |---|---|---|
-| FastAPI | `http://127.0.0.1:8000` | Neiroha Provider 连接这里 |
+| FastAPI | `http://127.0.0.1:8000` | Neiroha 提供商连接这里 |
 | Admin | `http://127.0.0.1:7860` | 管理 voice、model preset、试听和日志 |
 
 ## 安装
@@ -131,13 +131,13 @@ curl.exe -X POST http://127.0.0.1:8000/v1/audio/speech `
 
 ## 接入 Neiroha
 
-1. 打开 Neiroha 的 **Providers**。
-2. 新建 Provider，Adapter Type 选 **VoxCPM2 Native**。
-3. `Base URL` 填 `http://127.0.0.1:8000`。
-4. 本地无鉴权时 `API Key` 留空。
-5. 点击 **Fetch All**。
+1. 打开 Neiroha 的 **提供商（Providers）**。
+2. 新建提供商，适配器类型选 **VoxCPM2 Native**。
+3. 基础地址（`Base URL`）填 `http://127.0.0.1:8000`。
+4. 本地无鉴权时接口密钥（`API Key`）留空。
+5. 点击 **拉取全部（Fetch All）**。
 6. 确认能看到 `voxcpm2-design`、`voxcpm2-clone`、`voxcpm2-ultimate-clone`。
-7. 打开启用开关，点击 **Health Check**。
+7. 打开启用开关，点击 **健康检查（Health Check）**。
 
 Android 模拟器连接宿主机时：
 
@@ -174,7 +174,7 @@ curl.exe -X POST http://127.0.0.1:8000/api/voxcpm/voices `
   -d "{\"id\":\"demo_cn_01\",\"display_name\":\"Demo CN\",\"mode_hint\":\"reference_with_text\",\"audio_path\":\"file:///path/to/voices/demo/ref.wav\",\"prompt_text\":\"参考文本\",\"copy_audio_to_registry\":true}"
 ```
 
-注册后，Neiroha **Fetch All** 会把它作为 voice 候选。
+注册后，Neiroha **拉取全部（Fetch All）** 会把它作为 voice 候选。
 
 ## Admin 页面
 

@@ -34,7 +34,7 @@ sidebar_label: CosyVoice3
 
 | 服务 | 默认地址 | 说明 |
 |---|---|---|
-| FastAPI | `http://127.0.0.1:9880` | Neiroha Provider 连接这里 |
+| FastAPI | `http://127.0.0.1:9880` | Neiroha 提供商连接这里 |
 | Admin | `http://127.0.0.1:7880` | 管理 voice set、克隆配置、模型 preset、下载和日志 |
 
 CosyVoice3 和 GPT-SoVITS 当前都默认使用 API 端口 `9880`。同时运行多个本地后端时，请在其中一个后端的 `configs/server.toml` 修改端口，或使用 launcher 自动选择的随机端口，并把日志里的实际地址填到 Neiroha。
@@ -135,13 +135,13 @@ curl.exe http://127.0.0.1:9880/v1/audio/speech `
 
 ## 接入 Neiroha
 
-1. 打开 Neiroha 的 **Providers**。
-2. 新建 Provider，Adapter Type 选 **CosyVoice Native**。
-3. `Base URL` 填 `http://127.0.0.1:9880`，如果日志显示随机端口就填日志里的实际地址。
-4. 本地无鉴权时 `API Key` 留空。
-5. 点击 **Fetch All**。
+1. 打开 Neiroha 的 **提供商（Providers）**。
+2. 新建提供商，适配器类型选 **CosyVoice Native**。
+3. 基础地址（`Base URL`）填 `http://127.0.0.1:9880`，如果日志显示随机端口就填日志里的实际地址。
+4. 本地无鉴权时接口密钥（`API Key`）留空。
+5. 点击 **拉取全部（Fetch All）**。
 6. 确认能看到 `prompt-clone`、`cross-lingual-clone`、`instruct-clone`。
-7. 打开启用开关，点击 **Health Check**。
+7. 打开启用开关，点击 **健康检查（Health Check）**。
 
 Android 模拟器连接宿主机时：
 

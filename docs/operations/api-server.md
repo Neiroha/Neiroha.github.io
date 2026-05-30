@@ -10,7 +10,7 @@ Neiroha 暴露一个本地 HTTP 服务器，供外部工具通过 OpenAI 兼容�
 打开：
 
 ```text
-设置 → API Server
+设置 → API 服务器（API Server）
 ```
 
 默认配置：
@@ -19,14 +19,14 @@ Neiroha 暴露一个本地 HTTP 服务器，供外部工具通过 OpenAI 兼容�
 |---|---|
 | 绑定地址 | `127.0.0.1` |
 | 端口 | `8976` |
-| API Key | 空 |
-| CORS origins | 空 |
+| 接口密钥（API Key） | 空 |
+| 跨域来源（CORS origins） | 空 |
 | 限流 | `60` req/min/IP |
 | 最大请求体 | `1048576` 字节 |
 
-默认只允许本机访问。需要局域网访问时，再将绑定地址改为 `0.0.0.0`，并配置 API Key。
+默认只允许本机访问。需要局域网访问时，再将绑定地址改为 `0.0.0.0`，并配置接口密钥（API Key）。
 
-配置 API Key 后，客户端需要发送任一鉴权头：
+配置接口密钥后，客户端需要发送任一鉴权头：
 
 ```bash
 Authorization: Bearer <key>
@@ -38,7 +38,7 @@ Authorization: Bearer <key>
 X-API-Key: <key>
 ```
 
-如果 API Key 为空，请求示例中的鉴权头可以省略。
+如果接口密钥为空，请求示例中的鉴权头可以省略。
 
 ## 接口列表
 
