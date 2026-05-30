@@ -1,0 +1,38 @@
+{
+  "version.label": {
+    "message": "Current",
+    "description": "The label for version current"
+  },
+  "sidebar.wikiSidebar.category.快速入门": {
+    "message": "Quick Start",
+    "description": "The label for category '快速入门' in sidebar 'wikiSidebar'"
+  },
+  "sidebar.wikiSidebar.category.核心工作流": {
+    "message": "Core Workflows",
+    "description": "The label for category '核心工作流' in sidebar 'wikiSidebar'"
+  },
+  "sidebar.wikiSidebar.category.提供商配置": {
+    "message": "Provider Setup",
+    "description": "The label for category '提供商配置' in sidebar 'wikiSidebar'"
+  },
+  "sidebar.wikiSidebar.category.配置与运维": {
+    "message": "Configuration & Operations",
+    "description": "The label for category '配置与运维' in sidebar 'wikiSidebar'"
+  },
+  "sidebar.wikiSidebar.category.API 参考": {
+    "message": "API Reference",
+    "description": "The label for category 'API 参考' in sidebar 'wikiSidebar'"
+  },
+  "sidebar.wikiSidebar.doc.项目总览": {
+    "message": "Overview",
+    "description": "The label for the doc item '项目总览' in sidebar 'wikiSidebar', linking to the doc intro"
+  },
+  "sidebar.wikiSidebar.doc.中文 API": {
+    "message": "Chinese API",
+    "description": "The label for the doc item '中文 API' in sidebar 'wikiSidebar', linking to the doc api-zh"
+  },
+  "sidebar.wikiSidebar.doc.English API": {
+    "message": "English API",
+    "description": "The label for the doc item 'English API' in sidebar 'wikiSidebar', linking to the doc api"
+  }
+}

@@ -1,3 +1,7 @@
+---
+sidebar_label: 中文 API
+---
+
 # Neiroha — 音频 API 参考文档
 
 Neiroha 有两类 API：

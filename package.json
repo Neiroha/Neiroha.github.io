@@ -5,7 +5,10 @@
   "description": "Docusaurus wiki for Neiroha on GitHub Pages.",
   "scripts": {
     "start": "docusaurus start --host 0.0.0.0",
+    "start:en": "docusaurus start --host 0.0.0.0 --locale en",
     "build": "docusaurus build",
+    "build:zh": "docusaurus build --locale zh-Hans",
+    "build:en": "docusaurus build --locale en",
     "serve": "docusaurus serve --host 0.0.0.0"
   },
   "dependencies": {

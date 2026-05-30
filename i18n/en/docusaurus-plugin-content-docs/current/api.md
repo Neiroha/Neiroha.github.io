@@ -11,9 +11,9 @@ Neiroha exposes audio APIs in two places:
 
 ## 1. Built-In API Server
 
-The built-in server defaults to `127.0.0.1:8976` and can be toggled from **Settings → API Server**. Bind to `0.0.0.0` only when LAN access is intentional.
+The built-in server defaults to `127.0.0.1:8976` and can be toggled from **Settings -> API Server**. Bind to `0.0.0.0` only when LAN access is intentional.
 
-### Security And Runtime Controls
+### Security and Runtime Controls
 
 | Setting | Default | Notes |
 |---|---|---|
@@ -27,7 +27,7 @@ The built-in server defaults to `127.0.0.1:8976` and can be toggled from **Setti
 
 Every synthesis request goes through the shared `TtsQueueService`, so provider concurrency and rate limits apply to both the desktop UI and external API clients.
 
-### Voice Bank As Model
+### Voice Bank as Model
 
 The built-in API uses **voice banks** as the `model` abstraction:
 
@@ -80,7 +80,7 @@ Common errors:
 
 ## 2. Upstream Provider Adapters
 
-Provider `Base URL` rules depend on the adapter. OpenAI-compatible services usually point to `/v1`; Neiroha native local backends usually use the service root.
+Provider base URL rules depend on the adapter. OpenAI-compatible services usually point to `/v1`; Neiroha native local backends usually use the service root.
 
 ### OpenAI TTS API Compatible
 
@@ -270,9 +270,9 @@ Gemini TTS uses a Google AI Studio API key. Set the provider URL to `https://gen
 
 ### Windows System TTS
 
-Windows desktop uses system SAPI voices and needs no Base URL or API key. Android, Apple, and Linux system TTS providers remain hidden until native platform adapters exist.
+Windows desktop uses system SAPI voices and needs no base URL or API key. Android, Apple, and Linux system TTS providers remain hidden until native platform adapters exist.
 
-## 3. Response Headers And Troubleshooting
+## 3. Response Headers and Troubleshooting
 
 Neiroha local backends usually include these audio response headers. Exact fields vary by backend:
 
@@ -292,4 +292,4 @@ Troubleshooting order:
 1. Open `/health` in a browser or with `curl`.
 2. Check `/v1/models` and `/v1/audio/voices`.
 3. In Providers, click **Fetch All** and confirm models and voices are cached.
-4. Test one sentence in Quick TTS before running Dialog / Phase / Video batches.
+4. Test one sentence in Quick TTS before running Dialogue, Phase, or Video batches.

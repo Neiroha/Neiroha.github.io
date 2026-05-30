@@ -61,16 +61,8 @@ const sidebars = {
       label: 'API 参考',
       collapsed: false,
       items: [
-        {
-          type: 'doc',
-          id: 'api-zh',
-          label: '中文 API',
-        },
-        {
-          type: 'doc',
-          id: 'api',
-          label: 'English API',
-        },
+        'api-zh',
+        'api',
       ],
     },
   ],

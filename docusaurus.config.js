@@ -3,7 +3,7 @@ const {themes: prismThemes} = require('prism-react-renderer');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Neiroha Wiki',
-  tagline: 'AI 音频中间件与配音工作站',
+  tagline: 'AI audio middleware and dubbing workstation',
   favicon: 'img/neiroha_logo.png',
 
   url: 'https://neiroha.github.io',
@@ -22,7 +22,17 @@ const config = {
 
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    locales: ['zh-Hans', 'en'],
+    localeConfigs: {
+      'zh-Hans': {
+        label: '简体中文',
+        htmlLang: 'zh-Hans',
+      },
+      en: {
+        label: 'English',
+        htmlLang: 'en-US',
+      },
+    },
   },
 
   presets: [
@@ -52,7 +62,7 @@ const config = {
         {
           name: 'description',
           content:
-            'Neiroha 的使用手册、核心工作流、配置运维和 API 参考。',
+            'Neiroha user manual, core workflows, operations, and API reference.',
         },
       ],
       navbar: {
@@ -69,6 +79,10 @@ const config = {
             label: '文档',
           },
           {to: '/api-zh', label: 'API', position: 'left'},
+          {
+            type: 'localeDropdown',
+            position: 'right',
+          },
           {
             href: 'https://github.com/Neiroha/Neiroha',
             label: 'GitHub',
