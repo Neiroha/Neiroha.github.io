@@ -38,12 +38,13 @@ If a port is occupied, the launcher chooses a free random port and writes it to 
 
 ## Install
 
-Recommended portable package flow:
+Recommended portable package flow. The current package is built for NVIDIA GPU / CUDA environments and mainly targets RTX 30 / 40 / 50 series users:
 
-1. Open [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases).
+1. Open [Neiroha-GPT-SoVITS V1.0.0 Release](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases/tag/V1.0.0).
 2. Download all `V1.0.0` split archives: `Neiroha-GPT-SoVITS-Portable.7z.001`, `.002`, `.003`.
-3. Put all three files in the same directory and extract from `.001` with 7-Zip.
-4. Run `start_portable.bat serve`.
+3. If GitHub downloads are unstable, use the [Baidu Netdisk mirror](https://pan.baidu.com/s/1TFbb4mlrANKJlz0-wuWY8g?pwd=neir) from the Release body.
+4. Put all three files in the same directory and extract from `.001` with 7-Zip.
+5. Run `start_portable.bat serve`.
 
 Source or development environment:
 

@@ -5,7 +5,7 @@ sidebar_label: GitHub Actions 构建
 
 Neiroha 主程序仓库已经配置了原生平台 CI，不再只依赖本地机器产物。
 
-日常安装应直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0)，包含 Android、Linux x64、Windows x64 三个平台资产。
+日常安装应直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1)，包含 Android、Linux x64、Windows x64 三个平台资产。
 
 ## 工作流
 

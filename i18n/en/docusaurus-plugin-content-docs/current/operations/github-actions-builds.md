@@ -5,7 +5,7 @@ sidebar_label: GitHub Actions Builds
 
 The main Neiroha application repository has native platform CI. Release users do not need to depend on local build outputs.
 
-Normal users should download built packages from [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases). The current latest Release is [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0), with Android, Linux x64, and Windows x64 assets.
+Normal users should download built packages from [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases). The current latest Release is [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1), with Android, Linux x64, and Windows x64 assets.
 
 ## Workflows
 

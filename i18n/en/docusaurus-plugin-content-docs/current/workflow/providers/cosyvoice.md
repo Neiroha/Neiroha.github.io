@@ -39,7 +39,7 @@ CosyVoice3 and GPT-SoVITS both default to API port `9880`. Change one backend po
 
 ## Install
 
-Download Windows portable packages from [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases). Current split archive names are `neiroha-cosyvoice3-portable.7z.001` through `.006`; use the actual Release assets as source of truth and extract from `.001`.
+Download Windows portable packages from [Neiroha-Cosyvoice V1.0.0 Release](https://github.com/Neiroha/Neiroha-Cosyvoice/releases/tag/V1.0.0). The current package is built for NVIDIA GPU / CUDA environments and mainly targets RTX 30 / 40 / 50 series users. Current split archive names are `neiroha-cosyvoice3-portable.7z.001` through `.006`; if GitHub downloads are unstable, use the [Baidu Netdisk mirror](https://pan.baidu.com/s/1YloShmszdxrnXxbdDGlqoA?pwd=neir) from the Release body. Put all six parts in the same directory and extract from `.001`.
 
 Source or development environment:
 

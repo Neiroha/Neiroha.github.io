@@ -33,15 +33,25 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两�
 
 ## Windows 便携后端包
 
-本地后端可以直接下载便携 Release，不需要先装完整开发环境。分卷包必须全部下载到同一个目录，再用 7-Zip 从 `.001` 解压。
+本地后端可以直接下载便携 Release，不需要先装完整开发环境。当前 Windows 便携包按 NVIDIA GPU / CUDA 环境打包，主要面向 RTX 30 / 40 / 50 系列显卡用户。分卷包必须全部下载到同一个目录，再用 7-Zip 从 `.001` 解压。
 
-| 后端 | Release 页面 | 当前资产命名 |
-|---|---|---|
-| GPT-SoVITS | [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases) | `Neiroha-GPT-SoVITS-Portable.7z.001` 到 `.003` |
-| VoxCPM2 | [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases) | `Neiroha-VoxCPM-portable.7z.001` 到 `.004` |
-| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | `neiroha-cosyvoice3-portable.7z.001` 到 `.006`，以 Release 页面实际资产为准 |
+| 后端 | GitHub Release | 百度网盘镜像 | 当前资产命名 |
+|---|---|---|---|
+| GPT-SoVITS | [V1.0.0](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases/tag/V1.0.0) | [网盘备用](https://pan.baidu.com/s/1TFbb4mlrANKJlz0-wuWY8g?pwd=neir) | `Neiroha-GPT-SoVITS-Portable.7z.001` 到 `.003` |
+| VoxCPM2 | [V1.0.0](https://github.com/Neiroha/Neiroha-VoxCPM/releases/tag/V1.0.0) | [网盘备用](https://pan.baidu.com/s/1NT_4Uwu4CYOFpZ6ImKe_ig?pwd=neir) | `Neiroha-VoxCPM-portable.7z.001` 到 `.004` |
+| CosyVoice3 | [V1.0.0](https://github.com/Neiroha/Neiroha-Cosyvoice/releases/tag/V1.0.0) | [网盘备用](https://pan.baidu.com/s/1YloShmszdxrnXxbdDGlqoA?pwd=neir) | `neiroha-cosyvoice3-portable.7z.001` 到 `.006` |
 
 便携包启动后仍然在解压目录下使用 `runtime/` 存放日志、输出、临时文件和语音注册表。分卷不可单独移动，也不宜解压到系统临时目录后长期使用。
+
+## 后端选择速查
+
+下表是当前 Neiroha Windows 便携后端的相对经验排序，不是统一硬件 benchmark。显存友好度星越多表示越省显存，速度星越多表示合成越快；实际结果会受显卡、驱动、文本长度、参考音频、并发和模型预加载影响。
+
+| 后端 | 显存门槛 | 显存友好度 | 合成速度 | 适合场景 | 备注 |
+|---|---|---|---|---|---|
+| GPT-SoVITS v2ProPlus | 8 GB 显存更稳 | ★★★★★ | ★★★★★ | 已有训练音色、参考音频克隆、批量生成 | 三者中占用最少、速度最快；clone 需要参考文本 |
+| CosyVoice3 0.5B | 建议 8 GB 显存起步 | ★★★☆☆ | ★★★☆☆ | 跨语言克隆、指令控制、多语种试听 | 能力更全面，速度和显存占用居中 |
+| VoxCPM2 | 官方口径约 8 GB VRAM | ★★☆☆☆ | ★★☆☆☆ | 声音设计、多语言和方言覆盖、高保真克隆 | 三者中占用最高、速度最慢；8 GB 显存可跑，建议并发从 `1` 开始 |
 
 ## 源码环境与多后端
 

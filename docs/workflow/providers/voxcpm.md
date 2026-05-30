@@ -39,12 +39,13 @@ sidebar_label: VoxCPM2
 
 ## 安装
 
-推荐使用 Windows 便携包：
+推荐使用 Windows 便携包。当前便携包按 NVIDIA GPU / CUDA 环境打包，主要面向 RTX 30 / 40 / 50 系列显卡用户：
 
-1. 打开 [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases)。
+1. 打开 [Neiroha-VoxCPM V1.0.0 Release](https://github.com/Neiroha/Neiroha-VoxCPM/releases/tag/V1.0.0)。
 2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-VoxCPM-portable.7z.001`、`.002`、`.003`、`.004`。
-3. 把四个文件放在同一目录，用 7-Zip 从 `.001` 解压。
-4. 解压后运行 `start_portable.bat`。
+3. GitHub 下载不稳定时，可使用 Release 正文提供的 [百度网盘镜像](https://pan.baidu.com/s/1NT_4Uwu4CYOFpZ6ImKe_ig?pwd=neir)。
+4. 把四个文件放在同一目录，用 7-Zip 从 `.001` 解压。
+5. 解压后运行 `start_portable.bat`。
 
 源码或开发环境第一次使用，在 `<backend-root>` 执行：
 

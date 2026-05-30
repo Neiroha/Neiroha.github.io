@@ -11,13 +11,13 @@ sidebar_label: Quick Start
 
 ## 1. Download a Release Build
 
-Open [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) and download the latest version. The current latest version is [`v0.3.0`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.0), released on 2026-05-30.
+Open [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) and download the latest version. The current latest version is [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1), released on 2026-05-30.
 
 | Platform | File | Usage |
 |---|---|---|
-| Windows | `neiroha-v0.3.0-windows-x64-release.zip` | Extract it and run `neiroha.exe`. |
-| Android | `neiroha-v0.3.0-android-release.apk` | Copy it to the device and install the APK. |
-| Linux x64 | `neiroha-v0.3.0-linux-x64-release.tar.gz` | Extract it and run the executable in the bundle. |
+| Windows | `neiroha-v0.3.1-windows-x64-release.zip` | Extract it and run `neiroha.exe`. |
+| Android | `neiroha-v0.3.1-android-release.apk` | Copy it to the device and install the APK. |
+| Linux x64 | `neiroha-v0.3.1-linux-x64-release.tar.gz` | Extract it and run the executable in the bundle. |
 
 SHA256 checksums are now written directly in the Release page under **Checksums**. Separate `SHA256SUMS*.txt` files are no longer provided.
 
@@ -33,7 +33,7 @@ Neiroha is a TTS workstation and middleware layer. It does not include large-mod
 | Cloud / free quota | Quick trials without local model deployment | [Connect Cloud Inference Backends](/workflow/providers/cloud-engines) |
 | Windows system voice | Workflow validation without AI voices | Use Windows System TTS in Providers |
 
-Local backend Windows portable packages are available. GPT-SoVITS, VoxCPM2, and CosyVoice3 can be downloaded as split archives from their own Release pages; see [Windows Portable Backend Packages](/workflow/providers/local-engines#windows-portable-backend-packages).
+Local backend Windows NVIDIA portable packages are available, mainly for RTX 30 / 40 / 50 series users. GPT-SoVITS, VoxCPM2, and CosyVoice3 can be downloaded as split archives from their own Release pages. If GitHub downloads are unstable, use the Baidu Netdisk mirrors in the Release body; see [Windows Portable Backend Packages](/workflow/providers/local-engines#windows-portable-backend-packages).
 
 ### Choose a Route
 

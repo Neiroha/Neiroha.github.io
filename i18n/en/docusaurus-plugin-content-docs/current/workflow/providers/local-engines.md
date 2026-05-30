@@ -33,15 +33,25 @@ Backend guides:
 
 ## Windows Portable Backend Packages
 
-Local backends can be downloaded as portable Releases without a full development environment. Download all split archive parts into the same directory, then extract from `.001` with 7-Zip.
+Local backends can be downloaded as portable Releases without a full development environment. The current Windows portable packages are built for NVIDIA GPU / CUDA environments and mainly target RTX 30 / 40 / 50 series users. Download all split archive parts into the same directory, then extract from `.001` with 7-Zip.
 
-| Backend | Release Page | Current Asset Pattern |
-|---|---|---|
-| GPT-SoVITS | [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases) | `Neiroha-GPT-SoVITS-Portable.7z.001` through `.003` |
-| VoxCPM2 | [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases) | `Neiroha-VoxCPM-portable.7z.001` through `.004` |
-| CosyVoice3 | [Neiroha-Cosyvoice Releases](https://github.com/Neiroha/Neiroha-Cosyvoice/releases) | `neiroha-cosyvoice3-portable.7z.001` through `.006`; use the actual Release assets as source of truth |
+| Backend | GitHub Release | Baidu Netdisk Mirror | Current Asset Pattern |
+|---|---|---|---|
+| GPT-SoVITS | [V1.0.0](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases/tag/V1.0.0) | [Mirror](https://pan.baidu.com/s/1TFbb4mlrANKJlz0-wuWY8g?pwd=neir) | `Neiroha-GPT-SoVITS-Portable.7z.001` through `.003` |
+| VoxCPM2 | [V1.0.0](https://github.com/Neiroha/Neiroha-VoxCPM/releases/tag/V1.0.0) | [Mirror](https://pan.baidu.com/s/1NT_4Uwu4CYOFpZ6ImKe_ig?pwd=neir) | `Neiroha-VoxCPM-portable.7z.001` through `.004` |
+| CosyVoice3 | [V1.0.0](https://github.com/Neiroha/Neiroha-Cosyvoice/releases/tag/V1.0.0) | [Mirror](https://pan.baidu.com/s/1YloShmszdxrnXxbdDGlqoA?pwd=neir) | `neiroha-cosyvoice3-portable.7z.001` through `.006` |
 
 Portable packages use `runtime/` under the extracted directory for logs, outputs, temporary files, and voice registry. Do not move only one split part, and avoid long-term use from a system temporary directory.
+
+## Backend Selection Quick Reference
+
+This table is a relative ranking for the current Neiroha Windows portable backends, not a universal hardware benchmark. More VRAM stars mean lower memory pressure; more speed stars mean faster synthesis. Actual results depend on GPU, driver, text length, reference audio, concurrency, and model preload state.
+
+| Backend | VRAM Floor | VRAM Friendliness | Synthesis Speed | Good For | Notes |
+|---|---|---|---|---|---|
+| GPT-SoVITS v2ProPlus | 8 GB VRAM is safer | ★★★★★ | ★★★★★ | Trained voices, reference-audio cloning, batch generation | Lowest VRAM use and fastest among the three; clone mode needs reference text. |
+| CosyVoice3 0.5B | 8 GB VRAM recommended | ★★★☆☆ | ★★★☆☆ | Cross-lingual cloning, instruction control, multilingual trials | Broader capability set with middle-ground speed and VRAM use. |
+| VoxCPM2 | Official reference is about 8 GB VRAM | ★★☆☆☆ | ★★☆☆☆ | Voice design, multilingual and dialect coverage, high-fidelity cloning | Highest VRAM use and slowest among the three; 8 GB can run it, but start concurrency at `1`. |
 
 ## Source Environments and Multiple Backends
 

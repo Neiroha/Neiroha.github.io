@@ -40,12 +40,13 @@ sidebar_label: GPT-SoVITS
 
 ## 安装
 
-推荐使用 Windows 便携包：
+推荐使用 Windows 便携包。当前便携包按 NVIDIA GPU / CUDA 环境打包，主要面向 RTX 30 / 40 / 50 系列显卡用户：
 
-1. 打开 [Neiroha-GPT-SoVITS Releases](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases)。
+1. 打开 [Neiroha-GPT-SoVITS V1.0.0 Release](https://github.com/Neiroha/Neiroha-GPT-SoVITS/releases/tag/V1.0.0)。
 2. 下载 `V1.0.0` 下的所有分卷：`Neiroha-GPT-SoVITS-Portable.7z.001`、`.002`、`.003`。
-3. 把三个文件放在同一目录，用 7-Zip 从 `.001` 解压。
-4. 解压后运行 `start_portable.bat serve`。
+3. GitHub 下载不稳定时，可使用 Release 正文提供的 [百度网盘镜像](https://pan.baidu.com/s/1TFbb4mlrANKJlz0-wuWY8g?pwd=neir)。
+4. 把三个文件放在同一目录，用 7-Zip 从 `.001` 解压。
+5. 解压后运行 `start_portable.bat serve`。
 
 源码或开发环境第一次使用，在 `<backend-root>` 执行：
 

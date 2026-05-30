@@ -37,12 +37,13 @@ It provides OpenAI-compatible routes, native `/api/voxcpm` routes, a voice regis
 
 ## Install
 
-Recommended portable flow:
+Recommended portable flow. The current package is built for NVIDIA GPU / CUDA environments and mainly targets RTX 30 / 40 / 50 series users:
 
-1. Open [Neiroha-VoxCPM Releases](https://github.com/Neiroha/Neiroha-VoxCPM/releases).
+1. Open [Neiroha-VoxCPM V1.0.0 Release](https://github.com/Neiroha/Neiroha-VoxCPM/releases/tag/V1.0.0).
 2. Download all `V1.0.0` split archives: `Neiroha-VoxCPM-portable.7z.001`, `.002`, `.003`, `.004`.
-3. Put all four files in the same directory and extract from `.001` with 7-Zip.
-4. Run `start_portable.bat`.
+3. If GitHub downloads are unstable, use the [Baidu Netdisk mirror](https://pan.baidu.com/s/1NT_4Uwu4CYOFpZ6ImKe_ig?pwd=neir) from the Release body.
+4. Put all four files in the same directory and extract from `.001` with 7-Zip.
+5. Run `start_portable.bat`.
 
 Source or development environment:
 
