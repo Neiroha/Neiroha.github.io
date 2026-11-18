@@ -10,7 +10,7 @@ sidebar_label: 开发者源码运行
 | 工具 | 要求 |
 |---|---|
 | Git | 用于 clone、创建分支和提交 PR |
-| Flutter | `3.41.6`，与主仓库 CI 配置一致 |
+| Flutter | `3.47.7`（v0.4 与 v0.5 开发分支），其他版本以目标分支的 CI 为准 |
 | Dart | 使用 Flutter SDK 自带版本即可 |
 | Java | `17`，用于 Android 构建 |
 | Windows 桌面构建 | Windows 10/11 + Visual Studio 2022，安装 Desktop development with C++ |
@@ -61,6 +61,8 @@ git switch -c feature/<short-name>
 flutter pub get
 ```
 
+v0.5.0 开发分支的测试目录是 `scripts/tests`，v0.4 分支仍使用 `test`，在旧分支运行 `flutter test` 即可。
+
 项目使用代码生成。首次运行、更新 model/provider/schema 后，执行：
 
 ```bash
@@ -82,7 +84,7 @@ flutter run -d windows
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter analyze
-flutter test
+flutter test scripts/tests
 flutter run -d windows
 ```
 
@@ -131,7 +133,7 @@ flutter devices
 
 ```bash
 flutter analyze
-flutter test
+flutter test scripts/tests
 ```
 
 改动涉及代码生成时，再运行：
@@ -194,7 +196,7 @@ PR 流程：
 
 | Workflow | 作用 |
 |---|---|
-| `native-tests.yml` | `flutter analyze` 和 `flutter test` |
+| `native-tests.yml` | `flutter analyze` 和 `flutter test scripts/tests` |
 | `native-debug-builds.yml` | Android debug APK、Linux debug bundle、Windows debug bundle |
 
 `native-release-builds.yml` 只在发布 tag 或手动发布时运行；普通 PR 不会发布 Release。
@@ -215,7 +217,7 @@ git merge dev
 
 ```bash
 flutter analyze
-flutter test
+flutter test scripts/tests
 git push origin feature/<short-name>
 ```
 

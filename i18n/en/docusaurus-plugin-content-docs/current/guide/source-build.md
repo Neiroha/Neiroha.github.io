@@ -10,7 +10,7 @@ This page is for developers who need to change code, debug issues, or submit pul
 | Tool | Requirement |
 |---|---|
 | Git | Clone repositories, create branches, and submit pull requests. |
-| Flutter | `3.41.6`, matching the main repository CI. |
+| Flutter | `3.47.7` for v0.4 and the v0.5 development branch. For other versions, check the target branch CI. |
 | Dart | Use the Dart version bundled with Flutter. |
 | Java | `17`, required for Android builds. |
 | Windows desktop build | Windows 10/11 + Visual Studio 2022 with Desktop development with C++. |
@@ -61,6 +61,8 @@ Use a short and specific branch name, such as `feature/provider-health-timeout` 
 flutter pub get
 ```
 
+The v0.5.0 development branch keeps tests in `scripts/tests`. Use plain `flutter test` on v0.4 branches, where the directory is still `test`.
+
 The project uses code generation. Run this after first setup or after changing models, providers, or schemas:
 
 ```bash
@@ -82,7 +84,7 @@ Common development flow:
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter analyze
-flutter test
+flutter test scripts/tests
 flutter run -d windows
 ```
 
@@ -131,7 +133,7 @@ Before submitting changes, run at least:
 
 ```bash
 flutter analyze
-flutter test
+flutter test scripts/tests
 ```
 
 If code generation is involved:
@@ -192,7 +194,7 @@ Pull requests currently trigger:
 
 | Workflow | Purpose |
 |---|---|
-| `native-tests.yml` | `flutter analyze` and `flutter test` |
+| `native-tests.yml` | `flutter analyze` and `flutter test scripts/tests` |
 | `native-debug-builds.yml` | Android debug APK, Linux debug bundle, Windows debug bundle |
 
 `native-release-builds.yml` runs only for release tags or manual release dispatch. Normal pull requests do not publish Release assets.
@@ -213,7 +215,7 @@ After resolving conflicts, rerun local checks and push:
 
 ```bash
 flutter analyze
-flutter test
+flutter test scripts/tests
 git push origin feature/<short-name>
 ```
 

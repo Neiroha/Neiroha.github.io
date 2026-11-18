@@ -22,6 +22,15 @@ Novel Reader is for long TXT reading with cached TTS playback. It is meant for p
 
 During playback, Novel Reader generates missing audio, writes cache files to disk, and prefetches upcoming segments through the shared TTS queue.
 
+## Role Review and Streaming in v0.5.0
+
+1. In Role Review, create characters manually or select a provider and text model for automatic analysis.
+2. Review the proposed cast before continuing to batch labeling and review. Open flagged segments in the original text to correct the speaker, category, voice or style.
+3. Assign voices at the book or chapter level. A line-level override takes precedence over chapter and book assignments, with project defaults used for unassigned lines.
+4. Confirm or lock reviewed segments. Automatic analysis preserves the original text and confirmed assignments.
+
+Supported voices start playback as soon as the first audio chunk arrives. Complete audio can be replayed from cache. Cancelling discards incomplete audio. See the [v0.5.0 release notes](../guide/releases.md).
+
 ## First Configuration
 
 | Setting | Suggested Value |

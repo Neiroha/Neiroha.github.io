@@ -7,52 +7,33 @@ sidebar_label: 安装 Release 发布包
 
 ## 下载入口
 
-打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，选择最新版本。当前最新版本是 [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1)，发布时间为 2026-05-30。
+打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases/latest)，选择适合设备的正式版安装包。历次功能变化见 [版本更新](./releases.md)。
 
-Release 发布包由主程序仓库的 GitHub Actions 构建并发布。使用 Release 发布包不需要安装 Flutter，也不需要本地执行 build 命令。
+| 平台 | 在 Release 中选择 |
+|---|---|
+| Windows x64 | `neiroha-Windows-AMD64-<版本>.zip` |
+| Android | `neiroha-Android-Universal-<版本>.apk`，或选择对应 CPU 架构的 APK |
+| Linux x64 | `neiroha-Linux-AMD64-<版本>.tar.gz` |
+| macOS（v0.5.0 起） | `neiroha-macOS-ARM64-<版本>.dmg`（Apple Silicon）或 `neiroha-macOS-AMD64-<版本>.dmg`（Intel） |
 
-## Windows
+Release 安装包可直接运行，无需安装 Flutter SDK。
 
-1. 下载 `neiroha-v0.3.1-windows-x64-release.zip`。
-2. 解压到固定目录，例如专门存放便携应用的 `Neiroha` 文件夹。
-3. 运行解压目录里的 `neiroha.exe`。
-4. 如果 Windows SmartScreen 提示未知发布者，确认文件来自官方 Release 页面后再继续。
-5. 第一次启动后进入 [快速开始](/guide/getting-started) 的提供商配置步骤。
+- **Windows**：解压 ZIP 到固定目录，运行 `neiroha.exe`。
+- **Android**：将 APK 复制到设备，根据系统提示允许安装，再启动应用。
+- **Linux**：解压后运行 bundle 内的 Neiroha 可执行文件。视频配音导出所需 FFmpeg 在 **设置 → 媒体工具** 中配置。
+- **macOS**：在「关于本机」查看芯片类型。打开对应的 DMG，把 **Neiroha.app** 拖到「应用程序」。v0.5.0 的 DMG 使用 ad-hoc 签名，首次启动可能出现 Gatekeeper 提示，请先核对下载来源与校验值。
 
-## Android
-
-1. 下载 `neiroha-v0.3.1-android-release.apk`。
-2. 将 APK 复制到 Android 设备。
-3. 打开系统的“允许安装未知来源应用”设置。
-4. 安装 APK 并启动 Neiroha。
-5. Android 端支持 UI 和 TTS 客户端工作流；本地 FFmpeg 混流、裁剪、波形提取和视频导出当前禁用。
-
-## Linux x64
-
-1. 下载 `neiroha-v0.3.1-linux-x64-release.tar.gz`。
-2. 解压到固定目录。
-3. 在解压后的 bundle 目录运行 Neiroha 可执行文件。
-4. 如果要使用视频配音导出，确认系统已安装 FFmpeg，并在 **设置 → 媒体工具（Settings → Media Tools）** 中配置或检测路径。
+浏览器试用从 [Web 演示](./web-demo.mdx) 进入。
 
 ## 校验文件
 
-Release 页面不再单独提供 `SHA256SUMS*.txt`。校验值直接写在 Release 正文的 **Checksums** 表里，GitHub 资产信息里也会显示 digest。
-
-`v0.3.1` 当前校验值：
-
-| 文件 | SHA256 |
-|---|---|
-| `neiroha-v0.3.1-windows-x64-release.zip` | `baaa0c97a73e43b90e61ec651c0e24b961fce1548e918d916d594565e0a68a4f` |
-| `neiroha-v0.3.1-android-release.apk` | `e722f82614007f07c7e06384705e6790d71cee396176a2d3ef3672c50c012160` |
-| `neiroha-v0.3.1-linux-x64-release.tar.gz` | `da2cfafaadee63aad7c3b91afeec5ff09d6047bbba450718af32517f967ce660` |
-
-Windows 可用 PowerShell 校验：
+将文件的 SHA-256 与相应 Release 正文 **Checksums** 表或资产 digest 对照。PowerShell 示例：
 
 ```powershell
-Get-FileHash .\neiroha-v0.3.1-windows-x64-release.zip -Algorithm SHA256
+Get-FileHash ./neiroha-Windows-AMD64-v0.4.2.zip -Algorithm SHA256
 ```
 
-Android 和 Linux 包也可以用同样方式在 Windows 上校验，或用系统自带 `sha256sum`。
+也可用 Linux 的 `sha256sum` 或 macOS 的 `shasum -a 256`。
 
 ## 本地后端便携包
 

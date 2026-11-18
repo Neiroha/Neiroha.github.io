@@ -11,17 +11,7 @@ sidebar_label: Quick Start
 
 ## 1. Download a Release Build
 
-Open [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) and download the latest version. The current latest version is [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1), released on 2026-05-30.
-
-| Platform | File | Usage |
-|---|---|---|
-| Windows | `neiroha-v0.3.1-windows-x64-release.zip` | Extract it and run `neiroha.exe`. |
-| Android | `neiroha-v0.3.1-android-release.apk` | Copy it to the device and install the APK. |
-| Linux x64 | `neiroha-v0.3.1-linux-x64-release.tar.gz` | Extract it and run the executable in the bundle. |
-
-SHA256 checksums are now written directly in the Release page under **Checksums**. Separate `SHA256SUMS*.txt` files are no longer provided.
-
-See [Install Release Builds](/guide/install-release) for detailed installation steps.
+Download the stable build from [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases/latest). Choose your platform and architecture in the [installation guide](./install-release.md), try the browser workspace in the [Web demo](./web-demo.mdx), or browse the [release history](./releases.md).
 
 ## 2. Prepare a TTS Backend
 

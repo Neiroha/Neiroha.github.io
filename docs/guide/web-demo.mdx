@@ -1,0 +1,27 @@
+---
+title: Web 演示
+sidebar_label: Web 演示
+---
+
+import DemoRelease from '@site/src/components/DemoRelease';
+
+在浏览器中使用 Neiroha 的提供商管理、音色库和快速 TTS。演示页面与正式 Release 的 Web 下载包使用同一构建。
+
+<DemoRelease
+  loading="正在读取演示版本…"
+  unavailable="当前没有可以打开的正式版 Web 演示。请在正式版发布 Web 包后回来查看。"
+  versionLabel="演示版本"
+  openLabel="打开 Neiroha Web"
+/>
+
+## 试用快速 TTS
+
+1. 使用近期版本的桌面 Chrome 或 Edge 打开演示。
+2. 在「提供商」配置浏览器可访问的 HTTPS 服务。服务需允许来自 `https://neiroha.github.io` 的跨源请求（CORS），包括请求方法和认证头。演示站没有预置付费凭据或推理服务。
+3. 在「音色库」为角色绑定提供商和音色，在「快速 TTS」输入一句文本。OpenAI Speech 支持「自动：优先流式」，可边生成边听并随时停止。其他 Web 适配器完成整段生成后播放。
+
+提供商配置（包括填入的 API Key）和音色资料保存在当前浏览器的站点数据中。生成的音频只保存在当前标签页内存中，最多保留 30 条或 32 MiB。关闭或刷新页面前，可下载想保留的音频。共享电脑试用完毕后可清除站点数据。
+
+合成时，文本由浏览器直接发给所配置的服务商。试用公开 Demo 时，请用自有后端保管 OpenAI 等云端服务的 API Key，并按需为浏览器签发短时凭据。也可在桌面客户端中直接配置提供商。
+
+小说阅读、对话与段落项目、视频配音、录音、本地文件素材和 API/MCP 服务请使用 [原生客户端](./install-release.md)。Web 自托管可从 [Release](https://github.com/Neiroha/Neiroha/releases/latest) 下载同版本 ZIP，解压后通过 HTTP(S) 提供完整目录。

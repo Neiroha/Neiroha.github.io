@@ -15,6 +15,10 @@
     "message": "API",
     "description": "Navbar item with label API"
   },
+  "item.label.Web 演示": {
+    "message": "Web Demo",
+    "description": "Navbar link to the Web demo guide"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"

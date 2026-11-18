@@ -44,6 +44,7 @@ The built-in API uses **voice banks** as the `model` abstraction:
 | `GET` | `/v1/models` | List active voice banks as OpenAI-style models |
 | `GET` | `/speakers` | SillyTavern-style speaker list |
 | `GET` | `/health` | Health check |
+| `POST` | `/mcp` | MCP Streamable HTTP (v0.4.0 and later) |
 
 ### `POST /v1/audio/speech`
 
@@ -64,8 +65,11 @@ The built-in API uses **voice banks** as the `model` abstraction:
 | `model` | string | no | Voice bank name; scopes voice lookup when provided |
 | `speed` | number | no | Playback speed multiplier, default `1.0` |
 | `response_format` | string | no | Output format hint passed to the upstream adapter |
+| `stream` | boolean | no | In v0.5.0 and later, set to `true` with `response_format: pcm` |
 
 The response is raw audio bytes with a format-specific `Content-Type`.
+
+Streaming responses use `audio/pcm` and include `X-Audio-Encoding`, `X-Audio-Sample-Rate` and `X-Audio-Channels`. Providers without incremental PCM return `400`. A disconnect cancels the in-flight request.
 
 Common errors:
 

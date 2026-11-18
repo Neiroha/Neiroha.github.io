@@ -14,7 +14,7 @@ description: Product guide, workflows, operations notes, and API reference for N
     <h1>Neiroha</h1>
     <p><strong>AI audio middleware and dubbing workstation</strong></p>
     <p>
-      Neiroha is a Flutter desktop application that connects one unified UI to local or cloud TTS backends.
+      Neiroha is a cross-platform Flutter workstation for local and cloud TTS backends.
       It brings voice characters, voice banks, long-form reading, dialogue dubbing, video dubbing,
       and an OpenAI-compatible HTTP API into one workflow.
     </p>
@@ -38,11 +38,13 @@ description: Product guide, workflows, operations notes, and API reference for N
     <strong>API Server</strong>
     <p>Local OpenAI-compatible HTTP service, authentication, CORS, rate limits, and request examples.</p>
   </a>
-  <a className="wiki-card" href="/en/operations/github-actions-builds">
-    <strong>Automated Builds</strong>
-    <p>GitHub Actions build outputs, release assets, debug artifacts, and checksums.</p>
+  <a className="wiki-card" href="/en/guide/web-demo">
+    <strong>Web Demo</strong>
+    <p>Try providers, voice banks, and Quick TTS in your browser.</p>
   </a>
 </div>
+
+See the [release history](./guide/releases.md) for new features and publication dates.
 
 ## Feature Overview
 
@@ -61,7 +63,7 @@ description: Product guide, workflows, operations notes, and API reference for N
 
 ## Platform Scope
 
-Neiroha treats platform support as concrete capability boundaries, not as a promise that every platform exposes identical native features.
+This table covers stable v0.4 builds. macOS and the browser workspace arrive in v0.5.0. See the [release history](./guide/releases.md) for details.
 
 | Capability | Windows | Linux | Android phones / tablets |
 |---|---:|---:|---:|
@@ -74,6 +76,6 @@ Neiroha treats platform support as concrete capability boundaries, not as a prom
 | External FFmpeg CLI detection and invocation | ✓ | ✓ | - |
 | Video dubbing export, muxing, trimming, and waveform extraction | ✓ | ✓ | - |
 
-`✓` means the capability is covered by current documentation and release builds. `-` means it is not currently promised or exposed in the UI.
+`✓` means the release build supports the feature.
 
 System TTS currently uses Windows SAPI only. Android and Linux system TTS should only appear in the UI after native adapters exist.
