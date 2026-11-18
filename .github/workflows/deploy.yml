@@ -37,6 +37,7 @@ jobs:
         id: demo
         env:
           EVENT_NAME: ${{ github.event_name }}
+          GITHUB_RELEASE_API_TOKEN: ${{ github.token }}
         run: |
           args=()
           if [[ "$EVENT_NAME" == schedule ]]; then

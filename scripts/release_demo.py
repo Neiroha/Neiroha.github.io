@@ -25,7 +25,12 @@ REQUIRED_FILES = (
 
 
 def get_json(url):
-    request = Request(url, headers={"Accept": "application/json", "Cache-Control": "no-cache"})
+    headers = {"Accept": "application/json", "Cache-Control": "no-cache"}
+    if url == RELEASE_API:
+        token = os.environ.get("GITHUB_RELEASE_API_TOKEN")
+        if token:
+            headers["Authorization"] = f"Bearer {token}"
+    request = Request(url, headers=headers)
     with urlopen(request, timeout=30) as response:
         return json.load(response)
 
