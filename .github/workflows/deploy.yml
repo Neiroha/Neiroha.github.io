@@ -5,42 +5,76 @@ on:
     branches:
       - main
       - master
+  pull_request:
+    branches:
+      - main
+      - master
   workflow_dispatch:
+  repository_dispatch:
+    types: [neiroha-stable-release]
+  schedule:
+    - cron: '23 * * * *'
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.event_name == 'pull_request' && github.ref || 'pages' }}
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.demo.outputs.build }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check the public Web release
+        id: demo
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          GITHUB_RELEASE_API_TOKEN: ${{ github.token }}
+        run: |
+          args=()
+          if [[ "$EVENT_NAME" == schedule ]]; then
+            args+=(--if-changed)
+          fi
+          python3 scripts/release_demo.py plan "$RUNNER_TEMP/neiroha-demo.json" "${args[@]}"
 
       - name: Setup Node
+        if: steps.demo.outputs.build == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: steps.demo.outputs.build == 'true'
         run: npm ci
 
       - name: Build
+        if: steps.demo.outputs.build == 'true'
         run: npm run build
 
+      - name: Add the verified Web release to the Wiki
+        if: steps.demo.outputs.build == 'true'
+        run: python3 scripts/release_demo.py stage "$RUNNER_TEMP/neiroha-demo.json" build
+
       - name: Upload artifact
+        if: github.event_name != 'pull_request' && steps.demo.outputs.build == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
 
   deploy:
+    if: github.event_name != 'pull_request' && needs.build.outputs.publish == 'true'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

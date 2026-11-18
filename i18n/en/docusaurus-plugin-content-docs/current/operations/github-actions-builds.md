@@ -3,53 +3,24 @@ title: GitHub Actions Builds
 sidebar_label: GitHub Actions Builds
 ---
 
-The main Neiroha application repository has native platform CI. Release users do not need to depend on local build outputs.
+Download the build for your platform from [GitHub Releases](https://github.com/Neiroha/Neiroha/releases/latest). See the [release history](../guide/releases.md) for changes by version.
 
-Normal users should download built packages from [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases). The current latest Release is [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1), with Android, Linux x64, and Windows x64 assets.
-
-## Workflows
+## Application Builds
 
 | Workflow | Trigger | Output |
 |---|---|---|
-| `native-tests.yml` | Pull request, manual dispatch | Flutter / Dart tests and baseline checks |
-| `native-debug-builds.yml` | Pull request, manual dispatch | Android debug APK, Linux debug bundle, Windows debug bundle |
-| `native-release-builds.yml` | `v*.*` tag, manual tag input | Android release APK, Linux release tar.gz, Windows release zip, checksum table in the Release body, and release assets |
+| `native-tests.yml` | Push, PR, manual dispatch | Flutter analysis and tests, Android ARM64 APK compile check |
+| `native-debug-builds.yml` | PR, manual dispatch | Native debug builds |
+| `native-release-builds.yml` | Version tag, manual dispatch | Windows ZIP, Linux TAR.GZ and universal and split Android APKs. v0.5.0 adds two macOS DMGs and the Web ZIP |
+| `web-builds.yml` | PRs touching relevant paths, manual dispatch, release builds | Starting with v0.5.0, `neiroha-Web-<version>.zip` with Flutter Web, SQLite Wasm and the Drift worker |
 
-## Android Debug APK
+Release builds place SHA-256 values under **Checksums** in the Release notes. Download debug and PR artifacts from the corresponding Actions run.
 
-The debug workflow runs:
+## Wiki Web Demo
 
-```bash
-flutter build apk --debug
-```
+Wiki deployment fetches the Web ZIP from the latest stable application release. It verifies GitHub's SHA-256 and the version inside the ZIP, then stages the app at `/demo/`. The Chinese and English [Web demo](../guide/web-demo.mdx) pages share that build. Drafts and prereleases are excluded. The demo guide shows a waiting message until a stable release includes a Web asset.
 
-Artifact names:
-
-```text
-neiroha-android-debug-apk
-dist/neiroha-android-debug.apk
-dist/SHA256SUMS-android-debug.txt
-```
-
-The local equivalent is usually:
-
-```text
-build/app/outputs/flutter-apk/app-debug.apk
-```
-
-Screenshots in this wiki were captured from the debug APK installed on a 2560x1600 Android emulator.
-
-## Release Builds
-
-The release workflow builds these assets when a tag is published or provided manually:
-
-- `neiroha-<tag>-android-release.apk`
-- `neiroha-<tag>-linux-x64-release.tar.gz`
-- `neiroha-<tag>-windows-x64-release.zip`
-
-SHA256 values are no longer uploaded as separate text assets. They are written into the GitHub Release body under **Checksums**. Android release APKs also get provenance attestation.
-
-This is why the quick-start path no longer asks users to build from source. Source setup is kept for developers, debugging, and contributors.
+The Wiki checks hourly and redeploys on a version or checksum change. Updates to the Wiki default branch and manual runs also resync the demo. If the application repository has a `WIKI_DISPATCH_TOKEN`, publication of the stable release assets sends an immediate `repository_dispatch` to the Wiki. See the [Wiki repository setup](https://github.com/Neiroha/Neiroha.github.io#web-演示发布).
 
 ## Wiki Screenshot Updates
 

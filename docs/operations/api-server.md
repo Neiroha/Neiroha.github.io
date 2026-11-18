@@ -26,6 +26,8 @@ Neiroha 暴露一个本地 HTTP 服务器，供外部工具通过 OpenAI 兼容�
 
 默认只允许本机访问。需要局域网访问时，再将绑定地址改为 `0.0.0.0`，并配置接口密钥（API Key）。
 
+v0.4.1 起可启用「启动时自动开启 API 服务」。API 和 MCP 服务会在应用启动后按设置开启。
+
 配置接口密钥后，客户端需要发送任一鉴权头：
 
 ```bash
@@ -49,8 +51,15 @@ X-API-Key: <key>
 | `GET` | `/v1/models` | 将激活语音库列为模型 |
 | `GET` | `/speakers` | SillyTavern 兼容说话人列表 |
 | `GET` | `/health` | 健康检查 |
+| `POST` | `/mcp` | v0.4.0 起支持 Agent 通过 Streamable HTTP 管理声音、合成与配音项目 |
 
 完整字段和错误码见 [中文 API 参考](/api-zh)。
+
+## MCP 与流式 PCM
+
+Agent 可连接 `http://127.0.0.1:8976/mcp`。MCP 开关位于「设置 → API 服务器」，配套用法见 [Neiroha 配音 Skill](https://github.com/Neiroha/Neiroha/blob/dev/assets/skills/neiroha-dubbing/SKILL.md)。绑定非回环地址时，MCP 需要配置接口密钥。
+
+v0.5.0 起，向 `/v1/audio/speech` 传入 `"stream": true` 和 `"response_format": "pcm"` 可请求流式 PCM。响应为 `audio/pcm`，用 `X-Audio-Encoding`、`X-Audio-Sample-Rate` 和 `X-Audio-Channels` 指定解码参数。提供商不支持时返回 `400`，客户端断开会取消对应任务。
 
 ## 请求示例
 

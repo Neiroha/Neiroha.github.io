@@ -28,6 +28,8 @@ Quick TTS is for one-character checks and short audio generation. It appears in 
 
 ## First Test Sentence
 
+Starting with v0.5.0, automatic streaming begins playback before generation finishes with supported providers. Stop ends playback and cancels in-flight requests. Only complete audio enters history. The desktop app archives completed clips. The [Web demo](../guide/web-demo.mdx) keeps clips in the current tab.
+
 Start with a short sentence instead of a long paragraph:
 
 ```text

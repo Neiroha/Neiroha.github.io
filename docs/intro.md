@@ -14,7 +14,7 @@ description: Neiroha 的产品说明、使用手册、配置运维和 API 参考
     <h1>Neiroha</h1>
     <p><strong>AI 音频中间件 & 配音工作站</strong></p>
     <p>
-      Neiroha 是一款基于 Flutter 的 Windows 桌面应用，用一个统一前端连接本地或云端 TTS 后端，
+      Neiroha 是一款基于 Flutter 的跨平台语音工作站，连接本地或云端 TTS 后端，
       并把语音角色、语音库、长文本朗读、对话配音、视频配音和 OpenAI 兼容 HTTP API 放在同一套工作流里。
     </p>
   </div>
@@ -37,11 +37,13 @@ description: Neiroha 的产品说明、使用手册、配置运维和 API 参考
     <strong>API 服务器</strong>
     <p>本地 OpenAI 兼容 HTTP 服务、鉴权、跨域、限流和请求示例。</p>
   </a>
-  <a className="wiki-card" href="/operations/github-actions-builds">
-    <strong>自动构建</strong>
-    <p>了解 GitHub Actions 构建产物、Release 发布包和调试包下载位置。</p>
+  <a className="wiki-card" href="/guide/web-demo">
+    <strong>Web 演示</strong>
+    <p>在浏览器试用提供商、音色库和快速 TTS。</p>
   </a>
 </div>
+
+查看 [版本更新](./guide/releases.md)，了解各版新增功能与发布时间。
 
 ## 功能概览
 
@@ -60,7 +62,7 @@ description: Neiroha 的产品说明、使用手册、配置运维和 API 参考
 
 ## 平台范围
 
-Neiroha 当前把平台支持看作具体能力边界，而不是承诺所有屏幕在所有平台都有同等原生能力。
+下表列出 v0.4 系列正式安装包的平台。macOS 和浏览器工作区从 v0.5.0 引入，其范围见 [版本更新](./guide/releases.md)。
 
 | 能力 | Windows | Linux | Android 手机 / 平板 |
 |---|---:|---:|---:|
@@ -73,6 +75,6 @@ Neiroha 当前把平台支持看作具体能力边界，而不是承诺所有屏
 | 外部 FFmpeg 命令行检测与调用 | ✓ | ✓ | - |
 | 视频配音导出、混流、裁剪和波形提取 | ✓ | ✓ | - |
 
-`✓` 表示当前文档和发布包覆盖的能力；`-` 表示当前不承诺或不在界面中暴露。
+`✓` 表示发布包提供该能力。
 
 系统 TTS 当前只实现 Windows SAPI。Android 或 Linux 系统 TTS 需要先有原生平台适配器，才应在界面中暴露。

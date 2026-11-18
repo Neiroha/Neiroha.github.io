@@ -1,0 +1,27 @@
+---
+title: Web Demo
+sidebar_label: Web Demo
+---
+
+import DemoRelease from '@site/src/components/DemoRelease';
+
+Try Neiroha's provider manager, voice banks and Quick TTS in your browser. The demo uses the same build as the Web ZIP in the stable Release.
+
+<DemoRelease
+  loading="Checking the demo version…"
+  unavailable="The stable Web demo is currently unavailable. Check back when a stable release includes a Web ZIP."
+  versionLabel="Demo version"
+  openLabel="Open Neiroha Web"
+/>
+
+## Try Quick TTS
+
+1. Open the demo in a recent desktop version of Chrome or Edge.
+2. In Providers, configure an HTTPS service your browser can reach. It must allow requests from `https://neiroha.github.io`, including their method and authorization headers (CORS). The demo supplies no hosted inference service or API credentials.
+3. In Voice Banks, assign a provider and voice to a character and enter a sentence in Quick TTS. With OpenAI Speech, select automatic streaming to start listening while the audio generates and stop at any time. Other Web adapters play audio after generation completes.
+
+Provider settings, including any API key you enter, and voice definitions are saved in this browser's site data. Generated audio stays in the current tab's memory, up to 30 clips or 32 MiB. Download clips you want to keep before refreshing or closing the tab. Clear the site's data after using a shared computer.
+
+Your browser sends synthesis text directly to the provider you configure. When trying the public demo, keep cloud API keys such as OpenAI keys on a backend you control and issue short-lived credentials to the browser as needed. You can also configure providers directly in the desktop client.
+
+Use the [native client](./install-release.md) for novel reading, dialogue and paragraph projects, video dubbing, recording, local file assets, and the API/MCP server. To self-host, download the Web ZIP from the [Release](https://github.com/Neiroha/Neiroha/releases/latest) and serve the entire extracted directory over HTTP(S).

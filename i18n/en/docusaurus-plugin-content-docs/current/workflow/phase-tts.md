@@ -59,6 +59,9 @@ When long text contains several speakers, split it into readable short phases fi
 
 ## Export Tips
 
+- Starting with v0.4.2, set a gap between clips when merging. Set a loudness target in the voice bank and use per-character offsets for quieter or louder roles.
+- Starting with v0.5.0, run automatic role assignment in paragraph projects. Review characters and assignments before batch generation.
+
 - Create separate projects by chapter or scene for easier organization.
 - Collect audio from the output directory after generation.
 - If stable filenames matter, number phases inside the project before exporting or sorting files.

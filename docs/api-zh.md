@@ -44,6 +44,7 @@ Neiroha 有两类 API：
 | `GET` | `/v1/models` | 将激活音色库列为 OpenAI 风格模型 |
 | `GET` | `/speakers` | SillyTavern 风格说话人列表 |
 | `GET` | `/health` | 健康检查 |
+| `POST` | `/mcp` | v0.4.0 起支持 MCP Streamable HTTP |
 
 ### `POST /v1/audio/speech`
 
@@ -64,8 +65,11 @@ Neiroha 有两类 API：
 | `model` | string | 否 | 音色库名称；提供后只在该库中查找 voice |
 | `speed` | number | 否 | 播放速度倍数，默认 `1.0` |
 | `response_format` | string | 否 | 输出格式提示，会传给上游适配器 |
+| `stream` | bool | 否 | v0.5.0 起可设为 `true`，同时将 `response_format` 设为 `pcm` |
 
 响应是原始音频字节，`Content-Type` 随输出格式变化。
+
+流式响应使用 `audio/pcm`，通过 `X-Audio-Encoding`、`X-Audio-Sample-Rate`、`X-Audio-Channels` 声明格式。不支持增量 PCM 的提供商返回 `400`。客户端断开会取消正在运行的请求。
 
 常见错误：
 

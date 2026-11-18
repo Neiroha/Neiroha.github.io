@@ -13,6 +13,8 @@ const sidebars = {
       items: [
         'guide/getting-started',
         'guide/install-release',
+        'guide/releases',
+        'guide/web-demo',
         'guide/source-build',
       ],
     },

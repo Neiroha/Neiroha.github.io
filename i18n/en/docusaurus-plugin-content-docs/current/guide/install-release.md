@@ -7,52 +7,33 @@ Normal users should start from Release builds. Local compilation is not required
 
 ## Download Entry
 
-Open [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) and choose the latest version. The current latest version is [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1), released on 2026-05-30.
+Open [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases/latest) and select the stable build for your device. See the [release history](./releases.md) for changes by version.
 
-Release builds are produced and published by GitHub Actions in the main application repository. You do not need Flutter or local build commands when using these packages.
+| Platform | Release asset |
+|---|---|
+| Windows x64 | `neiroha-Windows-AMD64-<version>.zip` |
+| Android | `neiroha-Android-Universal-<version>.apk` or the APK for your CPU architecture |
+| Linux x64 | `neiroha-Linux-AMD64-<version>.tar.gz` |
+| macOS (v0.5.0 onward) | `neiroha-macOS-ARM64-<version>.dmg` for Apple Silicon or `neiroha-macOS-AMD64-<version>.dmg` for Intel |
 
-## Windows
+Release builds run without the Flutter SDK.
 
-1. Download `neiroha-v0.3.1-windows-x64-release.zip`.
-2. Extract it to a stable directory, such as a dedicated `Neiroha` folder for portable apps.
-3. Run `neiroha.exe`.
-4. If Windows SmartScreen warns about an unknown publisher, continue only after confirming the file came from the official Release page.
-5. After first launch, follow the provider setup steps in [Quick Start](/guide/getting-started).
+- **Windows:** Extract the ZIP to a fixed folder and run `neiroha.exe`.
+- **Android:** Copy the APK to the device, allow installation when prompted, and launch the app.
+- **Linux:** Extract the archive and run the Neiroha executable inside the bundle. Configure FFmpeg under **Settings → Media Tools** for video dubbing exports.
+- **macOS:** Check your chip in About This Mac. Open the matching DMG and drag **Neiroha.app** to Applications. The v0.5.0 DMGs use ad-hoc signing, so verify the download source and checksum if Gatekeeper prompts on first launch.
 
-## Android
-
-1. Download `neiroha-v0.3.1-android-release.apk`.
-2. Copy the APK to the Android device.
-3. Enable installing apps from unknown sources in system settings.
-4. Install the APK and launch Neiroha.
-5. Android supports the UI and TTS client workflows. Local FFmpeg muxing, trimming, waveform extraction, and video export are currently disabled.
-
-## Linux x64
-
-1. Download `neiroha-v0.3.1-linux-x64-release.tar.gz`.
-2. Extract it to a stable directory.
-3. Run the Neiroha executable in the extracted bundle.
-4. For video dubbing export, make sure FFmpeg is installed and configured or detected in **Settings -> Media Tools**.
+To try the browser workspace, open the [Web demo](./web-demo.mdx).
 
 ## Verify Files
 
-The Release page no longer provides separate `SHA256SUMS*.txt` files. Checksums are written directly in the Release body under **Checksums**, and GitHub asset metadata also shows digests.
-
-Current `v0.3.1` checksums:
-
-| File | SHA256 |
-|---|---|
-| `neiroha-v0.3.1-windows-x64-release.zip` | `baaa0c97a73e43b90e61ec651c0e24b961fce1548e918d916d594565e0a68a4f` |
-| `neiroha-v0.3.1-android-release.apk` | `e722f82614007f07c7e06384705e6790d71cee396176a2d3ef3672c50c012160` |
-| `neiroha-v0.3.1-linux-x64-release.tar.gz` | `da2cfafaadee63aad7c3b91afeec5ff09d6047bbba450718af32517f967ce660` |
-
-Windows PowerShell example:
+Compare the file's SHA-256 with the **Checksums** table in its Release notes or with the asset digest. In PowerShell:
 
 ```powershell
-Get-FileHash .\neiroha-v0.3.1-windows-x64-release.zip -Algorithm SHA256
+Get-FileHash ./neiroha-Windows-AMD64-v0.4.2.zip -Algorithm SHA256
 ```
 
-Android and Linux packages can be checked the same way on Windows, or with `sha256sum` on systems that provide it.
+On Linux use `sha256sum`. On macOS use `shasum -a 256`.
 
 ## Local Backend Portable Packages
 

@@ -11,17 +11,7 @@ sidebar_label: 快速开始
 
 ## 1. 下载 Release 发布包
 
-打开 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases)，下载最新版本。当前最新版本是 [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1)，发布时间为 2026-05-30。
-
-| 平台 | 下载文件 | 用法 |
-|---|---|---|
-| Windows | `neiroha-v0.3.1-windows-x64-release.zip` | 解压后运行 `neiroha.exe` |
-| Android | `neiroha-v0.3.1-android-release.apk` | 复制到设备后安装 APK |
-| Linux x64 | `neiroha-v0.3.1-linux-x64-release.tar.gz` | 解压后运行 bundle 内的可执行文件 |
-
-SHA256 现在直接写在 Release 正文的 **Checksums** 表里，不再单独提供 `SHA256SUMS*.txt`。
-
-详细安装步骤见 [安装 Release 包](/guide/install-release)。
+从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases/latest) 下载正式版，按 [安装指南](./install-release.md) 选择平台和架构。试用浏览器工作区可前往 [Web 演示](./web-demo.mdx)，了解版本变化可查看 [版本更新](./releases.md)。
 
 ## 2. 准备一个 TTS 后端
 

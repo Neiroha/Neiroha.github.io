@@ -3,53 +3,24 @@ title: GitHub Actions 构建
 sidebar_label: GitHub Actions 构建
 ---
 
-Neiroha 主程序仓库已经配置了原生平台 CI，不再只依赖本地机器产物。
+日常使用请从 [GitHub Releases](https://github.com/Neiroha/Neiroha/releases/latest) 下载相应平台的包。各版本变化见 [版本更新](../guide/releases.md)。
 
-日常安装应直接从 [Neiroha Releases](https://github.com/Neiroha/Neiroha/releases) 下载构建好的包。当前最新 Release 是 [`v0.3.1`](https://github.com/Neiroha/Neiroha/releases/tag/v0.3.1)，包含 Android、Linux x64、Windows x64 三个平台资产。
+## 主程序构建
 
-## 工作流
-
-| Workflow | 触发方式 | 输出 |
+| 工作流 | 触发方式 | 产物 |
 |---|---|---|
-| `native-tests.yml` | Pull request、手动触发 | Flutter / Dart 测试与基础校验 |
-| `native-debug-builds.yml` | Pull request、手动触发 | Android debug APK、Linux debug bundle、Windows debug bundle |
-| `native-release-builds.yml` | `v*.*` tag、手动输入 tag | Android release APK、Linux release tar.gz、Windows release zip、Release 正文校验表与 release assets |
+| `native-tests.yml` | Push、PR、手动触发 | Flutter 静态分析与测试、Android ARM64 APK 编译 |
+| `native-debug-builds.yml` | PR、手动触发 | 原生平台调试包 |
+| `native-release-builds.yml` | 版本 tag、手动触发 | Windows ZIP、Linux TAR.GZ、Android 通用及分架构 APK。v0.5.0 起还有两种 macOS DMG 及 Web ZIP |
+| `web-builds.yml` | 相关路径的 PR、手动触发、正式版构建调用 | v0.5.0 起生成 `neiroha-Web-<版本>.zip`，内含 Flutter Web、SQLite Wasm 与 Drift worker |
 
-## Android Debug APK
+版本构建将 SHA-256 写入 Release 正文的 **Checksums** 表。调试包与 PR 产物可在对应 GitHub Actions 运行页面下载。
 
-Debug workflow 会执行：
+## Wiki 的 Web 演示
 
-```bash
-flutter build apk --debug
-```
+Wiki 仓库的页面构建从主程序的最新正式 Release 读取同版本 Web ZIP，验证 GitHub 提供的 SHA-256 与 ZIP 内部版本，再放到 `/demo/`。中英文 [Web 演示](../guide/web-demo.mdx) 页面使用同一份构建。草稿或预发行版不会进入公开演示。没有正式 Web 资产时，演示页会显示等待提示。
 
-产物会被打包成 artifact：
-
-```text
-neiroha-android-debug-apk
-dist/neiroha-android-debug.apk
-dist/SHA256SUMS-android-debug.txt
-```
-
-本地同路径产物通常在：
-
-```text
-build/app/outputs/flutter-apk/app-debug.apk
-```
-
-本站截图当前使用该 debug APK 安装到 2560x1600 Android 模拟器后采集。
-
-## Release Builds
-
-Release workflow 会在 tag 发布或手动输入 tag 时构建：
-
-- `neiroha-<tag>-android-release.apk`
-- `neiroha-<tag>-linux-x64-release.tar.gz`
-- `neiroha-<tag>-windows-x64-release.zip`
-
-SHA256 不再作为单独 txt 资产上传，而是写入 GitHub Release 正文的 **Checksums** 表。Android release APK 还会执行 provenance attestation。最终资产由 release workflow 发布到 GitHub Release。
-
-因此，wiki 的快速开始不再要求用户从源码构建；源码运行仅保留给开发者、调试者和需要修改代码的贡献者。
+Wiki 每小时检查一次，版本与校验值有变化时才重建和发布。Wiki 主分支更新或手动运行也会重新同步。主程序配置 `WIKI_DISPATCH_TOKEN` 时，正式版资产发布完成后会立即通知 Wiki。此可选凭据只需能向 Wiki 仓库发起 `repository_dispatch`。配置细节见 [Wiki 仓库说明](https://github.com/Neiroha/Neiroha.github.io#web-演示发布)。
 
 ## Wiki 截图更新
 

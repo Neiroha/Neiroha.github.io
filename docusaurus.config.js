@@ -78,6 +78,7 @@ const config = {
             position: 'left',
             label: '文档',
           },
+          {to: '/guide/web-demo', label: 'Web 演示', position: 'left'},
           {to: '/api-zh', label: 'API', position: 'left'},
           {
             type: 'localeDropdown',
