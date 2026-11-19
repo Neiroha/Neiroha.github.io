@@ -5,13 +5,13 @@ sidebar_label: 版本更新
 
 [最新正式版下载](https://github.com/Neiroha/Neiroha/releases/latest) · [安装指南](./install-release.md)
 
-## v0.5.0
+## v0.5.0 · 2026-11-18
 
-本节根据发布 PR 整理。正式安装包和发布时间以 GitHub Release 为准。 [查看发布 PR](https://github.com/Neiroha/Neiroha/pull/8)
+[正式发布包](https://github.com/Neiroha/Neiroha/releases/tag/v0.5.0) · [发布 PR](https://github.com/Neiroha/Neiroha/pull/8)
 
 - **Web 工作区**支持提供商、音色库和快速 TTS。浏览器内 SQLite 保留设置和音色，语音留在标签页内存中。OpenAI Speech 支持流式试听和取消。见 [Web 演示](./web-demo.mdx)。
-- **流式合成**覆盖 Quick TTS、小说阅读器等试听入口。内置 HTTP API 可按块返回 PCM，并在客户端断开时取消请求。
-- **小说分角色**支持自动规划、片段标注和复核、人工校对与锁定、章级音色和句级覆盖。模型和提示词可按工作流配置。见 [小说阅读器](../workflow/novel-reader.md)。
+- **流式合成**覆盖 Quick TTS、小说阅读器等试听入口。内置 HTTP API 可按块返回 PCM，并在客户端断开时取消请求。见 [流式输出](../workflow/streaming.md)。
+- **小说分角色**支持自动规划、片段标注和复核、人工校对与锁定、章级音色和句级覆盖。模型和提示词可按工作流配置。见 [自动分角色](../workflow/auto-roles.md)。
 - **macOS**分发 Apple Silicon 和 Intel 两种 DMG，新增录音与媒体会话支持。发布包采用 ad-hoc 签名，麦克风和媒体按键仍有实机验收项。
 - **SQLite 升级**按 schema 版本拆分迁移，覆盖历史数据库升级测试。桌面数据库升级到 v33 前会建立备份。
 
@@ -31,7 +31,7 @@ sidebar_label: 版本更新
 
 ## v0.4.0 · 2026-10-11
 
-- 扩充 TTS 提供商与模型选择，改进视频配音的角色选择器。
+- 新增 [IndexTTS 2.5 WebUI](../workflow/providers/indextts.md)、[ElevenLabs](../workflow/providers/elevenlabs.md) 和 [MiniMax Speech](../workflow/providers/minimax.md) 适配器，改进视频配音的角色选择器。
 - 在内置 API 服务器增加 Agent 可用的 [MCP 接口](../operations/api-server.md)，支持音色管理、合成和配音操作。
 - Android 同时提供通用 APK 和按 CPU 架构拆分的 APK。
 

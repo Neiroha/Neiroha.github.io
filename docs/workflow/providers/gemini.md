@@ -5,15 +5,19 @@ sidebar_label: Gemini
 
 Gemini TTS 在 Neiroha 中使用 **Google Gemini TTS** 适配器。它调用 Gemini API 的 native text-to-speech 能力，适合使用 Google AI Studio API key 做小规模试听和风格测试。
 
-## 官方限制
+## 模型兼容性
 
-Google 官方文档把 Gemini TTS 标为 Preview，并说明 TTS 接收文本、输出音频。官方 Rate Limits 页面列出 `gemini-2.5-flash-preview-tts` 免费层限制为 `3 RPM / 10,000 TPM / 15 RPD`。额度、模型和命名可能调整，实际以 AI Studio 控制台为准。
+表中是 v0.5.0 的内置候选，账号可用情况和额度请查 AI Studio。生成需要文本和音色，Web 端还要求服务端允许跨域。
 
-官方页面：
+| 模型 ID | 接口 | 原生端 | Web | 流式播放 |
+|---|---|---|---|---|
+| `gemini-3.8-flash-tts`（默认） | Interactions | 支持 | 允许跨域时可用 | 整段 |
+| `gemini-3.8-flash-lite-tts` | Interactions | 支持 | 允许跨域时可用 | 整段 |
+| `gemini-3.1-flash-tts-preview` | generateContent | 支持 | 允许跨域时可用 | 整段 |
+| `gemini-2.5-flash-preview-tts` | generateContent | 支持 | 允许跨域时可用 | 整段 |
+| `gemini-2.5-pro-preview-tts` | generateContent | 支持 | 允许跨域时可用 | 整段 |
 
-- [Speech generation](https://ai.google.dev/gemini-api/docs/speech-generation)
-- [Pricing](https://ai.google.dev/gemini-api/docs/pricing)
-- [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)
+[Google TTS 文档](https://ai.google.dev/gemini-api/docs/speech-generation) · [额度与速率](https://ai.google.dev/gemini-api/docs/rate-limits) · [计费](https://ai.google.dev/gemini-api/docs/pricing)
 
 ## 提供商填写
 
@@ -23,7 +27,7 @@ Google 官方文档把 Gemini TTS 标为 Preview，并说明 TTS 接收文本、
 | Name | `Google AI Studio` |
 | 基础地址（Base URL） | `https://generativelanguage.googleapis.com` |
 | 接口密钥（API Key） | Google AI Studio API key |
-| 默认模型（Default Model） | 默认使用 `gemini-2.5-flash-preview-tts` |
+| 默认模型（Default Model） | 默认使用 `gemini-3.8-flash-tts` |
 
 保存后：
 
@@ -35,7 +39,7 @@ Google 官方文档把 Gemini TTS 标为 Preview，并说明 TTS 接收文本、
 
 ## 可选音色
 
-Gemini TTS 官方文档列出 30 个预设音色。Neiroha 会把这些音色作为固定列表展示，例如：
+下列 30 个官方预设音色由应用内置。成功读取 `/v1beta/voices` 时，Neiroha 还会加入扩展音色。
 
 ```text
 Zephyr, Puck, Charon, Kore, Fenrir, Leda, Orus, Aoede,
@@ -59,15 +63,4 @@ Gemini TTS 没有独立的速度字段，Neiroha 会把非 `1.0` 的速度选择
 
 ## 免费额度用法
 
-Gemini 免费层请求数适合 Quick TTS 和短 Dialog 测试，不适合直接处理完整小说。
-
-建议提供商限流：
-
-| 字段 | 建议值 |
-|---|---|
-| 最大并发 | `1` |
-| RPM | `3` 或更低 |
-| TPM | `10000` 或更低 |
-| RPD | `15` 或按控制台实际额度设置 |
-
-如果遇到 `429 RESOURCE_EXHAUSTED`，暂停请求后再降低并发和批量规模。
+在控制台查看该模型的请求数和 token 限制。先用短句试听，再按账号额度填 RPM、TPM 和 RPD。

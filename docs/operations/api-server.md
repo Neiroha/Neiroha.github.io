@@ -59,7 +59,7 @@ X-API-Key: <key>
 
 Agent 可连接 `http://127.0.0.1:8976/mcp`。MCP 开关位于「设置 → API 服务器」，配套用法见 [Neiroha 配音 Skill](https://github.com/Neiroha/Neiroha/blob/dev/assets/skills/neiroha-dubbing/SKILL.md)。绑定非回环地址时，MCP 需要配置接口密钥。
 
-v0.5.0 起，向 `/v1/audio/speech` 传入 `"stream": true` 和 `"response_format": "pcm"` 可请求流式 PCM。响应为 `audio/pcm`，用 `X-Audio-Encoding`、`X-Audio-Sample-Rate` 和 `X-Audio-Channels` 指定解码参数。提供商不支持时返回 `400`，客户端断开会取消对应任务。
+v0.5.0 起，向 `/v1/audio/speech` 传入 `"stream": true` 和 `"response_format": "pcm"` 可请求流式 PCM。响应为 `audio/pcm`，用 `X-Audio-Encoding`、`X-Audio-Sample-Rate` 和 `X-Audio-Channels` 指定解码参数。提供商不支持时返回 `400`，客户端断开会取消对应任务。见 [流式输出](../workflow/streaming.md)。
 
 ## 请求示例
 

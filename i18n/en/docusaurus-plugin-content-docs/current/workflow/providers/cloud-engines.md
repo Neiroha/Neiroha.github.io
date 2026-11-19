@@ -20,8 +20,11 @@ Cloud TTS is useful for trials, cross-device use, or setups that do not deploy l
 
 | Service | Neiroha Adapter | Why Try It | Details |
 |---|---|---|---|
+| OpenAI | OpenAI TTS (Official) | Speech and Realtime, with platform differences in the guide | [OpenAI](./openai.md) |
+| ElevenLabs | ElevenLabs | Account voices and native voice registration | [ElevenLabs](./elevenlabs.md) |
+| MiniMax Speech | MiniMax Speech | International and mainland China endpoints, synthesis by voice ID | [MiniMax Speech](./minimax.md) |
 | MiMo | OpenAI Chat Completions TTS | One key can access TTS, VoiceDesign, and VoiceClone-style models; useful for Chinese and Chinese-English tests. | [MiMo TTS](/workflow/providers/mimo) |
-| Google Gemini TTS | Google Gemini TTS | AI Studio API key; official docs list free-tier limits for Gemini 2.5 Flash Preview TTS. | [Gemini TTS](/workflow/providers/gemini) |
+| Google Gemini TTS | Google Gemini TTS | Uses an AI Studio API key. Check the console for models and trial limits. | [Gemini TTS](/workflow/providers/gemini) |
 | Azure Speech | Azure Speech Service | Azure F0 provides a monthly Neural TTS character quota and stable voice lists. | [Azure Speech](/workflow/providers/azure) |
 
 ## Free Quota Usage

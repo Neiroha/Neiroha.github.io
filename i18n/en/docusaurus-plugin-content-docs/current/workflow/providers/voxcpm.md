@@ -28,6 +28,15 @@ It provides OpenAI-compatible routes, native `/api/voxcpm` routes, a voice regis
 | Official speed reference | Official PyTorch reports RTF around `0.30` on RTX 4090; Nano-vLLM / vLLM-Omni acceleration is around `0.13`. |
 | Boundaries | Very short text may sound weak. Long text can speed up, produce noise, fail to stop, or OOM; split by sentence for production. |
 
+## Model Compatibility
+
+| Model preset | Native | Web | Streaming playback |
+|---|---|---|---|
+| `voxcpm2-default` (default) | Connects to a running server | Dedicated adapter unavailable | Plays after generation |
+| Other presets registered on the server | Depends on server configuration and voices | Dedicated adapter unavailable | Plays after generation |
+
+If the server exposes a browser-accessible OpenAI-compatible HTTPS endpoint, try its preset voices with the [compatible adapter](./local-engines.md). Web characters cannot supply local reference files.
+
 ## Default Addresses
 
 | Service | Default Address | Purpose |

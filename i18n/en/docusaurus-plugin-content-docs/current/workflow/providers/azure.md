@@ -42,6 +42,14 @@ https://eastus.api.cognitive.microsoft.com
 
 They are normalized internally to `https://{region}.tts.speech.microsoft.com`.
 
+## Voice Compatibility
+
+| Model or voice | Native | Web | Streaming playback |
+|---|---|---|---|
+| Preset voices in the Speech resource's region | Regional voice ID | Requires a CORS-enabled endpoint | Plays after generation |
+
+Neiroha stores the voice ID, fetches voices for the Azure region, and sets speed through SSML.
+
 ## Fetch Voices
 
 1. Save the provider.

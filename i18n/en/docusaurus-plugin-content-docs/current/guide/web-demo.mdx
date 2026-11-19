@@ -20,6 +20,8 @@ Try Neiroha's provider manager, voice banks and Quick TTS in your browser. The d
 2. In Providers, configure an HTTPS service your browser can reach. It must allow requests from `https://neiroha.github.io`, including their method and authorization headers (CORS). The demo supplies no hosted inference service or API credentials.
 3. In Voice Banks, assign a provider and voice to a character and enter a sentence in Quick TTS. With OpenAI Speech, select automatic streaming to start listening while the audio generates and stop at any time. Other Web adapters play audio after generation completes.
 
+For the official OpenAI adapter on Web, select a Speech API model. If Realtime triggers a reference-file message, use `gpt-4o-mini-tts` or its snapshot with a preset voice. [OpenAI model compatibility](../workflow/providers/openai.md) · [Streaming audio](../workflow/streaming.md)
+
 Provider settings, including any API key you enter, and voice definitions are saved in this browser's site data. Generated audio stays in the current tab's memory, up to 30 clips or 32 MiB. Download clips you want to keep before refreshing or closing the tab. Clear the site's data after using a shared computer.
 
 Your browser sends synthesis text directly to the provider you configure. When trying the public demo, keep cloud API keys such as OpenAI keys on a backend you control and issue short-lived credentials to the browser as needed. You can also configure providers directly in the desktop client.

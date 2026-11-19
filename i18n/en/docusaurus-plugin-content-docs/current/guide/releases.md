@@ -5,13 +5,13 @@ sidebar_label: Release History
 
 [Latest stable download](https://github.com/Neiroha/Neiroha/releases/latest) · [Installation guide](./install-release.md)
 
-## v0.5.0
+## v0.5.0 · 2026-11-18
 
-This section follows the release pull request. Check GitHub Releases for official downloads and publication dates. [Release pull request](https://github.com/Neiroha/Neiroha/pull/8)
+[Release downloads](https://github.com/Neiroha/Neiroha/releases/tag/v0.5.0) · [Release pull request](https://github.com/Neiroha/Neiroha/pull/8)
 
 - **Web workspace** with providers, voice banks and Quick TTS. Browser SQLite saves settings and voice definitions, while generated audio lives in tab memory. OpenAI Speech supports streaming playback and cancellation. See the [Web demo](./web-demo.mdx).
-- **Streaming synthesis** in Quick TTS, the novel reader and other previews. The built-in HTTP API streams PCM and cancels synthesis when the client disconnects.
-- **Novel role assignment** with planning, segment labeling, review, manual corrections and locks. Set voices per chapter or per line, and configure role models and prompts by workflow. See the [Novel Reader](../workflow/novel-reader.md).
+- **Streaming synthesis** in Quick TTS, the novel reader and other previews. The built-in HTTP API streams PCM and cancels synthesis when the client disconnects. See [streaming audio](../workflow/streaming.md).
+- **Novel role assignment** with planning, segment labeling, review, manual corrections and locks. Set voices per chapter or per line, and configure role models and prompts by workflow. See the [automatic role assignment](../workflow/auto-roles.md).
 - **macOS** DMGs for Apple Silicon and Intel, with recording and media session support. The DMGs use ad-hoc signing. Microphone and media-key behavior still needs validation on physical devices.
 - **SQLite upgrades** now use versioned migrations with tests against historical databases. Desktop databases are backed up before upgrading to schema v33.
 
@@ -31,7 +31,7 @@ This section follows the release pull request. Check GitHub Releases for officia
 
 ## v0.4.0 · 2026-10-11
 
-- Expanded TTS provider and model options and improved the video dubbing voice picker.
+- Added adapters for [IndexTTS 2.5 WebUI](../workflow/providers/indextts.md), [ElevenLabs](../workflow/providers/elevenlabs.md) and [MiniMax Speech](../workflow/providers/minimax.md). Improved the video dubbing voice picker.
 - The built-in API server adds an [MCP endpoint](../operations/api-server.md) for agents to manage voices, synthesize speech and work with dubbing projects.
 - Android builds now include a universal APK and separate APKs by CPU architecture.
 

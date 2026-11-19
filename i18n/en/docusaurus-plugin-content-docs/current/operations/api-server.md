@@ -59,7 +59,7 @@ To start the API and MCP automatically when Neiroha launches, enable API auto-st
 
 Agents connect to `http://127.0.0.1:8976/mcp`. The MCP toggle is under **Settings → API Server**. See the [Neiroha dubbing skill](https://github.com/Neiroha/Neiroha/blob/dev/assets/skills/neiroha-dubbing/SKILL.md) for usage. Set an API key when binding MCP to a non-loopback address.
 
-Starting with v0.5.0, send `"stream": true` and `"response_format": "pcm"` to `/v1/audio/speech` to request incremental PCM. The `audio/pcm` response includes `X-Audio-Encoding`, `X-Audio-Sample-Rate`, and `X-Audio-Channels`. Unsupported providers return `400`. Closing the connection cancels that request.
+Starting with v0.5.0, send `"stream": true` and `"response_format": "pcm"` to `/v1/audio/speech` to request incremental PCM. The `audio/pcm` response includes `X-Audio-Encoding`, `X-Audio-Sample-Rate`, and `X-Audio-Channels`. Unsupported providers return `400`. Closing the connection cancels that request. See [streaming audio](../workflow/streaming.md).
 
 ## Request Example
 

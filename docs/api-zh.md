@@ -278,6 +278,13 @@ Gemini TTS 使用 Google AI Studio 接口密钥。提供商中填写 `https://ge
 
 Windows 桌面端通过系统 SAPI 合成，无需基础地址或接口密钥。Android 和 Linux 的系统 TTS 在原生适配器实现前不会作为可用提供商暴露。
 
+### 新增适配器
+
+- **OpenAI 官方**使用 Speech API 或 Realtime WebSocket，按模型选择协议。见 [OpenAI 官方 TTS](./workflow/providers/openai.md)。
+- **IndexTTS 2.5**通过 Gradio `/gen_single` 启动任务并下载完整音频。见 [IndexTTS 2.5 WebUI](./workflow/providers/indextts.md)。
+- **ElevenLabs**通过 `/v1/text-to-speech/{voice_id}` 合成，使用 `xi-api-key`。见 [ElevenLabs](./workflow/providers/elevenlabs.md)。
+- **MiniMax Speech**用 `/v1/t2a_v2` 和 Bearer 鉴权，通常返回十六进制音频。见 [MiniMax Speech](./workflow/providers/minimax.md)。
+
 ## 3. 响应头和排错
 
 Neiroha 本地后端的音频响应通常会带这些头，具体字段按后端不同略有差异：

@@ -24,11 +24,11 @@ Quick TTS is for one-character checks and short audio generation. It appears in 
 4. Type short text in the Quick Test input.
 5. Click the purple generate button.
 6. The synthesis job enters the shared TTS queue.
-7. When complete, the audio is saved to disk and played automatically.
+7. Compatible models can play while generating. Other models play the completed clip. The native client saves complete clips to disk. Web keeps them in the current tab.
 
 ## First Test Sentence
 
-Starting with v0.5.0, automatic streaming begins playback before generation finishes with supported providers. Stop ends playback and cancels in-flight requests. Only complete audio enters history. The desktop app archives completed clips. The [Web demo](../guide/web-demo.mdx) keeps clips in the current tab.
+Automatic streaming starts playback before generation finishes with compatible models. Stop cancels in-flight requests and incomplete clips stay out of history. See [streaming audio](./streaming.md) for Web Realtime and other model limits.
 
 Start with a short sentence instead of a long paragraph:
 

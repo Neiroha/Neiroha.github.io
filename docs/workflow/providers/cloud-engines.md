@@ -20,8 +20,11 @@ sidebar_label: 云端 / 免费额度
 
 | 服务 | Neiroha 适配器 | 为什么适合试用 | 详细页 |
 |---|---|---|---|
+| OpenAI | OpenAI TTS (Official) | Speech 和 Realtime 的模型、音色与平台要求见详情 | [OpenAI](./openai.md) |
+| ElevenLabs | ElevenLabs | 读取账号音色，原生端可注册克隆音色 | [ElevenLabs](./elevenlabs.md) |
+| MiniMax Speech | MiniMax Speech | 支持国际站和中国大陆站，按音色 ID 发请求 | [MiniMax Speech](./minimax.md) |
 | MiMo | OpenAI Chat Completions TTS | 一个 key 接 TTS / VoiceDesign / VoiceClone 风格模型，适合测试中文和中英混合 | [MiMo TTS](/workflow/providers/mimo) |
-| Google Gemini TTS | Google Gemini TTS | AI Studio API key，官方文档列出 Gemini 2.5 Flash Preview TTS 免费层速率限制 | [Gemini TTS](/workflow/providers/gemini) |
+| Google Gemini TTS | Google Gemini TTS | 使用 AI Studio API Key，模型和试用额度见控制台 | [Gemini TTS](/workflow/providers/gemini) |
 | Azure Speech | Azure Speech Service | Azure F0 免费层提供 Neural TTS 每月字符额度，语音列表稳定 | [Azure Speech](/workflow/providers/azure) |
 
 ## 免费额度使用建议
@@ -36,7 +39,7 @@ sidebar_label: 云端 / 免费额度
 
 ## 提供商限流要填
 
-云端服务最常见的失败并非配置错误，而是触发限流。推荐在提供商里设置：
+按账号的速率和额度设置提供商限流。收到 429 时，先在控制台检查剩余额度和速率。
 
 | 字段 | 用途 |
 |---|---|
@@ -45,7 +48,7 @@ sidebar_label: 云端 / 免费额度
 | TPM | 每分钟 token 数，适合按 token 计费或限制的服务 |
 | RPD | 每日请求数，适合免费层 |
 
-例如 Gemini 免费层可按官方 Rate Limits 给 `gemini-2.5-flash-preview-tts` 设置保守的 RPM / TPM / RPD；Azure F0 需优先按字符额度控制文本长度和批量规模；MiMo Token Plan 则以控制台余额和模型消耗规则为准。
+Gemini 请按模型和账号设 RPM、TPM、RPD。Azure F0 还要留意字符额度。MiMo Token Plan 以控制台余额和模型的计费规则为准。
 
 ## 官方入口
 

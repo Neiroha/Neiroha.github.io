@@ -18,16 +18,24 @@ A provider is Neiroha's connection entry for an external TTS backend. It stores 
 
 ## Adapter Types
 
-| Adapter | Use Case |
-|---|---|
-| OpenAI TTS API Compatible | OpenAI-compatible `/v1/audio/speech` services such as Kokoro, XTTS, Orpheus, KoboldCpp, or custom wrappers. |
-| Azure Speech Service | Microsoft Azure Speech TTS. |
-| GPT-SoVITS | Neiroha GPT-SoVITS local backend. |
-| CosyVoice Native | Neiroha CosyVoice local backend. |
-| VoxCPM2 Native | Neiroha VoxCPM2 local backend. |
-| OpenAI Chat Completions TTS | Audio returned through Chat Completions, such as MiMo v2 TTS. |
-| Google Gemini TTS | Google AI Studio Gemini TTS models. |
-| Windows System TTS | Windows SAPI voices without an external server. |
+Choose the adapter for the service's actual API. The model guides use “native” for the Windows, macOS, Linux and Android clients, with a separate entry for Windows system voices. Remote providers on Web require HTTPS and cross-origin access. Check the provider for model availability on your account.
+
+| Adapter | Connects to | Web synthesis |
+|---|---|---|
+| [OpenAI TTS (Official)](./providers/openai.md) | OpenAI Speech and Realtime | Speech, with streaming |
+| [OpenAI TTS API Compatible](./providers/local-engines.md) | Self-hosted or third-party `/v1/audio/speech` servers | Whole clip |
+| [OpenAI Chat Completions TTS](./providers/mimo.md) | MiMo and other models that return audio via Chat Completions | Whole clip, with no local reference file |
+| [ElevenLabs](./providers/elevenlabs.md) | ElevenLabs models and account voices | Whole clip by voice ID |
+| [MiniMax Speech](./providers/minimax.md) | MiniMax models and account voices | Whole clip by voice ID |
+| [Google Gemini TTS](./providers/gemini.md) | Gemini TTS | Whole clip |
+| [Azure Speech Service](./providers/azure.md) | Azure preset voices | Whole clip |
+| [IndexTTS 2.5 (WebUI)](./providers/indextts.md) | A Gradio WebUI with a character reference recording | Unavailable |
+| [GPT-SoVITS](./providers/gpt-sovits.md) | GPT-SoVITS servers | Native adapter unavailable |
+| [CosyVoice Native](./providers/cosyvoice.md) | CosyVoice inference servers | Native adapter unavailable |
+| [VoxCPM2 Native](./providers/voxcpm.md) | VoxCPM2 inference servers | Native adapter unavailable |
+| Windows System TTS | Local Windows SAPI | Unavailable |
+
+Quick TTS adds clips to history once generation is complete. See [streaming audio](./streaming.md) for playback and cancellation.
 
 ## Create a Provider
 
@@ -55,6 +63,10 @@ A provider is Neiroha's connection entry for an external TTS backend. It stores 
 
 | Adapter | Key Required | Authentication Used by Neiroha |
 |---|---|---|
+| OpenAI TTS (Official) | Required | `Authorization: Bearer <key>` |
+| ElevenLabs | Required | `xi-api-key: <key>` |
+| MiniMax Speech | Required | `Authorization: Bearer <key>` |
+| IndexTTS 2.5 WebUI | Depends on the WebUI | `Authorization: Bearer <key>` when configured |
 | OpenAI TTS API Compatible | Depends on server | `Authorization: Bearer <key>` |
 | OpenAI Chat Completions TTS | Usually required for cloud | `api-key: <key>` by default for MiMo-style APIs |
 | Google Gemini TTS | Required | `x-goog-api-key: <key>` |

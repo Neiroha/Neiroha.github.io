@@ -27,6 +27,15 @@ It provides FastAPI, Gradio Admin, TOML model presets, TOML voice sets, an OpenA
 | Official speed reference | Official README reports v2ProPlus RTF around `0.028` on RTX 4060Ti, `0.014` on RTX 4090, and `0.526` on M4 CPU. |
 | Boundaries | Split long text. Reference text/audio mismatch increases missing words, repetition, and articulation risk. |
 
+## Model Compatibility
+
+| Model preset | Native | Web | Streaming playback |
+|---|---|---|---|
+| `v2proplus-clone` (default) | Connects to a running server | Dedicated adapter unavailable | Plays after generation |
+| Other presets registered on the server | Depends on server configuration and voices | Dedicated adapter unavailable | Plays after generation |
+
+If the server exposes a browser-accessible OpenAI-compatible HTTPS endpoint, try its preset voices with the [compatible adapter](./local-engines.md). Web characters cannot supply local reference files.
+
 ## Default Addresses
 
 | Service | Default Address | Purpose |

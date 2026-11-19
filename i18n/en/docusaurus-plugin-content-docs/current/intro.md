@@ -50,10 +50,10 @@ See the [release history](./guide/releases.md) for new features and publication 
 
 | Module | What It Does |
 |---|---|
-| Providers | Connects TTS backends, including OpenAI-compatible services, Azure, GPT-SoVITS, CosyVoice, VoxCPM2, Gemini, and Windows system voices. |
+| Providers | Connects TTS backends, including OpenAI and compatible services, ElevenLabs, MiniMax, IndexTTS 2.5, Azure, GPT-SoVITS, CosyVoice, VoxCPM2, Gemini and Windows system voices. |
 | Voice Characters | Bind a provider, model, voice, speed, mode, and optional reference audio into a reusable character. |
 | Voice Banks | Group multiple characters and expose them to projects and the API model list. |
-| Quick TTS | Single-character test synthesis; generated files are archived for later reuse and cleanup. |
+| Quick TTS | Preview a single character. The native client archives complete clips. Web keeps clips in the current tab. |
 | Dialogue TTS | Multi-character dialogue projects with chat-style lines and per-line audio. |
 | Phase TTS | Long-form script splitting, per-segment character assignment, and batch synthesis. |
 | Novel Reader | Import TXT files or folders, synthesize missing audio on demand, cache output, prefetch, and keep reading across screens. |
@@ -63,19 +63,11 @@ See the [release history](./guide/releases.md) for new features and publication 
 
 ## Platform Scope
 
-This table covers stable v0.4 builds. macOS and the browser workspace arrive in v0.5.0. See the [release history](./guide/releases.md) for details.
-
-| Capability | Windows | Linux | Android phones / tablets |
-|---|---:|---:|---:|
-| Release build | ✓ | ✓ | ✓ |
-| Main UI and project management | ✓ | ✓ | ✓ |
-| Cloud TTS backend connection | ✓ | ✓ | ✓ |
-| Same-device local inference backend connection | ✓ | ✓ | - |
-| LAN-hosted local inference backend connection | ✓ | ✓ | ✓ |
-| Windows SAPI system voice | ✓ | - | - |
-| External FFmpeg CLI detection and invocation | ✓ | ✓ | - |
-| Video dubbing export, muxing, trimming, and waveform extraction | ✓ | ✓ | - |
-
-`✓` means the release build supports the feature.
-
-System TTS currently uses Windows SAPI only. Android and Linux system TTS should only appear in the UI after native adapters exist.
+| v0.5.0 | Windows, macOS, Linux | Android | Web |
+|---|---|---|---|
+| Get the app | [Desktop build](./guide/install-release.md) | [APK](./guide/install-release.md) | [Demo](./guide/web-demo.mdx) or the Release ZIP |
+| Providers, voices and Quick TTS | Supported | Supported | Requires a [compatible HTTP provider](./workflow/providers.md) |
+| Novel, dialogue, phase and automatic roles | Supported | Supported | Unavailable |
+| Local and LAN inference services | Connect to a reachable service | Connect to a LAN service | Browser access and CORS required |
+| System voices | Windows SAPI | Unavailable | Unavailable |
+| FFmpeg and video export | Requires local FFmpeg | Unavailable | Unavailable |

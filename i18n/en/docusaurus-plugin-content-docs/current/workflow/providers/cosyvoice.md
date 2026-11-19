@@ -28,6 +28,15 @@ It provides FastAPI, Gradio Admin, TOML model presets, TOML voice sets, an OpenA
 | Official speed reference | Official model card emphasizes bi-streaming and latency down to around 150 ms, but does not provide one unified PyTorch RTF table. |
 | Boundaries | Rare words, tongue twisters, and specialized terms can be unstable; emotion control depends heavily on text semantics. |
 
+## Model Compatibility
+
+| Model preset | Native | Web | Streaming playback |
+|---|---|---|---|
+| `cosyvoice3-default` (default) | Connects to a running server | Dedicated adapter unavailable | Plays after generation |
+| Other presets registered on the server | Depends on server configuration and voices | Dedicated adapter unavailable | Plays after generation |
+
+If the server exposes a browser-accessible OpenAI-compatible HTTPS endpoint, try its preset voices with the [compatible adapter](./local-engines.md). Web characters cannot supply local reference files.
+
 ## Default Addresses
 
 | Service | Default Address | Purpose |
