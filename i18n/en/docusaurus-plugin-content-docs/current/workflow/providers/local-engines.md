@@ -21,6 +21,7 @@ Local inference backends are useful for local GPUs, LAN inference servers, or wo
 | GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:9880` | Trained voice or reference-audio clone |
 | CosyVoice3 | CosyVoice Native | `http://127.0.0.1:9880` | Prompt clone, cross-lingual clone, instruct |
 | VoxCPM2 | VoxCPM2 Native | `http://127.0.0.1:8000` | Registered voice, voice design, clone |
+| [IndexTTS 2.5](./indextts.md) | IndexTTS 2.5 (WebUI) | `http://127.0.0.1:7860` | Start a community Gradio WebUI and assign a reference recording |
 | Windows system voice | Windows System TTS | Empty | Enumerates local Windows SAPI voices |
 
 CosyVoice3 and GPT-SoVITS both default to port `9880`. When running both, change one backend's `[api].port` in `configs/server.toml`, or use the random port chosen by the launcher and copy the logged address into Neiroha.
@@ -30,6 +31,7 @@ Backend guides:
 - [Neiroha GPT-SoVITS](/workflow/providers/gpt-sovits)
 - [Neiroha VoxCPM2](/workflow/providers/voxcpm)
 - [Neiroha CosyVoice3](/workflow/providers/cosyvoice)
+- [IndexTTS 2.5 WebUI](./indextts.md)
 
 ## Windows Portable Backend Packages
 
@@ -58,6 +60,14 @@ This table is a relative ranking for the current Neiroha Windows portable backen
 Neiroha local backend projects use [Pixi](https://pixi.sh/) to manage Python, Conda, PyPI dependencies, and common launch commands. When running multiple inference backends long-term on one machine, building each backend from source and downloading only the required model assets is usually easier to upgrade, debug, and keep under disk control than keeping several full portable packages.
 
 Pixi's underlying ecosystem reuses rattler/Conda package cache and uv/PyPI cache, and can reuse files through hard links when available. Repeated dependencies across backends usually do not take a full duplicate copy. Model weights, sample voices, and runtime outputs are not automatically shared across projects; organize them by backend and model version.
+
+## OpenAI-Compatible Models
+
+| Model or service | Native | Web | Streaming playback |
+|---|---|---|---|
+| Models from Kokoro, XTTS, Orpheus, KoboldCpp or a custom service | Depends on the deployed endpoint | Requires a reachable HTTP endpoint, CORS and a preset voice | Plays after generation |
+
+The backend chooses its model IDs. Neiroha uses the configured adapter even when a model shares its name with an official model. See [OpenAI TTS](./openai.md) for the official adapter.
 
 ## OpenAI-Compatible Services
 

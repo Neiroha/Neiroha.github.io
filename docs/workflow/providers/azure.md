@@ -42,6 +42,14 @@ https://eastus.api.cognitive.microsoft.com
 
 内部会规范化到 `https://{region}.tts.speech.microsoft.com`。
 
+## 音色兼容性
+
+| 模型或音色 | 原生端 | Web | 流式播放 |
+|---|---|---|---|
+| Speech 资源所在区域的预设音色 | 使用区域音色 ID | 需要可跨域访问的端点 | 整段 |
+
+Neiroha 保存的是音色 ID。可选声音从 Azure 区域的 voice list 读取，语速通过 SSML 设置。
+
 ## 拉取声音
 
 1. 保存提供商。

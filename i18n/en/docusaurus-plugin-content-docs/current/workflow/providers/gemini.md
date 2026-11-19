@@ -5,15 +5,19 @@ sidebar_label: Gemini
 
 Gemini TTS uses Neiroha's **Google Gemini TTS** adapter and calls the native text-to-speech capability of the Gemini API. It is useful for small tests and style experiments with a Google AI Studio API key.
 
-## Official Limits
+## Model Compatibility
 
-Google marks Gemini TTS as Preview. Official rate-limit pages currently list `gemini-2.5-flash-preview-tts` free-tier limits as `3 RPM / 10,000 TPM / 15 RPD`. Quotas, model names, and availability can change; use the AI Studio console as the source of truth.
+These are the v0.5.0 built-in options. Check AI Studio for account availability and quotas. Synthesis requires text and a voice. Web also requires CORS.
 
-Official pages:
+| Model ID | API | Native | Web | Streaming playback |
+|---|---|---|---|---|
+| `gemini-3.8-flash-tts` (default) | Interactions | Supported | Requires CORS | Plays after generation |
+| `gemini-3.8-flash-lite-tts` | Interactions | Supported | Requires CORS | Plays after generation |
+| `gemini-3.1-flash-tts-preview` | generateContent | Supported | Requires CORS | Plays after generation |
+| `gemini-2.5-flash-preview-tts` | generateContent | Supported | Requires CORS | Plays after generation |
+| `gemini-2.5-pro-preview-tts` | generateContent | Supported | Requires CORS | Plays after generation |
 
-- [Speech generation](https://ai.google.dev/gemini-api/docs/speech-generation)
-- [Pricing](https://ai.google.dev/gemini-api/docs/pricing)
-- [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)
+[Google TTS docs](https://ai.google.dev/gemini-api/docs/speech-generation) · [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits) · [Pricing](https://ai.google.dev/gemini-api/docs/pricing)
 
 ## Provider Fields
 
@@ -23,7 +27,7 @@ Official pages:
 | Name | `Google AI Studio` |
 | Base URL | `https://generativelanguage.googleapis.com` |
 | API Key | Google AI Studio API key |
-| Default Model | `gemini-2.5-flash-preview-tts` by default |
+| Default Model | `gemini-3.8-flash-tts` |
 
 After saving:
 
@@ -35,7 +39,7 @@ After saving:
 
 ## Voices
 
-Gemini TTS official docs list 30 preset voices. Neiroha shows them as a fixed list, including:
+Neiroha includes the following 30 preset voices. When `/v1beta/voices` is available, it also adds voices from the extended library.
 
 ```text
 Zephyr, Puck, Charon, Kore, Fenrir, Leda, Orus, Aoede,
@@ -59,15 +63,4 @@ Gemini TTS has no dedicated speed field. Neiroha converts non-`1.0` speed choice
 
 ## Free Quota Usage
 
-Gemini free-tier request counts are suitable for Quick TTS and short Dialogue tests, not complete novels.
-
-Recommended provider limits:
-
-| Field | Value |
-|---|---|
-| Max concurrency | `1` |
-| RPM | `3` or lower |
-| TPM | `10000` or lower |
-| RPD | `15` or the value shown in your console |
-
-If you hit `429 RESOURCE_EXHAUSTED`, pause requests, then lower concurrency and batch size.
+Check the console for that model’s request and token limits. Try one short sentence, then set RPM, TPM and RPD to fit your account.

@@ -3,7 +3,7 @@ title: 配置提供商
 sidebar_label: 提供商
 ---
 
-提供商是 Neiroha 连接外部 TTS 后端的入口。它保存服务访问方式；项目实际使用的声音需要在 [语音角色与语音库](/workflow/voice-bank) 中绑定。
+先在「提供商」保存服务地址和鉴权信息，再到 [语音库](./voice-bank.md) 为角色选模型与音色。
 
 <img className="screenshot" src="/img/screenshot_providers.png" alt="提供商配置页" />
 
@@ -18,16 +18,24 @@ sidebar_label: 提供商
 
 ## 适配器类型
 
-| 适配器 | 适用场景 |
-|---|---|
-| OpenAI TTS API 兼容 | OpenAI、KoboldCpp、Kokoro/XTTS、Orpheus 等实现 OpenAI TTS 协议的服务 |
-| Azure 语音服务 | Microsoft Azure Speech TTS |
-| GPT-SoVITS | 本地 GPT-SoVITS 服务器 |
-| CosyVoice 原生 | 本地 CosyVoice 推理服务器 |
-| VoxCPM2 原生 | 本地 VoxCPM2 推理服务器 |
-| OpenAI Chat Completions TTS | 通过 Chat Completions 返回音频的模型，例如 MiMo v2 TTS |
-| Google Gemini TTS | Google AI Studio Gemini TTS 模型 |
-| Windows 系统语音 | Windows SAPI 语音，无需外部服务器 |
+先按服务的实际接口选适配器。各页的「原生端」指 Windows、macOS、Linux 和 Android 客户端，Windows 系统语音单独标注。Web 使用远程服务时要有 HTTPS 和跨域支持。模型是否对账号开放，以提供商返回为准。
+
+| 适配器 | 用来连接 | Web 合成 |
+|---|---|---|
+| [OpenAI TTS (Official)](./providers/openai.md) | OpenAI Speech、Realtime | Speech，支持流式 |
+| [OpenAI TTS API Compatible](./providers/local-engines.md) | 自建或第三方兼容 `/v1/audio/speech` 的服务 | 整段 |
+| [OpenAI Chat Completions TTS](./providers/mimo.md) | MiMo 等用 Chat Completions 返回音频的模型 | 整段，角色无需本地参考文件 |
+| [ElevenLabs](./providers/elevenlabs.md) | ElevenLabs 模型与账号音色 | 按音色 ID 整段 |
+| [MiniMax Speech](./providers/minimax.md) | MiniMax Speech 模型与账号音色 | 按音色 ID 整段 |
+| [Google Gemini TTS](./providers/gemini.md) | Gemini TTS | 整段 |
+| [Azure Speech Service](./providers/azure.md) | Azure 预设音色 | 整段 |
+| [IndexTTS 2.5 (WebUI)](./providers/indextts.md) | 社区部署的 Gradio WebUI，角色需参考音频 | 不可用 |
+| [GPT-SoVITS](./providers/gpt-sovits.md) | GPT-SoVITS 服务器 | 原生适配器不可用 |
+| [CosyVoice Native](./providers/cosyvoice.md) | CosyVoice 推理服务 | 原生适配器不可用 |
+| [VoxCPM2 Native](./providers/voxcpm.md) | VoxCPM2 推理服务 | 原生适配器不可用 |
+| Windows System TTS | Windows 本机 SAPI | 不可用 |
+
+适配器能收到完整音频，才会进入试听历史。边生成边播放的条件和取消行为见 [流式输出](./streaming.md)。
 
 ## 创建提供商
 
@@ -55,6 +63,10 @@ sidebar_label: 提供商
 
 | 适配器 | Key 是否必需 | Neiroha 使用的鉴权方式 |
 |---|---|---|
+| OpenAI 官方 | 必需 | `Authorization: Bearer <key>` |
+| ElevenLabs | 必需 | `xi-api-key: <key>` |
+| MiniMax Speech | 必需 | `Authorization: Bearer <key>` |
+| IndexTTS 2.5 WebUI | 看 WebUI 的访问设置 | 填写后发送 `Authorization: Bearer <key>` |
 | OpenAI TTS API 兼容 | 看服务端设置 | `Authorization: Bearer <key>` |
 | OpenAI Chat Completions TTS | 云端通常必需 | 默认 `api-key: <key>`，适配 MiMo 风格 |
 | Google Gemini TTS | 必需 | `x-goog-api-key: <key>` |

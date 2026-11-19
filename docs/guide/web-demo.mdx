@@ -20,6 +20,8 @@ import DemoRelease from '@site/src/components/DemoRelease';
 2. 在「提供商」配置浏览器可访问的 HTTPS 服务。服务需允许来自 `https://neiroha.github.io` 的跨源请求（CORS），包括请求方法和认证头。演示站没有预置付费凭据或推理服务。
 3. 在「音色库」为角色绑定提供商和音色，在「快速 TTS」输入一句文本。OpenAI Speech 支持「自动：优先流式」，可边生成边听并随时停止。其他 Web 适配器完成整段生成后播放。
 
+在浏览器选 OpenAI 官方适配器时，使用 Speech API 模型。若选 Realtime 后看到参考文件提示，请改用 `gpt-4o-mini-tts` 或对应快照和一个预设音色。[OpenAI 模型兼容性](../workflow/providers/openai.md) · [流式输出](../workflow/streaming.md)
+
 提供商配置（包括填入的 API Key）和音色资料保存在当前浏览器的站点数据中。生成的音频只保存在当前标签页内存中，最多保留 30 条或 32 MiB。关闭或刷新页面前，可下载想保留的音频。共享电脑试用完毕后可清除站点数据。
 
 合成时，文本由浏览器直接发给所配置的服务商。试用公开 Demo 时，请用自有后端保管 OpenAI 等云端服务的 API Key，并按需为浏览器签发短时凭据。也可在桌面客户端中直接配置提供商。

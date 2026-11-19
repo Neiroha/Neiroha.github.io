@@ -32,6 +32,16 @@ After saving:
 4. Enable the provider.
 5. Click **Health Check**.
 
+## Model Compatibility
+
+| Model | Native | Web | Streaming playback |
+|---|---|---|---|
+| `mimo-v2-tts` and available v2.5 preset models | Preset voice | Requires CORS | Plays after generation |
+| VoiceDesign | Voice description | Requires CORS and no reference file | Plays after generation |
+| VoiceClone | MP3 or WAV reference file | Unavailable | Plays after generation |
+
+Neiroha reads the complete audio from the Chat Completions response. Use the model IDs and capabilities available on your account.
+
 ## Character Modes
 
 | Model Type | Character Mode | Required Input |

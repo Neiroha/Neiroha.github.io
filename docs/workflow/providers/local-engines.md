@@ -21,6 +21,7 @@ sidebar_label: 本地推理引擎
 | GPT-SoVITS | GPT-SoVITS | `http://127.0.0.1:9880` | 已训练音色或参考音频克隆 |
 | CosyVoice3 | CosyVoice Native | `http://127.0.0.1:9880` | 提示克隆、跨语言克隆、指令控制 |
 | VoxCPM2 | VoxCPM2 Native | `http://127.0.0.1:8000` | 已注册音色、声音设计、克隆 |
+| [IndexTTS 2.5](./indextts.md) | IndexTTS 2.5 (WebUI) | `http://127.0.0.1:7860` | 先启动社区 Gradio WebUI，每次合成需要参考文件 |
 | Windows 系统声音 | Windows System TTS | 留空 | Windows 桌面端直接枚举 SAPI voice |
 
 CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两个后端，请改其中一个 `configs/server.toml` 的 `[api].port`，或使用 launcher 自动选择的随机端口，并把日志里的实际地址填到 Neiroha。
@@ -30,6 +31,7 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两�
 - [Neiroha GPT-SoVITS](/workflow/providers/gpt-sovits)
 - [Neiroha VoxCPM2](/workflow/providers/voxcpm)
 - [Neiroha CosyVoice3](/workflow/providers/cosyvoice)
+- [IndexTTS 2.5 WebUI](./indextts.md)
 
 ## Windows 便携后端包
 
@@ -58,6 +60,14 @@ CosyVoice3 和 GPT-SoVITS 当前都默认使用 `9880`。如果同时启动两�
 Neiroha 的本地后端项目使用 [Pixi](https://pixi.sh/) 管理 Python、Conda、PyPI 依赖和常用启动命令。需要在同一台机器上长期运行多个后端推理引擎时，推荐按需从源码构建各后端，并只下载实际需要的模型资产；这样比同时保留多套完整便携包更便于升级、排错和控制磁盘占用。
 
 Pixi 底层生态会复用 rattler/Conda 包缓存和 uv/PyPI 缓存，并在可用时通过硬链接复用文件，因此多个后端之间的重复依赖通常不会按完整副本重复占用空间。模型权重、示例音色和运行输出不会自动跨项目共享，仍建议按后端和模型版本单独整理。
+
+## OpenAI 兼容模型
+
+| 模型或服务 | 原生端 | Web | 流式播放 |
+|---|---|---|---|
+| Kokoro、XTTS、Orpheus、KoboldCpp 或自建服务提供的模型 | 由实际接口和部署决定 | 需要可访问的 HTTP 接口、跨域与预设音色 | 整段 |
+
+模型 ID 由后端决定。名字与官方模型相同，仍按被选中的适配器发请求。官方模型的兼容性见 [OpenAI 官方 TTS](./openai.md)。
 
 ## OpenAI 兼容服务
 

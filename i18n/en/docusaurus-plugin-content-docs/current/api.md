@@ -276,6 +276,13 @@ Gemini TTS uses a Google AI Studio API key. Set the provider URL to `https://gen
 
 Windows desktop uses system SAPI voices and needs no base URL or API key. Android and Linux system TTS providers remain hidden until native platform adapters exist.
 
+### Additional Adapters
+
+- **OpenAI TTS (Official)** uses the Speech API or Realtime WebSocket according to the selected model. See [OpenAI TTS](./workflow/providers/openai.md).
+- **IndexTTS 2.5** starts a Gradio `/gen_single` job and downloads the full audio. See [IndexTTS 2.5 WebUI](./workflow/providers/indextts.md).
+- **ElevenLabs** calls `/v1/text-to-speech/{voice_id}` with `xi-api-key`. See [ElevenLabs](./workflow/providers/elevenlabs.md).
+- **MiniMax Speech** calls `/v1/t2a_v2` with Bearer authentication and normally receives hex-encoded audio. See [MiniMax Speech](./workflow/providers/minimax.md).
+
 ## 3. Response Headers and Troubleshooting
 
 Neiroha local backends usually include these audio response headers. Exact fields vary by backend:

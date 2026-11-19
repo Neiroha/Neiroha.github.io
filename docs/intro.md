@@ -49,10 +49,10 @@ description: Neiroha 的产品说明、使用手册、配置运维和 API 参考
 
 | 模块 | 功能说明 |
 |---|---|
-| 提供商 | 连接 TTS 后端，支持 OpenAI 兼容、Azure、GPT-SoVITS、CosyVoice、VoxCPM2、Gemini 和 Windows 系统语音 |
+| 提供商 | 连接 TTS 后端，支持 OpenAI 官方与兼容服务、ElevenLabs、MiniMax、IndexTTS 2.5、Azure、GPT-SoVITS、CosyVoice、VoxCPM2、Gemini 和 Windows 系统语音 |
 | 语音角色 | 绑定提供商、音色或模型、语速、任务模式和可选参考音频 |
 | 语音库 | 将角色分组管理，并作为项目创建和 API 模型列表的默认音色池 |
-| 快速合成 | 单角色试听，生成结果会进入快速合成归档 |
+| 快速合成 | 单角色试听。原生端归档完整音频，Web 保存在当前标签页 |
 | 对话 TTS | 多角色对话项目，使用聊天气泡视图组织台词和音频 |
 | 段落 TTS | 长篇脚本拆分、逐段分配角色并批量合成 |
 | 小说阅读器 | 导入 TXT 或文件夹，使用缓存 TTS、预取、自动翻页和持续播放朗读长篇文本 |
@@ -62,19 +62,11 @@ description: Neiroha 的产品说明、使用手册、配置运维和 API 参考
 
 ## 平台范围
 
-下表列出 v0.4 系列正式安装包的平台。macOS 和浏览器工作区从 v0.5.0 引入，其范围见 [版本更新](./guide/releases.md)。
-
-| 能力 | Windows | Linux | Android 手机 / 平板 |
-|---|---:|---:|---:|
-| Release 运行包 | ✓ | ✓ | ✓ |
-| 主界面 / 项目管理 | ✓ | ✓ | ✓ |
-| 连接云端 TTS 后端 | ✓ | ✓ | ✓ |
-| 连接本机本地推理后端 | ✓ | ✓ | - |
-| 连接局域网本地推理后端 | ✓ | ✓ | ✓ |
-| Windows SAPI 系统语音 | ✓ | - | - |
-| 外部 FFmpeg 命令行检测与调用 | ✓ | ✓ | - |
-| 视频配音导出、混流、裁剪和波形提取 | ✓ | ✓ | - |
-
-`✓` 表示发布包提供该能力。
-
-系统 TTS 当前只实现 Windows SAPI。Android 或 Linux 系统 TTS 需要先有原生平台适配器，才应在界面中暴露。
+| v0.5.0 | Windows、macOS、Linux | Android | Web |
+|---|---|---|---|
+| 获取应用 | [桌面安装包](./guide/install-release.md) | [APK](./guide/install-release.md) | [在线演示](./guide/web-demo.mdx)和 Release ZIP |
+| 配置提供商、音色和快速试听 | 支持 | 支持 | 支持，需 [兼容的 HTTP 提供商](./workflow/providers.md) |
+| 小说、对话、段落和自动分角色 | 支持 | 支持 | 不可用 |
+| 本机或局域网推理服务 | 连接可达的服务 | 可连接局域网服务 | 要求浏览器可访问、允许跨域 |
+| 系统音色 | Windows SAPI | 不可用 | 不可用 |
+| FFmpeg 与视频导出 | 需本机安装 FFmpeg | 不可用 | 不可用 |
